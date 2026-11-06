@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "description": "Reviewed local build adaptations, applied after prose translation only when the exact English source guard and translated before-text both match once. Skip changed upstream excerpts; never guess a fuzzy match.",
+  "files_relative_to": "episodes",
+  "patches": [
+    {
+      "id": "data-frame-heading-id",
+      "file": "25-starting-with-data.Rmd",
+      "description": "Give the data.frame heading a stable ASCII identifier so the Sandpaper table of contents matches the rendered heading.",
+      "source_guard": "## Inspecting `data.frame` Objects\n",
+      "before": "## `data.frame` オブジェクトの確認\n",
+      "after": "## `data.frame` オブジェクトの確認 {#inspecting-data-frame-objects}\n",
+      "expected_occurrences": 1,
+      "changes_code": false
+    },
+    {
+      "id": "vector-generation-link",
+      "file": "25-starting-with-data.Rmd",
+      "description": "Replace a Bookdown cross-reference, unsupported by Sandpaper, with a link to the existing vector-generation heading.",
+      "source_guard": "`:` is a special function that creates numeric vectors of integers in\nincreasing or decreasing order, test `1:10` and `10:1` for\ninstance. See section @ref(sec:genvec) for details.",
+      "before": "`:`は、整数の数値ベクトルを昇順または降順に生成する特殊な関数です。例として`1:10`や`10:1`をお試しください。詳細はセクション @ref(sec:genvec) を参照してください。",
+      "after": "`:`は、整数の数値ベクトルを昇順または降順に生成する特殊な関数です。例として`1:10`や`10:1`をお試しください。詳細は[「ベクトルの生成」セクション](23-starting-with-r.Rmd#sec:genvec)を参照してください。",
+      "expected_occurrences": 1,
+      "changes_code": false
+    },
+    {
+      "id": "theme-object-call",
+      "file": "40-visualization.Rmd",
+      "description": "Use the saved ggplot2 theme object directly; calling it as a function prevents this plot from rendering.",
+      "source_guard": "```{r mean_exp-time-with-right-labels-xfont, cache=FALSE, purl=TRUE, fig.alt=\"Custrom 'blue_theme() showing a blue grid and blue axis legends.\"}\nblue_theme <- theme(axis.text.x = element_text(colour = \"royalblue4\",\n                                               size = 12),\n                    axis.text.y = element_text(colour = \"royalblue4\",\n                                               size = 12),\n                    text = element_text(size = 16),\n                    panel.grid = element_line(colour=\"lightsteelblue1\"))\n\nggplot(rna, aes(x = expression_log)) +\n  geom_histogram(bins = 20) +\n    blue_theme()\n```",
+      "before": "```{r mean_exp-time-with-right-labels-xfont, cache=FALSE, purl=TRUE, fig.alt=\"Custrom 'blue_theme() showing a blue grid and blue axis legends.\"}\nblue_theme <- theme(axis.text.x = element_text(colour = \"royalblue4\",\n                                               size = 12),\n                    axis.text.y = element_text(colour = \"royalblue4\",\n                                               size = 12),\n                    text = element_text(size = 16),\n                    panel.grid = element_line(colour=\"lightsteelblue1\"))\n\nggplot(rna, aes(x = expression_log)) +\n  geom_histogram(bins = 20) +\n    blue_theme()\n```",
+      "after": "```{r mean_exp-time-with-right-labels-xfont, cache=FALSE, purl=TRUE, fig.alt=\"Custrom 'blue_theme() showing a blue grid and blue axis legends.\"}\nblue_theme <- theme(axis.text.x = element_text(colour = \"royalblue4\",\n                                               size = 12),\n                    axis.text.y = element_text(colour = \"royalblue4\",\n                                               size = 12),\n                    text = element_text(size = 16),\n                    panel.grid = element_line(colour=\"lightsteelblue1\"))\n\nggplot(rna, aes(x = expression_log)) +\n  geom_histogram(bins = 20) +\n    blue_theme\n```",
+      "expected_occurrences": 1,
+      "changes_code": true
+    },
+    {
+      "id": "painter-model-link",
+      "file": "40-visualization.Rmd",
+      "description": "Replace the unsupported Bookdown figure reference and add the matching anchor before its plot.",
+      "source_guard": "The default graphics system that comes with R, often called *base R\ngraphics* is simple and fast. It is based on the *painter's or canvas\nmodel*, where different output are directly overlaid on top of each\nother (see figure @ref(fig:paintermodel)). This is a fundamental\ndifference with `ggplot2` (and with `lattice`, described below), that\nreturns dedicated objects, that are rendered on screen or in a file, and\nthat can even be updated.",
+      "before": "Rに標準で搭載されているグラフィックスシステム（一般に*base R graphics*と呼ばれます）は、シンプルで高速です。これは*ペインターモデルまたはキャンバスモデル*に基づいており、異なる出力が直接重ね合わせられます（図 @ref(fig:paintermodel) 参照）。この点は、専用のオブジェクトを返し、それらを画面やファイルにレンダリングし、さらには更新することさえ可能な`ggplot2`（および後述する`lattice`）とは根本的に異なります。",
+      "after": "Rに標準で搭載されているグラフィックスシステム（一般に*base R graphics*と呼ばれます）は、シンプルで高速です。これは*ペインターモデルまたはキャンバスモデル*に基づいており、異なる出力が直接重ね合わせられます（[下の図](#fig:paintermodel)参照）。この点は、専用のオブジェクトを返し、それらを画面やファイルにレンダリングし、さらには更新することさえ可能な`ggplot2`（および後述する`lattice`）とは根本的に異なります。\n\n<span id=\"fig:paintermodel\"></span>",
+      "expected_occurrences": 1,
+      "changes_code": false
+    }
+  ]
+}

@@ -65,7 +65,39 @@ Community](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcb
 Computational Biology 21 (4): e1012925.
 
 
+## Updating the Japanese episodes
+
+The translation tool reads the English episodes from `upstream/main`, reuses
+the reviewed Japanese translations, and translates changed prose with the
+pinned PLaMo model:
+
+```sh
+git fetch upstream main
+uv run --locked scripts/translate.py --source-ref upstream/main --dry-run
+uv run --locked scripts/translate.py --source-ref upstream/main --update-memory
+```
+
+See [the translation guide](translation/README.md) for setup, offline replay,
+reviewing new translations, and protecting local edits.
+
 ## Testing locally
+
+The translation tests need Python 3.12 only; they do not load the model or use
+the network:
+
+```sh
+python3.12 -m unittest discover -s tests -v
+```
+
+To build the translated site with Japanese navigation, bibliography citations,
+and theme icons, run:
+
+```sh
+Rscript scripts/build.R
+```
+
+The rendered site is written to `site/docs/`. Add `--rebuild` to regenerate
+all lesson code output.
 
 To test locally, run the following in the lessons directory:
 

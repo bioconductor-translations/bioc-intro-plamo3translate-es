@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "description": "Reviewed disambiguation for exact English unit keys. Do not select these contexts by paragraph position.",
+  "files_relative_to": "episodes",
+  "records": {
+    "027f9c654c3de79261683c224a04ca195748c8663610c7a30d638748a121aac3": {
+      "source": "This structure is called a <x0/>, as one column contains all the values, and other column(s) list(s) the context of the value.",
+      "kind": "prose",
+      "files": [
+        "30-dplyr.Rmd"
+      ],
+      "context": "In a long-format table, a column contains values and the other columns list or describe the context of each value. The original column(s) list(s) notation merely covers singular and plural grammatical forms.",
+      "glossary": []
+    },
+    "106305291ae45d50d965ca052d4b71382677929e8e117b522ad12b6d97b15af4": {
+      "source": "Here, we've called <x0/> with just one argument, <x1/>, and it has returned the value <x2/>.  That's because the default is to round to the nearest whole number. If we want more digits we can see how to do that by getting information about the <x3/> function.  We can use <x4/> or look at the help for this function using <x5/>.",
+      "kind": "prose",
+      "files": [
+        "23-starting-with-r.Rmd"
+      ],
+      "context": "The R round() function rounds to the nearest whole number or integer. Its ties rule rounds to even, so describe nearest-integer rounding without asserting that every decimal 5 is rounded upward.",
+      "glossary": []
+    },
+    "1c91c1cba76a46a8f8e735dba9f71bbba4cd98a6c5f0777b67a0d6f27acf4c3c": {
+      "source": "If I wanted an output larger than the input vector, or being able to draw some elements multiple times, I would need to set the <x0/> argument to <x1/>:",
+      "kind": "prose",
+      "files": [
+        "23-starting-with-r.Rmd"
+      ],
+      "context": "The R sample() function draws or randomly samples vector elements. With replace=TRUE, sampling is done with replacement and the same element can be selected multiple times. Draw refers to random sampling.",
+      "glossary": []
+    },
+    "28e26b75d940150fa1ef310b104e55d702a00aaa22a6cccd4fc033f03f935029": {
+      "source": "As above, but disregarding the contaminated samples?",
+      "kind": "prose",
+      "files": [
+        "10-data-organisation.Rmd"
+      ],
+      "context": "An exercise asks how many A, AB, and B blood types were tested. This next question asks learners to recalculate those counts with the contaminated samples excluded.",
+      "glossary": []
+    },
+    "2f5337a1d93f213b4d847ba020f9471222658e5a6c21a2ff414619dcb0337205": {
+      "source": "Sequence generation",
+      "kind": "prose",
+      "files": [
+        "23-starting-with-r.Rmd"
+      ],
+      "context": "This section is about generating numerical sequences using R's seq() and seq_len() functions.",
+      "glossary": []
+    },
+    "3322c0d9545105030f79e3b34cb2b967d7e92175aee301b3510f5b952c4948e1": {
+      "source": "Composing plots",
+      "kind": "prose",
+      "files": [
+        "40-visualization.Rmd"
+      ],
+      "context": "This section is about combining multiple independent plots in one figure, arranging plots side by side.",
+      "glossary": []
+    },
+    "33b6792ed31dc147942699c65316348c7f76e2394ab9ca811d02a9e5a56fb065": {
+      "source": "Extract the gene expression levels of the 3 first genes in samples at time 0 and at time 8.",
+      "kind": "prose",
+      "files": [
+        "60-next-steps.Rmd"
+      ],
+      "context": "The exercise asks for the first three genes in row order, extracted with [1:3], without any ranking by expression.",
+      "glossary": [
+        {
+          "source": "3 first genes",
+          "target": "先頭3つの遺伝子"
+        }
+      ]
+    },
+    "42b577f9328b4aa2de8bc92e596468cad76c6e775fe8d43d885f0ad981be592d": {
+      "source": "Seeking help",
+      "kind": "prose",
+      "files": [
+        "20-r-rstudio.Rmd"
+      ],
+      "context": "This is a section heading about how to look up help and documentation for R functions.",
+      "glossary": []
+    },
+    "4324f2a7a902d4725f663b98120e1a8de99713007d44ed98c083d17ba29ba785": {
+      "source": "Verify that you get the same values using the long <x0/> table.",
+      "kind": "prose",
+      "files": [
+        "60-next-steps.Rmd"
+      ],
+      "context": "The word long refers to a table in long data format, as in tidy data and pivot_longer(), rather than physical length.",
+      "glossary": []
+    },
+    "47767facd7d956720a33f409e40038b1fba3ed19cefed9df71a851a07fddf52f": {
+      "source": "The long table and the <x0/> contain the same information, but are simply structured differently. Each approach has its own advantages: the former is a good fit for the <x1/> packages, while the latter is the preferred structure for many bioinformatics and statistical processing steps. For example, a typical RNA-Seq analyses using the <x2/> package.",
+      "kind": "prose",
+      "files": [
+        "60-next-steps.Rmd"
+      ],
+      "context": "Long table means a data table in long format (ロング形式), as opposed to a wide-format table, not physical length.",
+      "glossary": []
+    },
+    "628f0244e3b5e47977e87ca04f09885d28d990b1e6d377f6da7c706e28bb5e73": {
+      "source": "The default constructor for a matrix is <x0/>. It takes a vector of values to populate the matrix and the number of row and/or columns<x1/>. The values are sorted along the columns, as illustrated below.",
+      "kind": "prose",
+      "files": [
+        "25-starting-with-data.Rmd"
+      ],
+      "context": "R matrix() fills values into a matrix column by column by default. Sorted along columns here means arranged or filled in column-major order; the input numerical values are not sorted by magnitude.",
+      "glossary": [
+        {
+          "source": "are sorted along the columns",
+          "target": "列方向に配置されます"
+        }
+      ]
+    },
+    "635d9455e359f66b7f1dcbb672a2d92a112a9eee525cc2b909f631bca135ec6d": {
+      "source": "Either the number of rows or columns are enough, as the other one can be deduced from the length of the values. Try out what happens if the values and number of rows/columns don't add up.",
+      "kind": "prose",
+      "files": [
+        "25-starting-with-data.Rmd"
+      ],
+      "context": "For an R matrix, the data length must be consistent with the dimensions nrow and ncol (their product), otherwise recycling occurs. The English idiom do not add up means inconsistent dimensions here.",
+      "glossary": [
+        {
+          "source": "don't add up",
+          "target": "整合しない"
+        }
+      ]
+    },
+    "66235135f169130298580a918be8d5e6698c2785475a1aef7914c72f9f1e380b": {
+      "source": "The default graphics system that comes with R, often called *base R graphics* is simple and fast. It is based on the *painter's or canvas model*, where different output are directly overlaid on top of each other (see figure <x0/>). This is a fundamental difference with <x1/> (and with <x2/>, described below), that returns dedicated objects, that are rendered on screen or in a file, and that can even be updated.",
+      "kind": "prose",
+      "files": [
+        "40-visualization.Rmd"
+      ],
+      "context": "Each of the three XML placeholders must occur once only. The two library names may be mentioned together once, then referred to as これら in later clauses. This paragraph compares base R graphics with graphics libraries that return updateable plot objects.",
+      "glossary": []
+    },
+    "6b8335c460072c5ec2a2b0bafcb1042338664c9d2c47f3ed49a8000ee7d4df94": {
+      "source": "We can observe here that the data are skewed to the right. We can apply log2 transformation to have a more symmetric distribution. Note that we add here a small constant value (<x0/>) to avoid having <x1/> values returned for expression values equal to 0.",
+      "kind": "prose",
+      "files": [
+        "40-visualization.Rmd"
+      ],
+      "context": "This paragraph requires a log2 transformation of expression values, explicitly a logarithm with base 2 (底が2の対数変換), before plotting.",
+      "glossary": []
+    },
+    "6cc43121fdbde12af5a715415b59349a20c271af8c8d55d5b8293163b8c1a032": {
+      "source": "Now let's paste the year, month, and day separately - we get the same result:",
+      "kind": "prose",
+      "files": [
+        "25-starting-with-data.Rmd"
+      ],
+      "context": "In R programming, paste() concatenates character strings for year, month, and day with a separator, then ymd() parses the resulting date. The action is string concatenation.",
+      "glossary": []
+    },
+    "6d813b3e5a02464c24df3789e846709d52ed6ad15405ed223e1d463f0aba199a": {
+      "source": "Because it is a proprietary format, and it is possible that in the future, technology won't exist (or will become sufficiently rare) to make it inconvenient, if not impossible, to open the file.",
+      "kind": "prose",
+      "files": [
+        "10-data-organisation.Rmd"
+      ],
+      "context": "Proprietary file formats may become unsupported in future: software or technology capable of opening the file may cease to exist or become rare. That disappearance makes it impossible or inconvenient to open the files.",
+      "glossary": [
+        {
+          "source": "technology won't exist (or will become sufficiently rare)",
+          "target": "そのファイルを開くための技術が存在しなくなる（または非常にまれになる）"
+        },
+        {
+          "source": "to make it inconvenient, if not impossible, to open the file",
+          "target": "その結果、ファイルを開くことが不可能になったり、少なくとも不便になったりする"
+        }
+      ]
+    },
+    "9e6cb5896694e44a6d753a466e8b1d95c59b17a5f256b9fa095aa00c94bb3555": {
+      "source": "An **atomic vector** is the simplest R **data type** and is a linear vector of a single type. Above, we saw 2 of the 6 main **atomic vector** types that R uses: <x0/> and <x1/> (or <x2/>). These are the basic building blocks that all R objects are built from. The other 4 **atomic vector** types are:",
+      "kind": "prose",
+      "files": [
+        "23-starting-with-r.Rmd"
+      ],
+      "context": "Atomic vector is an R technical term: アトミックベクトル. It is a homogeneous vector containing one data type. Use this established technical term.",
+      "glossary": []
+    },
+    "a4bf89289fd4093d0c2af79f852dd2430aeef3b2aa100f794db4ff04328e565d": {
+      "source": "When using <x0/> or <x1/> on strings, R compares their alphabetical order. Here <x2/> comes after <x3/>, and therefore is *greater than* it.",
+      "kind": "prose",
+      "files": [
+        "23-starting-with-r.Rmd"
+      ],
+      "context": "Each of the four XML placeholders must occur once only. After comparing the two named strings, use Japanese pronouns 前者 and 後者 in the conclusion, rather than repeating their placeholders. The text is about alphabetical string comparison with R operators.",
+      "glossary": [
+        {
+          "source": "Here <x2/> comes after <x3/>, and therefore is *greater than* it.",
+          "target": "ここでは <x2/> が <x3/> の後に来るため、前者の方が後者よりも*大きい*と判断されます。"
+        }
+      ]
+    },
+    "b75054ef37b76dbb880c07d269c66b9c64ee80464557df1a69b8667f8aebcb99": {
+      "source": "Pivoting to wider and longer formats can be a useful way to balance out a dataset so every replicate has the same composition.",
+      "kind": "prose",
+      "files": [
+        "30-dplyr.Rmd"
+      ],
+      "context": "These are two distinct formats for a table: the wide format and the long format, known in Japanese as ワイド形式 and ロング形式. The paragraph contrasts the two formats.",
+      "glossary": []
+    },
+    "b937afa88682af07ca0442461cec9b5b03fdaaf645003249c555656ce3857026": {
+      "source": "Let's first calculate the mean expression level of X and Y linked genes from male and female samples...",
+      "kind": "prose",
+      "files": [
+        "30-dplyr.Rmd"
+      ],
+      "context": "The dataset consists of male and female mice (雄 and 雌). X and Y linked genes means genes located on the X and Y chromosomes.",
+      "glossary": []
+    },
+    "bf99be52aae5b144c69fc56067e32917233fce5c93f41c79e50fb5e18a319911": {
+      "source": "Our <x0/> data frame has rows and columns (it has 2 dimensions); if we want to extract some specific data from it, we need to specify the \"coordinates\" we want. Row numbers come first, followed by column numbers. However, note that different ways of specifying these coordinates lead to results with different classes.",
+      "kind": "prose",
+      "files": [
+        "25-starting-with-data.Rmd"
+      ],
+      "context": "Our data frame means the data frame used by workshop participants in their R session. There is no company involved.",
+      "glossary": []
+    },
+    "cbabb38ae2332e22a2d780e10ebe718cbc135d6bb9af1863ffb5a6255d8724f7": {
+      "source": "Identify genes associated with the \"abnormal DNA methylation\" phenotype description, and calculate their mean expression (in log) at time 0, time 4 and time 8.",
+      "kind": "prose",
+      "files": [
+        "30-dplyr.Rmd"
+      ],
+      "context": "The phrase abnormal DNA methylation is an exact literal value stored in the phenotype_description column and must remain in English for the filtering exercise. It may be followed by a Japanese explanation.",
+      "glossary": []
+    },
+    "ce6bee49722758a162522ef3a0b8b651099bc0cb33fbf9780ea1bd0c443245c2": {
+      "source": "We've seen that atomic vectors can be of type character, numeric (or double), integer, and logical. But what happens if we try to mix these types in a single vector?",
+      "kind": "prose",
+      "files": [
+        "23-starting-with-r.Rmd"
+      ],
+      "context": "Atomic vector is an R technical term, アトミックベクトル. An atomic vector holds elements of a single data type, unlike a list.",
+      "glossary": []
+    },
+    "ddd8354f0f5a3b95874705866b5c2426e34825d9b7e4370c831329f5de090888": {
+      "source": "It's good practice to put the non-optional arguments (like the number you're rounding) first in your function call, and to specify the names of all optional arguments.  If you don't, someone reading your code might have to look up the definition of a function with unfamiliar arguments to understand what you're doing. By specifying the name of the arguments you are also safeguarding against possible future changes in the function interface, which may potentially add new arguments in between the existing ones.",
+      "kind": "prose",
+      "files": [
+        "23-starting-with-r.Rmd"
+      ],
+      "context": "Non-optional arguments are required or mandatory arguments (必須の引数) that must be supplied to an R function.",
+      "glossary": []
+    },
+    "e2f9e402c2c52c6bad37e4e3974b3d18ad2987a182fcb4d932cb42d5c4714af5": {
+      "source": "Storing data in a universal, open, and static format will help deal with this problem. Try tab-delimited (tab separated values or TSV) or comma-delimited (comma separated values or CSV). CSV files are plain text files where the columns are separated by commas, hence 'comma separated values' or CSV. The advantage of a CSV file over an Excel/SPSS/etc. file is that we can open and read a CSV file using just about any software, including plain text editors like TextEdit or NotePad. Data in a CSV file can also be easily imported into other formats and environments, such as SQLite and R. We're not tied to a certain version of a certain expensive program when we work with CSV files, so it's a good format to work with for maximum portability and endurance. Most spreadsheet programs can save to delimited text formats like CSV easily, although they may give you a warning during the file export.",
+      "kind": "prose",
+      "files": [
+        "10-data-organisation.Rmd"
+      ],
+      "context": "For archival data formats, endurance means longevity or the ability to remain usable and readable for many years. Portability and endurance refer to transfer across systems and long-term preservation.",
+      "glossary": []
+    },
+    "e467151f771950b928beaa21e6a034934b72c9168954fb85664f792f315e8422": {
+      "source": "**Solution**: Don't include more than one piece of information in a cell. This will limit the ways in which you can analyse your data.  If you need both these measurements, design your data sheet to include this information. For example, include one column for the ABO group and one for the Rhesus group.",
+      "kind": "prose",
+      "files": [
+        "10-data-organisation.Rmd"
+      ],
+      "context": "The limitation on analysis is caused by combining multiple pieces of information in a single cell. The recommendation is to store each piece of information in a separate column, such as ABO and Rhesus groups.",
+      "glossary": [
+        {
+          "source": "This will limit the ways in which you can analyse your data.",
+          "target": "1つのセルに複数の情報を入れると、データの分析方法が制限されてしまいます。"
+        }
+      ]
+    },
+    "e474d12a7d35407edd3d3a3d75b59ade160bc14f5436889a8972a6395dd37629": {
+      "source": "<x0/> functions like data in the 'long' format, i.e., a column for every dimension, and a row for every observation. Well-structured data will save you lots of time when making figures with <x1/>.",
+      "kind": "prose",
+      "files": [
+        "40-visualization.Rmd"
+      ],
+      "context": "The verb like here means prefer or work well with: ggplot2 functions expect or work well with data in long format. This sentence is about ggplot2 input data format.",
+      "glossary": []
+    },
+    "f2288a47cfb61c4c9c5b6a6da812d8f1c72641a7b5f4d814d913414db0f15669": {
+      "source": "Mutate",
+      "kind": "prose",
+      "files": [
+        "30-dplyr.Rmd"
+      ],
+      "context": "This section describes dplyr's mutate() function for creating new data frame columns from existing columns.",
+      "glossary": [
+        {
+          "source": "Mutate",
+          "target": "列の作成・変更（mutate）"
+        }
+      ]
+    },
+    "fae70c5c004c065a9faabe28c542f23425e7cb8e30b39dc1bfcebbdab202156d": {
+      "source": "Your friendly colleagues: if you know someone with more experience than you, they might be able and willing to help you.",
+      "kind": "prose",
+      "files": [
+        "20-r-rstudio.Rmd"
+      ],
+      "context": "This is a bullet label in a list of resources for seeking help with R: friendly colleagues are people who can answer your questions. The text labels a resource, rather than addressing a letter to those colleagues.",
+      "glossary": []
+    }
+  }
+}

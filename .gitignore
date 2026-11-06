@@ -35,6 +35,8 @@ vignettes/*.pdf
 docs/
 # translation temp files
 po/*~
+.cache/translation/
+.venv/
 # renv detritus
 renv/sandbox/
 *.pyc

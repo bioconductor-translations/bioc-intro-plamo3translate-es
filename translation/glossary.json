@@ -1,0 +1,98 @@
+[
+  {
+    "source": "data frame",
+    "target": "データフレーム"
+  },
+  {
+    "source": "data frames",
+    "target": "データフレーム"
+  },
+  {
+    "source": "vector",
+    "target": "ベクトル"
+  },
+  {
+    "source": "vectors",
+    "target": "ベクトル"
+  },
+  {
+    "source": "factor",
+    "target": "因子"
+  },
+  {
+    "source": "factors",
+    "target": "因子"
+  },
+  {
+    "source": "atomic vector",
+    "target": "アトミックベクトル"
+  },
+  {
+    "source": "atomic vectors",
+    "target": "アトミックベクトル"
+  },
+  {
+    "source": "tidy data",
+    "target": "整然データ"
+  },
+  {
+    "source": "gene expression",
+    "target": "遺伝子発現"
+  },
+  {
+    "source": "spreadsheet",
+    "target": "スプレッドシート"
+  },
+  {
+    "source": "spreadsheets",
+    "target": "スプレッドシート"
+  },
+  {
+    "source": "working directory",
+    "target": "作業ディレクトリ"
+  },
+  {
+    "source": "data wrangling",
+    "target": "データ加工"
+  },
+  {
+    "source": "wide format",
+    "target": "ワイド形式"
+  },
+  {
+    "source": "long format",
+    "target": "ロング形式"
+  },
+  {
+    "source": "wider and longer formats",
+    "target": "ワイド形式とロング形式"
+  },
+  {
+    "source": "non-optional arguments",
+    "target": "必須の引数"
+  },
+  {
+    "source": "log2 transformation",
+    "target": "底が2の対数変換"
+  },
+  {
+    "source": "abnormal DNA methylation",
+    "target": "abnormal DNA methylation"
+  },
+  {
+    "source": "The Carpentries",
+    "target": "The Carpentries"
+  },
+  {
+    "source": "Bioconductor",
+    "target": "Bioconductor"
+  },
+  {
+    "source": "RStudio",
+    "target": "RStudio"
+  },
+  {
+    "source": "R Markdown",
+    "target": "R Markdown"
+  }
+]
