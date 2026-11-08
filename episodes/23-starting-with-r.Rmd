@@ -1,6 +1,6 @@
 ---
 source: Rmd
-title: "R入門"
+title: "Introducción a R"
 teaching: 60
 exercises: 60
 ---
@@ -10,52 +10,52 @@ exercises: 60
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Rに関連する以下の用語を定義してください。オブジェクト、代入、呼び出し、関数、引数、オプション。
-- Rでオブジェクトに値を代入します。
-- オブジェクトの*命名*方法を学びましょう。
-- コメントを用いてスクリプトに説明を添えてください。
-- Rで簡単な算術演算を行います。
-- 関数を呼び出し、引数を用いてデフォルトオプションを変更します。
-- ベクトルの内容を確認し、その内容を操作します。
-- ベクトルから部分集合を抽出し、値を取得します。
-- 欠損値を含むベクトルを解析します。
+- Defina los siguientes términos en relación con R: objeto, asignar, llamar, función, argumentos, opciones.
+- Asignar valores a objetos en R.
+- Aprenda a *nombrar* objetos
+- Utilice comentarios para documentar el script.
+- Realizar operaciones aritméticas sencillas en R.
+- Llama a funciones y utiliza argumentos para cambiar sus opciones predeterminadas.
+- Inspeccionar el contenido de los vectores y manipular dicho contenido.
+- Seleccionar subconjuntos y extraer valores de vectores.
+- Analizar vectores con datos faltantes.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- Rでの最初のコマンド
+- Primeros comandos en R
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-> このエピソードは、Data Carpentriesの*「生態学者のためのRによるデータ分析と可視化」*レッスンに基づいています。
+> Este episodio se basa en la lección *Data Analysis and Visualisation in R for Ecologists* de Data Carpentries.
 
-## Rでのオブジェクトの作成
+## Creación de objetos en R
 
-コンソールに数式を入力するだけで、Rから出力を得ることができます。
+Puede obtener resultados de R simplemente escribiendo matemáticas en la consola:
 
 ```{r, purl=TRUE}
 3 + 5
 12 / 7
 ```
 
-しかし、有用で興味深いことを行うには、*オブジェクト*に*値*を代入する必要があります。オブジェクトを作成するには、名前に続けて代入演算子 `<-` と、代入したい値を指定します：
+Sin embargo, para hacer cosas útiles e interesantes, necesitamos asignar *valores* a *objetos*. Para crear un objeto, debemos darle un nombre seguido del operador de asignación `<-` y el valor que queremos asignarle:
 
 ```{r, purl=TRUE}
 weight_kg <- 55
 ```
 
-`<-` は代入演算子です。右側の値を左側のオブジェクトに代入します。したがって、`x <- 3` を実行した後、`x` の値は `3` となります。この矢印は、3 **が** `x` **に入る** と読み解くことができます。歴史的な経緯から、代入に `=` を使用することもできますが、あらゆる文脈で使用できるわけではありません。構文に[わずかな違い](https://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html)があるため、代入には常に `<-` を使用するのが望ましい慣行です。
+`<-` es el operador de asignación. Asigna valores de la derecha a objetos de la izquierda. Por lo tanto, tras ejecutar `x <- 3`, el valor de `x` es `3`. La flecha puede interpretarse como 3 **entra en** `x`. Por razones históricas, también se puede usar `=` para las asignaciones, pero no en todos los contextos. Debido a las [ligeras diferencias](https://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html) en la sintaxis, es buena práctica utilizar siempre `<-` para las asignaciones.
 
-RStudioでは、<kbd>Alt</kbd> + <kbd>\-</kbd>（<kbd>\-</kbd>キーと同時に<kbd>Alt</kbd>を押す）と入力すると、PCでは1回のキー操作で`<-`が入力されます。一方、Macでは<kbd>Option</kbd> + <kbd>\-</kbd>（<kbd>\-</kbd>キーと同時に<kbd>Option</kbd>を押す）と入力することで同様の操作が可能です。
+En RStudio, escribir <kbd>Alt</kbd> + <kbd>\-</kbd> (presionar <kbd>Alt</kbd> al mismo tiempo que la tecla <kbd>\-</kbd>) escribirá `<-` con un solo toque de tecla en una PC, mientras que escribir <kbd>Option</kbd> + <kbd>\-</kbd> (presionar <kbd>Option</kbd> al mismo tiempo que la tecla <kbd>\-</kbd>) hace lo mismo en una Mac.
 
-### 変数の命名
+### Nombres de variables
 
-オブジェクトには、`x`、`current_temperature`、`subject_id` などの任意の名前を付けられます。オブジェクト名は明示的で、長すぎないようにしてください。数字で始めることはできません（`2x` は無効ですが、`x2` は有効です）。Rは大文字と小文字を区別します（例：`weight_kg` は `Weight_kg` とは異なります）。Rの基本関数の名前であるため、使用できない名前もあります（例：`if`、`else`、`for`。完全なリストについては [Rの予約語](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html) のマニュアルページを参照してください）。一般的に、許可されていても、他の関数名（例：`c`、`T`、`mean`、`data`、`df`、`weights`）は使用しないのが最善です。判断に迷う場合は、ヘルプを確認してその名前が既に使用されていないか調べてください。また、`my.dataset` のようにオブジェクト名の中にドット（`.`）を含めることも避けるのが最善です。歴史的な理由から、Rには名前にドットを含む関数が多く存在しますが、ドットはR（メソッド用）や他のプログラミング言語において特別な意味を持つため、避けるのが最善です。また、オブジェクト名には名詞を、関数名には動詞を使用することが推奨されます。コードのスタイル（スペースの配置やオブジェクトの命名方法など）を一貫させることが重要です。一貫したコーディングスタイルを採用することで、将来の自分や共同作業者にとってコードがより読みやすくなります。Rでは、[Google](https://google.github.io/styleguide/Rguide.xml) のスタイルガイド、[tidyverse](https://style.tidyverse.org/) のスタイル、および [Bioconductor スタイルガイド](https://bioconductor.org/developers/how-to/coding-style/) などが一般的です。tidyverse のガイドは非常に包括的で、最初は圧倒されるかもしれません。[**`lintr`**](https://github.com/jimhester/lintr) パッケージをインストールすれば、コードのスタイルに関する問題を自動的にチェックできます。
+Los objetos pueden recibir cualquier nombre, como `x`, `current_temperature` o `subject_id`. Es recomendable que los nombres de los objetos sean explícitos y no demasiado largos. No pueden comenzar con un número (`2x` no es válido, pero `x2` sí). R distingue entre mayúsculas y minúsculas (por ejemplo, `weight_kg` es diferente de `Weight_kg`). Hay algunos nombres que no pueden utilizarse porque son nombres de funciones fundamentales en R (por ejemplo, `if`, `else`, `for`; consulte la página del manual [Palabras reservadas en R](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html) para obtener una lista completa). En general, aunque esté permitido, lo mejor es no utilizar otros nombres de funciones (por ejemplo, `c`, `T`, `mean`, `data`, `df`, `weights`). En caso de duda, consulte la ayuda para ver si el nombre ya está en uso. También es recomendable evitar los puntos (`.`) dentro del nombre de un objeto, como en `my.dataset`. Hay muchas funciones en R con puntos en sus nombres por razones históricas, pero dado que los puntos tienen un significado especial en R (para los métodos) y en otros lenguajes de programación, lo mejor es evitarlos. También se recomienda utilizar sustantivos para los nombres de los objetos y verbos para los nombres de las funciones. Es importante ser coherente en el estilo de su código (dónde coloca los espacios, cómo nombra los objetos, etc.). Utilizar un estilo de codificación coherente hace que su código sea más fácil de leer tanto para usted mismo en el futuro como para sus colaboradores. En R, algunas de las guías de estilo más populares son la de [Google](https://google.github.io/styleguide/Rguide.xml), el estilo de [tidyverse](https://style.tidyverse.org/) y la [guía de estilo de Bioconductor](https://bioconductor.org/developers/how-to/coding-style/). La de tidyverse es muy exhaustiva y puede parecer abrumadora al principio. Puede instalar el paquete [**`lintr`**](https://github.com/jimhester/lintr) para comprobar automáticamente si hay problemas en el estilo de su código.
 
-> **オブジェクトと変数**: `R` で `objects` と呼ばれるものは、他の多くのプログラミング言語では `variables` と呼ばれます。文脈によっては、`object` と `variable` は大きく異なる意味を持つことがあります。ただし、本レッスンでは、これら2つの用語は同義語として使用されます。詳細については、[こちらをご覧ください。](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
+> **Objetos vs. variables**: Lo que se conoce como `objects` en `R` se conoce como `variables` en muchos otros lenguajes de programación. Dependiendo del contexto, `object` y `variable` pueden tener significados drásticamente diferentes. Sin embargo, en esta lección, ambos términos se utilizan como sinónimos. Para más información, [consulte aquí.](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Objects)
 
-オブジェクトに値を代入する際、Rは何も出力しません。括弧を使うか、オブジェクト名を入力することで、Rに値を強制的に出力させることができます。
+Al asignar un valor a un objeto, R no imprime nada. Puede obligar a R a imprimir el valor utilizando paréntesis o escribiendo el nombre del objeto:
 
 ```{r, purl=TRUE}
 weight_kg <- 55    # doesn't print anything
@@ -63,26 +63,26 @@ weight_kg <- 55    # doesn't print anything
 weight_kg          # and so does typing the name of the object
 ```
 
-Rのメモリに`weight_kg`が格納されたので、これを使って計算を行うことができます。例えば、この重量をポンドに変換したい場合が考えられます（ポンドでの重量はkgでの重量の2.2倍です）：
+Ahora que R tiene `weight_kg` en la memoria, podemos realizar operaciones aritméticas con él. Por ejemplo, es posible que queramos convertir este peso a libras (el peso en libras es 2,2 veces el peso en kg):
 
 ```{r, purl=TRUE}
 2.2 * weight_kg
 ```
 
-また、オブジェクトに新しい値を代入することで、その値を変更することもできます。
+También podemos cambiar el valor de un objeto asignándole uno nuevo:
 
 ```{r, purl=TRUE}
 weight_kg <- 57.5
 2.2 * weight_kg
 ```
 
-つまり、あるオブジェクトに値を代入しても、他のオブジェクトの値は変わりません。例えば、動物の体重（ポンド）を新しいオブジェクト `weight_lb` に格納してみましょう。
+Esto significa que asignar un valor a un objeto no cambia los valores de otros objetos. Por ejemplo, guardemos el peso del animal en libras en un nuevo objeto, `weight_lb`:
 
 ```{r, purl=TRUE}
 weight_lb <- 2.2 * weight_kg
 ```
 
-次に、`weight_kg`を100に変更してください。
+y luego cambiar `weight_kg` a 100.
 
 ```{r}
 weight_kg <- 100
@@ -90,24 +90,24 @@ weight_kg <- 100
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-オブジェクト `weight_lb` の現在の内容は、何だと思いますか？ 126\.5 でしょうか、それとも 220 でしょうか？
+¿Cuál crees que es el contenido actual del objeto `weight_lb`? ¿126\.5 o 220?
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## コメント
+## Comentarios
 
-Rにおけるコメント記号は`#`です。スクリプト内で`#`より右側にある記述は、Rによって無視されます。スクリプトにメモや説明を残しておくと便利です。
+El carácter de comentario en R es `#`; todo lo que aparezca a la derecha de un `#` en un script será ignorado por R. Es útil dejar notas y explicaciones en sus scripts.
 
-RStudioでは、段落のコメントアウトやコメント解除を簡単に行えます。コメントアウトしたい行を選択した後、キーボードの <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> を同時に押してください。1行だけをコメントアウトしたい場合は、その行の任意の位置にカーソルを置き（つまり、行全体を選択する必要はありません）、<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> を押してください。
+RStudio facilita la forma de comentar o descomentar un párrafo: después de seleccionar las líneas que desee comentar, presione simultáneamente <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd> en su teclado. Si solo desea comentar una línea, puede colocar el cursor en cualquier punto de dicha línea (es decir, no es necesario seleccionar toda la línea) y luego presionar <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>C</kbd>.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-以下において、各文の後の値は何になりますか？
+¿Cuáles son los valores después de cada instrucción en lo siguiente?
 
 ```{r, purl=TRUE}
 mass <- 47.5            # mass?
@@ -119,27 +119,27 @@ mass_index <- mass/age  # mass_index?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## 関数とその引数
+## Funciones y sus argumentos
 
-関数とは、代入操作などを含むより複雑な一連のコマンドを自動化する「定型スクリプト」のことです。多くの関数はあらかじめ定義されているか、あるいはRの*パッケージ*をインポートすることで利用可能になります（これについては後述します）。関数は通常、*引数*と呼ばれる1つ以上の入力を受け取ります。関数は多くの場合（必ずしもそうとは限りませんが）、*値*を返します。典型的な例は関数 `sqrt()` です。入力（引数）は数値である必要があり、戻り値（実質的には出力）はその数値の平方根となります。関数を実行すること（「動かす」こと）を、関数を*呼び出す*と言います。関数呼び出しの例は以下の通りです：
+Las funciones son "scripts predefinidos" que automatizan conjuntos de comandos más complejos, incluyendo operaciones, asignaciones, etc. Muchas funciones están predefinidas o pueden ponerse a disposición importando *paquetes* de R (hablaremos más de esto más adelante). Una función suele recibir una o más entradas denominadas *argumentos*. Las funciones a menudo (aunque no siempre) devuelven un *valor*. Un ejemplo típico sería la función `sqrt()`. La entrada (el argumento) debe ser un número, y el valor de retorno (de hecho, la salida) es la raíz cuadrada de ese número. Ejecutar una función ('correrla') se denomina *llamar* a la función. Un ejemplo de llamada a función es:
 
 ```{r, eval=FALSE, purl=FALSE}
 b <- sqrt(a)
 ```
 
-ここでは、`a`の値が`sqrt()`関数に渡され、`sqrt()`関数が平方根を計算してその値を返し、それがオブジェクト`b`に代入されます。この関数は引数を1つしか取らないため、非常にシンプルです。
+Aquí, el valor de `a` se pasa a la función `sqrt()`, la función `sqrt()` calcula la raíz cuadrada y devuelve el valor, que luego se asigna al objeto `b`. Esta función es muy sencilla, ya que solo acepta un argumento.
 
-関数の戻り値「value」は、必ずしも数値（`sqrt()`のように）である必要はありません。また、単一の要素である必要もなく、複数の要素の集合や、データセットであることも可能です。これについては、データファイルをRに読み込む際に見ていきましょう。
+El «valor» de retorno de una función no tiene por qué ser numérico (como el de `sqrt()`), ni tiene por qué ser un único elemento: puede ser un conjunto de elementos, o incluso un conjunto de datos. Veremos esto cuando leyamos archivos de datos en R.
 
-引数には、数値やファイル名だけでなく、その他のオブジェクトも含め、あらゆるものを指定できます。各引数が具体的に何を意味するかは関数によって異なり、ドキュメント（以下参照）で確認する必要があります。一部の関数では、ユーザーが指定できる引数のほか、指定しなかった場合に*デフォルト*値が適用される引数があります。これらは「オプション」と呼ばれます。オプションは通常、「不正な値」を無視するかどうかや、プロットで使用する記号など、関数の動作を変更するために用いられます。ただし、特定の値を指定したい場合は、デフォルト値の代わりに任意の値を指定することができます。
+Los argumentos pueden ser cualquier cosa, no solo números o nombres de archivos, sino también otros objetos. El significado exacto de cada argumento varía según la función y debe consultarse en la documentación (ver más abajo). Algunas funciones aceptan argumentos que pueden ser especificados por el usuario o, si se omiten, asumen un valor *predeterminado*: estos se denominan *opciones*. Las opciones se utilizan habitualmente para modificar la forma en que funciona la función, como si ignora los «valores incorrectos» o qué símbolo utilizar en un gráfico. Sin embargo, si desea algo específico, puede especificar el valor de su elección, que se utilizará en lugar del predeterminado.
 
-複数の引数を受け取れる関数を試してみましょう。`round()`。
+Probemos una función que pueda recibir múltiples argumentos: `round()`.
 
 ```{r, results="show", purl=TRUE}
 round(3.14159)
 ```
 
-ここでは、`round()`を引数`3.14159`のみで呼び出しており、`3`という値が返されました。これは、デフォルトで最近接の整数に丸められるためです。より多くの桁数が必要な場合は、`round`関数に関する情報を取得することでその方法を確認できます。`args(round)`を使用するか、`?round`を使ってこの関数のヘルプを参照することができます。
+Aquí, hemos llamado a `round()` con un solo argumento, `3.14159`, y ha devuelto el valor `3`. Esto se debe a que el valor predeterminado es redondear al número entero más cercano. Si queremos más dígitos, podemos ver cómo hacerlo obteniendo información sobre la función `round`. Podemos usar `args(round)` o consultar la ayuda de esta función mediante `?round`.
 
 ```{r, results="show", purl=TRUE}
 args(round)
@@ -149,66 +149,66 @@ args(round)
 ?round
 ```
 
-桁数を変更したい場合は、`digits=2` や任意の桁数を入力すればよいことがわかります。
+Vemos que si queremos un número diferente de dígitos, podemos escribir `digits=2` o cuantos queramos.
 
 ```{r, results="show", purl=TRUE}
 round(3.14159, digits = 2)
 ```
 
-引数を定義時と全く同じ順序で指定すれば、名前を付ける必要はありません。
+Si proporcionas los argumentos exactamente en el mismo orden en que están definidos, no es necesario asignarles nombres:
 
 ```{r, results="show", purl=TRUE}
 round(3.14159, 2)
 ```
 
-また、引数に名前を付けておけば、その順序を入れ替えることもできます。
+Y si se indican los nombres de los argumentos, se puede cambiar su orden:
 
 ```{r, results="show", purl=TRUE}
 round(digits = 2, x = 3.14159)
 ```
 
-関数呼び出しの際には、必須の引数（丸め処理を行う数値など）を最初に配置し、すべてのオプション引数の名前を指定するのが良い習慣です。そうしないと、コードを読む人が、馴染みのない引数を持つ関数の定義を調べて、何を行っているのかを理解しなければならない場合があります。また、引数の名前を指定することで、将来的に関数インターフェースに変更が加えられ、既存の引数の間に新しい引数が追加される可能性に対する備えにもなります。
+Es una buena práctica colocar primero los argumentos obligatorios (como el número que se está redondeando) en la llamada a la función, y especificar los nombres de todos los argumentos opcionales. Si no lo haces, alguien que lea tu código podría tener que consultar la definición de una función con argumentos desconocidos para comprender qué estás haciendo. Al especificar los nombres de los argumentos, también te proteges contra posibles cambios futuros en la interfaz de la función, que podrían añadir nuevos argumentos entre los existentes.
 
-## ベクトルとデータ型
+## Vectores y tipos de datos
 
-ベクトルはRで最も一般的かつ基本的なデータ型であり、実質的にRの主力となるデータ型です。ベクトルは、数値や文字などの一連の値で構成されます。`c()`関数を使用して、一連の値をベクトルに代入できます。例えば、動物の体重のベクトルを作成し、それを新しいオブジェクト`weight_g`に代入することができます：
+Un vector es el tipo de dato más común y básico en R, y es prácticamente el motor de R. Un vector se compone de una serie de valores, como números o caracteres. Podemos asignar una serie de valores a un vector utilizando la función `c()`. Por ejemplo, podemos crear un vector de pesos de animales y asignarlo a un nuevo objeto `weight_g`:
 
 ```{r, purl=TRUE}
 weight_g <- c(50, 60, 65, 82)
 weight_g
 ```
 
-ベクトルには文字を含めることもできます。
+Un vector también puede contener caracteres:
 
 ```{r, purl=TRUE}
 molecules <- c("dna", "rna", "protein")
 molecules
 ```
 
-ここでは「dna」や「rna」などの引用符が不可欠です。引用符がないと、Rは`dna`、`rna`、`protein`というオブジェクトが存在すると判断します。これらのオブジェクトはRのメモリ上に存在しないため、エラーメッセージが表示されます。
+Las comillas alrededor de "dna", "rna", etc., son esenciales aquí. Sin las comillas, R asumirá que existen objetos llamados `dna`, `rna` y `protein`. Como estos objetos no existen en la memoria de R, aparecerá un mensaje de error.
 
-ベクトルの内容を確認できる関数が数多く用意されています。`length()` を使うと、特定のベクトルにいくつの要素が含まれているかが分かります。
+Existen muchas funciones que permiten inspeccionar el contenido de un vector. `length()` indica cuántos elementos contiene un vector determinado:
 
 ```{r, purl=TRUE}
 length(weight_g)
 length(molecules)
 ```
 
-ベクトルの重要な特徴は、すべての要素が同じデータ型であることです。関数 `class()` は、オブジェクトのクラス（要素の型）を示します。
+Una característica importante de un vector es que todos los elementos son del mismo tipo de dato. La función `class()` indica la clase (el tipo de elemento) de un objeto:
 
 ```{r, purl=TRUE}
 class(weight_g)
 class(molecules)
 ```
 
-`str()`関数は、オブジェクトの構造とその要素の概要を提供します。大規模で複雑なオブジェクトを扱う際に有用な関数です。
+La función `str()` proporciona una visión general de la estructura de un objeto y de sus elementos. Es una función útil al trabajar con objetos grandes y complejos:
 
 ```{r, purl=TRUE}
 str(weight_g)
 str(molecules)
 ```
 
-`c()`関数を使えば、ベクトルに他の要素を追加できます。
+Puede utilizar la función `c()` para añadir otros elementos a su vector:
 
 ```{r}
 weight_g <- c(weight_g, 90) # add to the end of the vector
@@ -216,32 +216,32 @@ weight_g <- c(30, weight_g) # add to the beginning of the vector
 weight_g
 ```
 
-1行目では、元のベクトル `weight_g` の末尾に値 `90` を追加し、その結果を `weight_g` に保存します。次に、先頭に値 `30` を追加し、同様にその結果を `weight_g` に保存します。
+En la primera línea, tomamos el vector original `weight_g`, añadimos el valor `90` al final y guardamos el resultado de nuevo en `weight_g`. Luego añadimos el valor `30` al principio, guardando nuevamente el resultado en `weight_g`.
 
-これを繰り返すことで、ベクトルを拡張したり、データセットを構築したりできます。プログラミングを進める中で、収集や計算を行っている結果を追加する際にも役立つでしょう。
+Podemos hacer esto una y otra vez para ampliar un vector o ensamblar un conjunto de datos. A medida que programamos, esto puede resultar útil para añadir los resultados que estamos recopilando o calculando.
 
-**アトミックベクトル**はRで最も単純な**データ型**であり、単一の型からなる線形ベクトルです。上記では、Rが使用する主要な6種類の**アトミックベクトル**型のうち、`"character"`と`"numeric"`（または`"double"`）の2つを確認しました。これらは、すべてのRオブジェクトを構成する基本的な構成要素です。その他の4種類の**アトミックベクトル**型は以下の通りです。
+Un **vector atómico** es el **tipo de dato** más sencillo de R y es un vector lineal de un único tipo. Arriba, vimos 2 de los 6 tipos principales de **vectores atómicos** que utiliza R: `"character"` y `"numeric"` (o `"double"`). Estos son los elementos básicos a partir de los cuales se construyen todos los objetos de R. Los otros 4 tipos de **vectores atómicos** son:
 
-- `TRUE` および `FALSE` 用の `"logical"`（論理型データ）
-- 整数には`"integer"`を使用します（例：`2L`。ここで`L`はRに対してそれが整数であることを示します）。
-- `"complex"` は実部と虚部を持つ複素数（例：`1 + 4i`）を表します。これらについては以上です。
-- `"raw"` 以降では触れないビットストリーム用
+- `"logical"` para `TRUE` y `FALSE` (el tipo de dato booleano)
+- `"integer"` para números enteros (p. ej., `2L`, el `L` indica a R que se trata de un número entero)
+- `"complex"` para representar números complejos con partes real e imaginaria (p. ej., `1 + 4i`) y eso es todo lo que diremos sobre ellos
+- `"raw"` para flujos de bits que no analizaremos más adelante
 
-`typeof()`関数にベクトルを引数として渡すことで、その型を確認できます。
+Puedes comprobar el tipo de tu vector utilizando la función `typeof()` y pasando tu vector como argumento.
 
-ベクトルは、Rが使用する数多くの**データ構造**のひとつです。その他の重要なものには、リスト (`list`)、行列 (`matrix`)、データフレーム (`data.frame`)、因子 (`factor`)、配列 (`array`) があります。
+Los vectores son una de las muchas **estructuras de datos** que utiliza R. Otras importantes son las listas (`list`), las matrices (`matrix`), los marcos de datos (`data.frame`), los factores (`factor`) y los arrays (`array`).
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-アトミックベクトルには、文字型、数値型（またはdouble型）、整数型、論理型があることを確認しました。では、これらの異なる型を一つのベクトルに混在させようとすると、どうなるでしょうか。
+Hemos visto que los vectores atómicos pueden ser de tipo carácter, numérico (o double), entero y lógico. Pero, ¿qué sucede si intentamos mezclar estos tipos en un mismo vector?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
-Rはこれらを暗黙的にすべて同じ型に変換します。
+R los convierte implícitamente a un mismo tipo
 
 
 
@@ -251,9 +251,9 @@ Rはこれらを暗黙的にすべて同じ型に変換します。
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-それぞれの例で何が起こるでしょうか？（ヒント：`class()` を使ってオブジェクトのデータ型を確認し、その名前を入力して何が起こるか確かめてみてください）：
+¿Qué pasará en cada uno de estos ejemplos? (pista: usa `class()` para comprobar el tipo de datos de tus objetos y escribe sus nombres para ver qué sucede):
 
 ```{r, eval=TRUE}
 num_char <- c(1, 2, 3, "a")
@@ -264,7 +264,7 @@ tricky <- c(1, 2, 3, "4")
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, purl=TRUE}
 class(num_char)
@@ -283,15 +283,15 @@ tricky
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-なぜそうなると思いますか？
+¿Por qué crees que sucede?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
-ベクトルは単一のデータ型しか持つことができません。Rは、このベクトルの内容を変換（coerce）し、情報を一切損なわない*共通の型*を見つけ出そうとします。
+Los vectores pueden tener un solo tipo de dato. R intenta convertir el contenido de este vector (mediante coerción) para encontrar un *denominador común* que no pierda ninguna información.
 
 
 
@@ -301,9 +301,9 @@ tricky
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-次の例において、`combined_logical` に含まれる値のうち、`"TRUE"`（文字列として）となるものはいくつありますか？
+¿Cuántos valores en `combined_logical` son `"TRUE"` (como cadena de caracteres) en el siguiente ejemplo?
 
 ```{r, eval=TRUE}
 num_logical <- c(1, 2, 3, TRUE)
@@ -313,9 +313,9 @@ combined_logical <- c(num_logical, char_logical)
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
-1つだけです。過去のデータ型の記憶はなく、型変換はベクトルが最初に評価される際に行われます。したがって、`num_logical` 内の `TRUE` は、`combined_logical` で `"1"` に変換される前に、まず `1` に変換されます。
+Solo uno. No hay memoria de los tipos de datos anteriores, y la coerción ocurre la primera vez que se evalúa el vector. Por lo tanto, el `TRUE` en `num_logical` se convierte en un `1` antes de que se convierta en un `"1"` en `combined_logical`.
 
 ```{r}
 combined_logical
@@ -327,15 +327,15 @@ combined_logical
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-Rでは、あるクラスのオブジェクトを別のクラスに変換することを「強制変換」と呼びます。これらの変換は階層構造に基づいて行われ、一部の型は他の型へ優先的に強制変換されます。これらのデータ型がどのように強制変換されるか、その階層構造を示す図を描いていただけますか？
+En R, llamamos *coerción* al proceso de convertir objetos de una clase a otra. Estas conversiones ocurren según una jerarquía, mediante la cual algunos tipos se convierten preferentemente a otros. ¿Puedes dibujar un diagrama que represente la jerarquía de cómo se convierten estos tipos de datos?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
-論理型 → 数値型 → 文字列型 ← 論理型
+lógico → numérico → carácter ← lógico
 
 
 
@@ -369,9 +369,9 @@ tricky <- c(1, 2, 3, "4")
 ## types are coerced?
 ```
 
-## ベクトルの部分抽出
+## Selección de subconjuntos de vectores
 
-ベクトルから1つまたは複数の値を抽出したい場合は、角括弧で1つまたは複数のインデックスを指定する必要があります。例えば：
+Si queremos extraer uno o varios valores de un vector, debemos proporcionar uno o varios índices entre corchetes. Por ejemplo:
 
 ```{r, results="show", purl=TRUE}
 molecules <- c("dna", "rna", "peptide", "protein")
@@ -379,16 +379,16 @@ molecules[2]
 molecules[c(3, 2)]
 ```
 
-また、インデックスを繰り返すことで、元のオブジェクトよりも要素数の多いオブジェクトを作成することもできます。
+También podemos repetir los índices para crear un objeto con más elementos que el original:
 
 ```{r, results="show", purl=TRUE}
 more_molecules <- molecules[c(1, 2, 3, 2, 1, 4)]
 more_molecules
 ```
 
-Rのインデックスは1から始まります。Fortran、MATLAB、Julia、Rなどのプログラミング言語が1から数えるのは、それが人間にとって一般的だからです。C系言語（C++、Java、Perl、Pythonを含む）が0から数えるのは、コンピュータにとってその方が処理が簡単だからです。
+Los índices de R comienzan en 1. Los lenguajes de programación como Fortran, MATLAB, Julia y R comienzan a contar desde 1, ya que es lo que suelen hacer los seres humanos. Los lenguajes de la familia C (incluidos C++, Java, Perl y Python) cuentan desde 0 porque es más sencillo para las computadoras.
 
-最後に、負のインデックスを用いることで、ベクトルの指定した要素を除くすべての要素を取得することも可能です。
+Por último, también es posible obtener todos los elementos de un vector, excepto algunos elementos especificados, utilizando índices negativos:
 
 ```{r}
 molecules ## all molecules
@@ -397,16 +397,16 @@ molecules[-c(1, 3)] ## all but 1st/3rd ones
 molecules[c(-1, -3)] ## all but 1st/3rd ones
 ```
 
-## 条件付きサブセット抽出
+## Selección condicional de subconjuntos
 
-サブセットを抽出するもう一つの一般的な方法は、論理ベクトルを使用することです。`TRUE`は同じインデックスを持つ要素を選択しますが、`FALSE`は選択しません。
+Otra forma común de obtener un subconjunto es utilizar un vector lógico. `TRUE` seleccionará el elemento con el mismo índice, mientras que `FALSE` no lo hará:
 
 ```{r, purl=TRUE}
 weight_g <- c(21, 34, 39, 54, 55)
 weight_g[c(TRUE, FALSE, TRUE, TRUE, FALSE)]
 ```
 
-通常、これらの論理ベクトルは手動で入力されるものではなく、他の関数や論理判定の結果として得られるものです。例えば、50を超える値のみを選択したい場合は、次のようにします。
+Por lo general, estos vectores lógicos no se escriben a mano, sino que son el resultado de otras funciones o pruebas lógicas. Por ejemplo, si quisiera seleccionar únicamente los valores superiores a 50:
 
 ```{r, purl=TRUE}
 ## will return logicals with TRUE for the indices that meet
@@ -416,16 +416,16 @@ weight_g > 50
 weight_g[weight_g > 50]
 ```
 
-`&`（両方の条件が真、AND）または`|`（少なくとも一方の条件が真、OR）を使用して、複数のテストを組み合わせることができます。
+Puede combinar múltiples pruebas utilizando `&` (ambas condiciones son ciertas, Y) o `|` (al menos una de las condiciones es cierta, O):
 
 ```{r, results="show", purl=TRUE}
 weight_g[weight_g < 30 | weight_g > 50]
 weight_g[weight_g >= 30 & weight_g == 21]
 ```
 
-ここで、`<`は「未満」、`>`は「より大きい」、`>=`は「以上」、`==`は「等しい」を表します。二重等号`==`は左辺と右辺の数値的な等価性を判定するもので、変数への代入を行う単一の`=`記号（`<-`と同様）と混同しないようご注意ください。
+Aquí, `<` significa "menor que", `>` "mayor que", `>=` "mayor o igual que" y `==` "igual a". El doble signo de igual `==` es una prueba de igualdad numérica entre el lado izquierdo y el derecho, y no debe confundirse con el signo único `=`, que realiza la asignación de variables (de manera similar a `<-`).
 
-ベクトル内で特定の文字列を検索することは、よくある作業です。複数の値との等価性を判定するには「or」演算子 `|` を使用できますが、すぐに煩雑になります。関数 `%in%` を使用すると、検索ベクトルの要素のいずれかが見つかるかどうかを判定できます：
+Una tarea común es buscar ciertas cadenas en un vector. Se podría utilizar el operador "o" `|` para comprobar la igualdad con múltiples valores, pero esto puede volverse rápidamente tedioso. La función `%in%` permite comprobar si se encuentra alguno de los elementos de un vector de búsqueda:
 
 ```{r, purl=TRUE}
 molecules <- c("dna", "rna", "protein", "peptide")
@@ -436,19 +436,19 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-なぜ `"four" > "five"` が `TRUE` を返すのか、分かりますか？
+¿Puedes descifrar por qué `"four" > "five"` devuelve `TRUE`?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r}
 "four" > "five"
 ```
 
-文字列に対して `>` や `<` を使用する場合、R はそれらのアルファベット順を比較します。ここでは `"four"` が `"five"` の後に来るため、前者の方が後者よりも*大きい*と判断されます。
+Al utilizar `>` o `<` en cadenas, R compara su orden alfabético. En este caso, `"four"` aparece después de `"five"` y, por lo tanto, es *mayor que* este.
 
 
 
@@ -456,9 +456,9 @@ molecules[molecules %in% c("rna", "dna", "metabolite", "peptide", "glycerol")]
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## 名称
+## Nombres
 
-ベクトルの各要素に名前を付けることができます。以下のコードチャンクでは、名前が付与されていない初期のベクトルと、名前の設定方法および取得方法を示しています。
+Es posible asignar nombres a cada elemento de un vector. El bloque de código a continuación muestra un vector inicial sin nombres, cómo se establecen y se recuperan los nombres.
 
 ```{r}
 x <- c(1, 5, 3, 5, 10)
@@ -467,18 +467,18 @@ names(x) <- c("A", "B", "C", "D", "E")
 names(x) ## now we have names
 ```
 
-ベクトルに名前が付いている場合、インデックスに加えて名前で要素にアクセスすることができます。
+Cuando un vector tiene nombres, es posible acceder a los elementos por su nombre, además de por su índice.
 
 ```{r}
 x[c(1, 3)]
 x[c("A", "C")]
 ```
 
-## 欠損データ
+## Datos faltantes
 
-Rはデータセットの解析を目的として設計されているため、欠損データという概念を備えています（他のプログラミング言語では一般的ではありません）。欠損データは、ベクトル内で`NA`として表現されます。
+Dado que R fue diseñado para analizar conjuntos de datos, incluye el concepto de datos faltantes (algo poco común en otros lenguajes de programación). Los datos faltantes se representan en los vectores como `NA`.
 
-数値演算を行う際、扱うデータに欠損値が含まれていると、ほとんどの関数は`NA`を返します。この仕様により、欠損値を扱うケースを見落とすことが難しくなります。引数`na.rm = TRUE`を指定することで、欠損値を無視して結果を算出できます。
+Al realizar operaciones con números, la mayoría de las funciones devolverán `NA` si los datos con los que se trabaja incluyen valores faltantes. Esta característica dificulta pasar por alto los casos en los que se manejan datos faltantes. Puede añadir el argumento `na.rm = TRUE` para calcular el resultado ignorando los valores faltantes.
 
 ```{r}
 heights <- c(2, 4, 4, NA, 6)
@@ -488,7 +488,7 @@ mean(heights, na.rm = TRUE)
 max(heights, na.rm = TRUE)
 ```
 
-データに欠損値が含まれている場合は、`is.na()`、`na.omit()`、`complete.cases()` の各関数に慣れておくとよいでしょう。例については以下をご覧ください。
+Si sus datos incluyen valores faltantes, es posible que desee familiarizarse con las funciones `is.na()`, `na.omit()` y `complete.cases()`. Consulte a continuación ejemplos.
 
 ```{r}
 ## Extract those elements which are not missing values.
@@ -507,20 +507,20 @@ heights[complete.cases(heights)]
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-1. このインチ単位の身長のベクトルを用いて、NAを除去した新しいベクトルを作成してください。
+1. Utilizando este vector de alturas en pulgadas, crea un nuevo vector sin los valores NA.
 
 ```{r}
 heights <- c(63, 69, 60, 65, NA, 68, 61, 70, 61, 59, 64, 69, 63, 63, NA, 72, 65, 64, 70, 63, 65)
 ```
 
-2. 関数 `median()` を使用して、ベクトル `heights` の中央値を計算してください。
-3. Rを使って、集合の中で67インチより背が高い人が何人いるか調べてください。
+2. Utilice la función `median()` para calcular la mediana del vector `heights`.
+3. Utilice R para determinar cuántas personas del conjunto miden más de 67 pulgadas.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, purl=TRUE}
 heights_no_na <- heights[!is.na(heights)]
@@ -541,38 +541,38 @@ length(heights_above_67)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## ベクトルの生成 {#sec:genvec}
+## Generación de vectores {#sec:genvec}
 
 ```{r, echo=FALSE}
 set.seed(1)
 ```
 
-### コンストラクタ
+### Constructores
 
-さまざまな型のベクトルを生成するための関数がいくつか用意されています。数値型のベクトルを生成するには、出力ベクトルの長さを引数として指定する`numeric()`コンストラクタを使用できます。値は0で初期化されます。
+Existen algunas funciones para generar vectores de diferentes tipos. Para generar un vector de números, se puede utilizar el constructor `numeric()`, proporcionando la longitud del vector de salida como parámetro. Los valores se inicializarán con 0.
 
 ```{r, purl=TRUE}
 numeric(3)
 numeric(10)
 ```
 
-なお、長さ0の数値ベクトルを要求すると、まさにそれが得られます。
+Téngase en cuenta que si solicitamos un vector numérico de longitud 0, obtenemos exactamente eso:
 
 ```{r, purl=TRUE}
 numeric(0)
 ```
 
-文字型と論理型に対しても、それぞれ`character()`および`logical()`という同様のコンストラクタが用意されています。
+Existen constructores similares para caracteres y valores lógicos, denominados `character()` y `logical()`, respectivamente.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-文字型および論理型ベクトルのデフォルト値は何ですか？
+¿Cuáles son los valores predeterminados para los vectores de caracteres y lógicos?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, purl=TRUE}
 character(2) ## the empty character
@@ -583,21 +583,21 @@ logical(2)   ## FALSE
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### 要素を複製します
+### Repetir elementos
 
-`rep` 関数を使用すると、値を指定した回数だけ繰り返すことができます。例えば、値 -1 で長さ 5 の数値ベクトルを初期化したい場合は、次のように記述できます。
+La función `rep` permite repetir un valor un número determinado de veces. Si queremos inicializar un vector numérico de longitud 5 con el valor -1, por ejemplo, podríamos hacer lo siguiente:
 
 ```{r, purl=TRUE}
 rep(-1, 5)
 ```
 
-同様に、収集するデータに前提条件を設けず、まずは欠損値を含むベクトルを生成する方法もよく用いられます。
+Del mismo modo, para generar un vector lleno de valores faltantes, lo cual suele ser una buena forma de comenzar, sin establecer supuestos sobre los datos a recopilar:
 
 ```{r, purl=TRUE}
 rep(NA, 5)
 ```
 
-`rep`は、任意の長さのベクトル（上記では長さ1のベクトルを使用しました）および任意の型を入力として受け付けます。例えば、値1、2、3を5回繰り返したい場合は、次のように記述します。
+`rep` puede aceptar como entrada vectores de cualquier longitud (en lo anterior, utilizamos vectores de longitud 1) y de cualquier tipo. Por ejemplo, si queremos repetir los valores 1, 2 y 3 cinco veces, haríamos lo siguiente:
 
 ```{r, purl=TRUE}
 rep(c(1, 2, 3), 5)
@@ -605,13 +605,13 @@ rep(c(1, 2, 3), 5)
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-値 1、2、3 をそれぞれ 5 回繰り返しつつ、その順に 1 が 5 個、2 が 5 個、3 が 5 個得たい場合はどうすればよいでしょうか。方法は 2 通りあります。詳細は `?rep` または `?sort` を参照してください。
+¿Y si quisiéramos repetir los valores 1, 2 y 3 cinco veces, pero obtener cinco 1, cinco 2 y cinco 3 en ese orden? Hay dos posibilidades; consulte `?rep` o `?sort` para obtener ayuda.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, purl=TRUE}
 rep(c(1, 2, 3), each = 5)
@@ -622,15 +622,15 @@ sort(rep(c(1, 2, 3), 5))
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### 数列の生成
+### Generación de secuencias
 
-もう一つ非常に便利な関数に、数値列を生成する`seq`があります。例えば、1から20まで2刻みで整数列を生成するには、次のように記述します。
+Otra función muy útil es `seq`, para generar una secuencia de números. Por ejemplo, para generar una secuencia de enteros del 1 al 20 en pasos de 2, se utilizaría:
 
 ```{r, purl=TRUE}
 seq(from = 1, to = 20, by = 2)
 ```
 
-`by`のデフォルト値は1です。1刻みで値を順次生成する操作は頻繁に用いられるため、ショートカットが用意されています。
+El valor predeterminado de `by` es 1 y, dado que la generación de una secuencia de un valor a otro con pasos de 1 se utiliza con frecuencia, existe un atajo:
 
 ```{r, purl=TRUE}
 seq(1, 5, 1)
@@ -638,27 +638,27 @@ seq(1, 5) ## default by
 1:5
 ```
 
-1から20までの数値を、最終的に長さ3となるように生成するには、次のようにします。
+Para generar una secuencia de números del 1 al 20 con una longitud final de 3, se utilizaría:
 
 ```{r, purl=TRUE}
 seq(from = 1, to = 20, length.out = 3)
 ```
 
-### 無作為抽出と置換
+### Muestras aleatorias y permutaciones
 
-最後に、有用な関数群として、ランダムデータを生成するものがあります。最初の`sample`は、別のベクトルのランダムな順列を生成します。例えば、10人の学生の口頭試験のランダムな順序を決めるには、まず各学生に1から10までの番号を割り当て（例えば名前のアルファベット順に基づいて）、次に次のようにします：
+Un último grupo de funciones útiles son aquellas que generan datos aleatorios. La primera, `sample`, genera una permutación aleatoria de otro vector. Por ejemplo, para determinar un orden aleatorio para el examen oral de 10 estudiantes, primero asigno a cada estudiante un número del 1 al 10 (por ejemplo, según el orden alfabético de su nombre) y luego:
 
 ```{r, purl=TRUE}
 sample(1:10)
 ```
 
-追加の引数を指定しない場合、`sample`はベクトルの全要素の順列を返します。特定のサイズのランダムサンプルを取得したい場合は、この値を第2引数として指定します。以下では、あらかじめ定義された`letters`ベクトルに含まれるアルファベットから5文字をランダムに抽出します。
+Sin argumentos adicionales, `sample` devolverá una permutación de todos los elementos del vector. Si quisiera una muestra aleatoria de un tamaño determinado, establecería este valor como segundo argumento. A continuación, extraigo 5 letras aleatorias del alfabeto contenido en el vector `letters` predefinido:
 
 ```{r, purl=TRUE}
 sample(letters, 5)
 ```
 
-入力ベクトルよりも大きな出力を得たい場合や、一部の要素を複数回抽出したい場合は、`replace`引数を`TRUE`に設定する必要があります：
+Si quisiera un resultado mayor que el vector de entrada, o poder extraer algunos elementos varias veces, tendría que establecer el argumento `replace` en `TRUE`:
 
 ```{r, purl=TRUE}
 sample(1:5, 10, replace = TRUE)
@@ -666,28 +666,28 @@ sample(1:5, 10, replace = TRUE)
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：
+## Desafío:
 
-上記の関数を試してみると、サンプルが確かにランダムに抽出されており、同じ順列が二度現れることはないことに気づいたはずです。こうしたランダム抽出を再現するには、ランダムサンプルを抽出する前に、`set.seed()` を用いて乱数生成のシード値を手動で設定することができます。
+Al probar las funciones anteriores, habrá advertido que las muestras son, en efecto, aleatorias y que no se obtiene la misma permutación dos veces. Para poder reproducir estos muestreos aleatorios, se puede establecer manualmente la semilla de generación de números aleatorios con `set.seed()` antes de extraer la muestra aleatoria.
 
-隣の人と一緒にこの機能を試してみましょう。まず、`1:10`のランダムな順列を2つ独立して作成し、結果が異なることを確認してください。
+Prueba esta función con tu compañero. Primero, extrae dos permutaciones aleatorias de `1:10` de forma independiente y observa que obtienes resultados diferentes.
 
-次に、例えば `set.seed(123)` でシード値を設定し、ランダム抽出を再度行います。これで、同じランダム抽出結果が得られることが確認できます。
+Ahora establezca la semilla con, por ejemplo, `set.seed(123)` y repita el muestreo aleatorio. Observe que ahora obtiene los mismos muestreos aleatorios.
 
-別のシード値を設定して繰り返してください。
+Repita estableciendo una semilla diferente.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
-さまざまな順列
+Diferentes permutaciones
 
 ```{r, purl=TRUE}
 sample(1:10)
 sample(1:10)
 ```
 
-シード値 123 での同一の順列
+Mismas permutaciones con la semilla 123
 
 ```{r, purl=TRUE}
 set.seed(123)
@@ -696,7 +696,7 @@ set.seed(123)
 sample(1:10)
 ```
 
-別のシード値
+Una semilla diferente
 
 ```{r, purl=TRUE}
 set.seed(1)
@@ -709,9 +709,9 @@ sample(1:10)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### 正規分布からの標本抽出
+### Toma de muestras de una distribución normal
 
-最後に見ていく関数は`rnorm`で、正規分布から無作為標本を抽出します。平均0と100、標準偏差1と5の2つの正規分布（*N(0, 1)*および*N(100, 5)*と表記）を以下に示します。
+La última función que veremos es `rnorm`, que extrae una muestra aleatoria de una distribución normal. A continuación se muestran dos distribuciones normales con medias 0 y 100 y desviaciones estándar 1 y 5, denotadas como *N(0, 1)* y *N(100, 5)*.
 
 ```{r, echo=FALSE, fig.width=12, fig.height=6, fig.cap="Two normal distributions: *N(0, 1)* on the left and *N(100, 5)* on the right.", fig.alt="Two figures illustraing normal distributonis N(0,1) and N(100,5)."}
 par(mfrow = c(1, 2))
@@ -719,7 +719,7 @@ plot(density(rnorm(1000)), main = "", sub = "N(0, 1)")
 plot(density(rnorm(1000, 100, 5)), main = "", sub = "N(100, 5)")
 ```
 
-3つの引数 `n`、`mean`、`sd` は、標本サイズと、正規分布のパラメータ（すなわち平均とその標準偏差）を指定します。後者のデフォルト値は 0 と 1 です。
+Los tres argumentos, `n`, `mean` y `sd`, definen el tamaño de la muestra y los parámetros de la distribución normal, es decir, la media y su desviación estándar. Los valores predeterminados de estos dos parámetros son 0 y 1, respectivamente.
 
 ```{r, purl=TRUE}
 rnorm(5)
@@ -727,10 +727,10 @@ rnorm(5, 2, 2)
 rnorm(5, 100, 5)
 ```
 
-スクリプトの書き方とRのデータ構造の基礎を学んだところで、いよいよより大規模なデータを扱い、データフレームについて学んでいきましょう。
+Ahora que hemos aprendido a escribir scripts y los conceptos básicos de las estructuras de datos de R, estamos listos para empezar a trabajar con datos más extensos y aprender sobre los marcos de datos.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Rの操作方法
+- Cómo interactuar con R
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -1,4 +1,4 @@
-"""Preservation checks for the source-to-Japanese lesson translation workflow.
+"""Preservation checks for the English lesson translation workflow.
 
 These fixtures deliberately include syntax that can look like translatable prose.
 They run without MLX, model weights, network access, or an R installation.
@@ -494,6 +494,80 @@ class TranslationCliTests(unittest.TestCase):
         self.run_cli(["--cache-only"], forbid_backend=True)
         self.assertIn("最初のレッスン", (self.output / "first.Rmd").read_text())
         self.assertIn("次のレッスン", (self.output / "second.Rmd").read_text())
+
+    def test_reviewed_memory_requires_matching_source_and_target_languages(self):
+        config_path, config, directory = self.copy_translation_resources()
+        source = "A reviewed language-scope fixture paragraph.\n"
+        self.write_source(source)
+        unit = core.extract_document(source, "new-lesson.Rmd").units[0]
+        memory_model = {**config["model"], "source_language": "en", "target_language": "ja"}
+        memory = {"schema_version": 1, "model": memory_model, "records": {
+            core.unit_key(unit): {"source": unit.masked, "kind": unit.kind,
+                                  "files": [unit.file], "translation": "日本語のレビュー済み翻訳です。"},
+        }}
+        memory_path = directory / config["memory"]
+        memory_path.write_text(json.dumps(memory, ensure_ascii=False))
+        for languages in ({"source_language": "en", "target_language": "es"},
+                          {"source_language": "de", "target_language": "ja"}):
+            with self.subTest(languages=languages):
+                config["model"].update(languages)
+                config_path.write_text(json.dumps(config, ensure_ascii=False))
+                with self.assertRaisesRegex(ValueError, "uncached passages"):
+                    self.run_cli(["--cache-only"], forbid_backend=True)
+                self.assertFalse(self.output.exists())
+        self.assertEqual(json.loads(memory_path.read_text()), memory)
+
+    def test_language_change_resets_memory_without_relabeling_old_records(self):
+        config_path, config, directory = self.copy_translation_resources()
+        config["model"].update(source_language="en", target_language="es")
+        config_path.write_text(json.dumps(config, ensure_ascii=False))
+        source = "A reviewed memory-migration fixture paragraph.\n"
+        self.write_source(source)
+        unit = core.extract_document(source, "new-lesson.Rmd").units[0]
+        old_unit = core.extract_document("An obsolete Japanese-memory fixture.\n", "obsolete.Rmd").units[0]
+        old_model = {**config["model"], "target_language": "ja"}
+        memory = {"schema_version": 1, "model": old_model, "records": {
+            core.unit_key(item): {"source": item.masked, "kind": item.kind,
+                                  "files": [item.file], "translation": "日本語のレビュー済み翻訳です。"}
+            for item in (unit, old_unit)
+        }}
+        memory_path = directory / config["memory"]
+        memory_path.write_text(json.dumps(memory, ensure_ascii=False))
+
+        class SpanishBackend:
+            def translate_batch(self, requests):
+                return ["Una traducción al español." for request in requests]
+
+        self.run_cli(["--update-memory"], backend=SpanishBackend())
+        updated = json.loads(memory_path.read_text())
+        self.assertEqual(updated["model"]["target_language"], "es")
+        self.assertEqual(set(updated["records"]), {core.unit_key(unit)})
+        record = updated["records"][core.unit_key(unit)]
+        self.assertEqual(record["translation"], "Una traducción al español.")
+        self.assertEqual(record["review_status"], "machine")
+        self.assertEqual(record["model"]["target_language"], "es")
+        self.assertNotIn("日本語", memory_path.read_text())
+        (self.cache / "cache.jsonl").unlink()
+        self.run_cli(["--cache-only"], forbid_backend=True)
+        self.assertIn("Una traducción al español.", (self.output / unit.file).read_text())
+
+    def test_reviewed_same_language_memory_survives_model_and_glossary_changes(self):
+        config_path, config, directory = self.copy_translation_resources()
+        config["model"].update(source_language="en", target_language="es")
+        source = "A stable reviewed-language fixture paragraph.\n"
+        self.write_source(source)
+        unit = core.extract_document(source, "new-lesson.Rmd").units[0]
+        memory = {"schema_version": 1, "model": dict(config["model"]), "records": {
+            core.unit_key(unit): {"source": unit.masked, "kind": unit.kind,
+                                  "files": [unit.file], "translation": "Una traducción revisada."},
+        }}
+        (directory / config["memory"]).write_text(json.dumps(memory, ensure_ascii=False))
+        config["model"]["revision"] = "0" * 40
+        config["context"] += " A changed prompt context."
+        config_path.write_text(json.dumps(config, ensure_ascii=False))
+        (directory / config["glossary"]).write_text(json.dumps([{"source": "fixture", "target": "ejemplo"}]))
+        self.run_cli(["--cache-only"], forbid_backend=True)
+        self.assertEqual((self.output / unit.file).read_text(), "Una traducción revisada.\n")
 
     def test_persisted_machine_memory_is_invalidated_by_prompt_profile_changes(self):
         config_path, config, directory = self.copy_translation_resources()

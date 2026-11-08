@@ -1,6 +1,6 @@
 ---
 source: Rmd
-title: "スプレッドシートによるデータ整理"
+title: "Organización de datos con hojas de cálculo"
 teaching: 30
 exercises: 30
 ---
@@ -10,135 +10,135 @@ exercises: 30
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- スプレッドシートとその長所・短所について学びましょう。
-- データを効果的に活用するために、スプレッドシートではどのようにデータを整形すればよいでしょうか。
-- スプレッドシートでよくあるエラーと、その修正方法について学びましょう。
-- 整然データの原則に従ってデータを整理してください。
-- カンマ区切り（CSV）やタブ区切り（TSV）などのテキストベースのスプレッドシート形式について学びましょう。
+- Conozca las hojas de cálculo, sus fortalezas y debilidades.
+- ¿Cómo formateamos los datos en hojas de cálculo para un uso eficaz de los mismos?
+- Conozca los errores comunes en las hojas de cálculo y cómo corregirlos.
+- Organice sus datos siguiendo los principios de datos ordenados.
+- Conozca los formatos de hojas de cálculo basados en texto, como los formatos separados por comas (CSV) o por tabulaciones (TSV).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- 表形式データの整理方法は？
+- ¿Cómo organizar los datos en tabla?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-> このエピソードは、Data Carpentriesの*「生態学者のためのRによるデータ分析と可視化」*レッスンに基づいています。
+> Este episodio se basa en la lección *Data Analysis and Visualisation in R for Ecologists* de Data Carpentries.
 
-## スプレッドシートソフト
+## Programas de hojas de cálculo
 
-**質問**
+**Pregunta**
 
-- データを適切に整理するためのスプレッドシート活用の基本原則とは何でしょうか？
+- ¿Cuáles son los principios básicos para utilizar hojas de cálculo para una buena organización de datos?
 
-**目的**
+**Objetivo**
 
-- コンピュータがデータセットを最大限に活用できるよう、データを整理する際のベストプラクティスについて説明してください。
+- Describa las mejores prácticas para organizar los datos para que las computadoras puedan aprovechar al máximo los conjuntos de datos.
 
-**要点**
+**Punto clave**
 
-- 適切なデータ整理は、あらゆる研究プロジェクトの基盤となります。
+- Una buena organización de los datos es la base de cualquier proyecto de investigación.
 
-適切なデータ整理は、研究プロジェクトの基盤となります。ほとんどの研究者は、スプレッドシートでデータを扱ったり、データ入力を行ったりしています。スプレッドシートソフトは、データテーブルの設計や、ごく基本的なデータ品質管理機能を利用する上で非常に有用なグラフィカルインターフェースです。 @Broman:2018. も参照してください。
+Una buena organización de los datos es la base de su proyecto de investigación. La mayoría de los investigadores disponen de datos o realizan la entrada de datos en hojas de cálculo. Los programas de hojas de cálculo son interfaces gráficas muy útiles para diseñar tablas de datos y gestionar funciones muy básicas de control de calidad de los datos. Véase también  @Broman:2018.
 
-### スプレッドシートの構成
+### Esquema de la hoja de cálculo
 
-スプレッドシートはデータ入力に適しています。そのため、スプレッドシートには膨大なデータが蓄積されています。研究者としての時間の多くは、この「データ加工」の段階に費やされることになります。決して楽しい作業ではありませんが、不可欠なものです。ここでは、データの整理方法や、より効率的なデータ加工のための実践的な手法について解説します。
+Las hojas de cálculo son útiles para la entrada de datos. Por lo tanto, tenemos mucha información en hojas de cálculo. Gran parte de su tiempo como investigador se dedicará a esta etapa de «manipulación de datos». No es lo más divertido, pero es necesario. Le enseñaremos cómo pensar en la organización de los datos y algunas prácticas para una manipulación de datos más eficaz.
 
-### このレッスンで学べないこと
+### Lo que esta lección no le enseñará
 
-- スプレッドシートで*統計*を行う方法
-- スプレッドシートで*グラフ作成*を行う方法
-- スプレッドシートソフトで*コードを書く*方法
+- Cómo realizar *estadísticas* en una hoja de cálculo
+- Cómo hacer *gráficos* en una hoja de cálculo
+- Cómo *escribir código* en programas de hojas de cálculo
 
-これをやってみたい場合は、O'Reilly社から出版されている[『Head First Excel』](https://www.amazon.com/Head-First-Excel-learners-spreadsheets/dp/0596807694/)が参考になります。
+Si busca hacer esto, una buena referencia es [Head First Excel](https://www.amazon.com/Head-First-Excel-learners-spreadsheets/dp/0596807694/), publicada por O'Reilly.
 
-### なぜスプレッドシートでのデータ分析を教えないのでしょうか？
+### ¿Por qué no enseñamos el análisis de datos en hojas de cálculo?
 
-- スプレッドシートでのデータ分析には、通常、多大な手作業を要します。パラメータを変更したり、新しいデータセットで分析を実行したりしたい場合、通常はすべてを手作業でやり直さなければなりません。（マクロを作成できることは承知していますが、次の項目をご覧ください。）
+- El análisis de datos en hojas de cálculo suele requerir mucho trabajo manual. Si desea cambiar un parámetro o ejecutar un análisis con un nuevo conjunto de datos, normalmente tiene que volver a hacerlo todo a mano. (Sabemos que es posible crear macros, pero consulte el siguiente punto).
 
-- また、作業に戻ったり、誰かに分析の詳細を求められたりした際に、スプレッドシートソフトで行った統計解析やグラフ作成の経緯を追跡したり再現したりすることは困難です。
+- También resulta difícil rastrear o reproducir análisis estadísticos o de gráficos realizados en programas de hojas de cálculo cuando se desea volver a trabajar en su trabajo o alguien solicita detalles de su análisis.
 
-数多くのスプレッドシートソフトが利用可能です。ほとんどの受講者が主要なスプレッドシートソフトとしてExcelを使用しているため、本レッスンではExcelの例を用います。また、無料で利用できるスプレッドシートソフトとしてLibreOfficeもあります。プログラムによってコマンドが多少異なる場合がありますが、基本的な考え方は同じです。
+Existen muchos programas de hojas de cálculo. Dado que la mayoría de los participantes utilizan Excel como su programa principal, esta lección hará uso de ejemplos de Excel. Otro programa de hojas de cálculo gratuito que también puede utilizarse es LibreOffice. Los comandos pueden diferir un poco entre programas, pero la idea general es la misma.
 
-スプレッドシートソフトには、研究者として必要となる機能の多くが盛り込まれています。以下のような用途に活用できます。
+Los programas de hojas de cálculo abarcan muchas de las tareas que necesitamos realizar como investigadores. Podemos utilizarlos para:
 
-- データ入力
-- データの整理
-- データの抽出と並べ替え
-- 統計学
-- プロット
+- Ingreso de datos
+- Organización de datos
+- Selección de subconjuntos y ordenación de datos
+- Estadística
+- Representación gráfica
 
-スプレッドシートソフトでは、表を用いてデータを表現・表示します。表形式でフォーマットされたデータは本章の主要なテーマでもあり、後続の解析を効率的に行うために、データを標準的な方法で表にまとめる方法について解説します。
+Los programas de hojas de cálculo utilizan tablas para representar y mostrar datos. Los datos formateados como tablas son también el tema principal de este capítulo, y veremos cómo organizar los datos en tablas de manera estandarizada para garantizar un análisis posterior eficiente.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：隣の人と以下の点について話し合ってください。
+## Desafío: Analice los siguientes puntos con su vecino
 
-- 研究や授業、あるいは自宅でスプレッドシートを使ったことはありますか？
-- スプレッドシートではどのような操作を行いますか？
-- スプレッドシートはどのような用途に向いていると思いますか？
-- スプレッドシートソフトで、うっかり何かをしてイライラしたり、がっかりしたりしたことはありますか？
+- ¿Has utilizado hojas de cálculo en tu investigación, cursos o en casa?
+- ¿Qué tipo de operaciones realizas en las hojas de cálculo?
+- ¿Para qué crees que son útiles las hojas de cálculo?
+- ¿Alguna vez ha hecho algo por error en un programa de hojas de cálculo que le haya hecho sentirse frustrado o triste?
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### スプレッドシートの問題点
+### Problemas con las hojas de cálculo
 
-スプレッドシートはデータ入力に適していますが、実際にはデータ入力以外にも幅広く利用されています。論文用のデータテーブルの作成や、要約統計量の算出、図表の作成などに活用されています。
+Las hojas de cálculo son útiles para la entrada de datos, pero en la práctica tendemos a utilizar los programas de hojas de cálculo para mucho más que solo la entrada de datos. Las utilizamos para crear tablas de datos para publicaciones, generar estadísticas resumidas y elaborar figuras.
 
-出版用の表をスプレッドシートで作成するのは最適ではありません。出版用にデータ表をフォーマットする際、主要な要約統計量を本来データとして読み取られることを想定しない形式で提示することが多く、また特殊な書式設定（セルの結合、罫線の設定、見栄えの調整など）を伴うことがよくあります。こうした作業は、文書編集ソフト内で行うことをおすすめします。
+Generar tablas para publicaciones en una hoja de cálculo no es lo ideal: a menudo, al dar formato a una tabla de datos para una publicación, presentamos estadísticas resumidas clave de una manera que no está pensada para leerse como datos, y a menudo implica un formato especial (fusionar celdas, crear bordes, embellecerla). Le recomendamos realizar este tipo de operaciones dentro de su software de edición de documentos.
 
-後者の2つの用途、すなわち統計量や図表の作成については、注意が必要です。スプレッドシートプログラムはグラフィカルなドラッグ＆ドロップ方式であるため、特に統計量や図表の作成により複雑な計算が必要な場合、自身の操作手順を再現することは極めて困難、あるいは不可能に近いと言えます。さらに、スプレッドシートで計算を行う際は、隣接する複数のセルに誤ってわずかに異なる数式を適用してしまいがちです。RやSASのようなコマンドラインベースの統計プログラムを使用する場合、意図的に行わない限り、データセット内のある観測値には計算を適用し、別の観測値には適用しないということは事実上不可能です。
+Las dos últimas aplicaciones, la generación de estadísticas y figuras, deben utilizarse con cautela: debido a la naturaleza gráfica y de arrastre y soltar de los programas de hojas de cálculo, puede resultar muy difícil, si no imposible, replicar sus pasos (mucho menos rastrear los de otros), particularmente si sus estadísticas o figuras requieren realizar cálculos más complejos. Además, al realizar cálculos en una hoja de cálculo, es fácil aplicar accidentalmente una fórmula ligeramente diferente a múltiples celdas adyacentes. Al utilizar un programa de estadísticas basado en línea de comandos como R o SAS, es prácticamente imposible aplicar un cálculo a una observación de su conjunto de datos pero no a otra, a menos que lo haga intencionadamente.
 
-### データ入力とクリーニングへのスプレッドシートの活用
+### Uso de hojas de cálculo para la entrada y limpieza de datos
 
-本レッスンでは、主にスプレッドシートソフトとしてExcelをご利用であることを前提とします。他にも（gnumericやOpenOfficeのCalcなど）あり、機能も似ていますが、生物学者や生物医学研究者の間で最も広く利用されているのはExcelのようです。
+En esta lección, asumiremos que lo más probable es que utilice Excel como su programa de hojas de cálculo principal; existen otros (gnumeric, Calc de OpenOffice) y su funcionalidad es similar, pero Excel parece ser el programa más utilizado por biólogos e investigadores biomédicos.
 
-このレッスンでは、以下の内容について解説します。
+En esta lección hablaremos de:
 
-1. スプレッドシートにおけるデータテーブルの書式設定
-2. 書式の問題
-3. データのエクスポート
+1. Formateo de tablas de datos en hojas de cálculo
+2. Problemas de formato
+3. Exportación de datos
 
-## スプレッドシートにおけるデータテーブルの書式設定
+## Formateo de tablas de datos en hojas de cálculo
 
-**質問**
+**Preguntas**
 
-- データを効果的に活用するために、スプレッドシートではどのようにデータを整形すればよいでしょうか。
+- ¿Cómo formateamos los datos en hojas de cálculo para un uso eficaz de los mismos?
 
-**目的**
+**Objetivos**
 
-- スプレッドシートにおけるデータ入力と書式設定のベストプラクティスについて説明してください。
+- Describa las mejores prácticas para la entrada y el formato de datos en hojas de cálculo.
 
-- スプレッドシートで変数と観測値を整理する際は、ベストプラクティスを適用してください。
+- Aplicar las mejores prácticas para organizar variables y observaciones en una hoja de cálculo.
 
-**要点**
+**Puntos clave**
 
-- 生データは絶対に変更しないでください。変更を加える前には、必ずコピーを作成してください。
+- Nunca modifique sus datos brutos. Haga siempre una copia antes de realizar cualquier cambio.
 
-- データのクリーニングで行ったすべての手順を、プレーンテキストファイルに記録しておいてください。
+- Lleva un registro de todos los pasos que sigas para limpiar tus datos en un archivo de texto plano.
 
-- 整然データの原則に従ってデータを整理してください。
+- Organice sus datos siguiendo los principios de datos ordenados.
 
-最もよくある間違いは、スプレッドシートソフトを実験ノートのように扱ってしまうことです。つまり、文脈や余白のメモ、データやフィールドの配置に頼って情報を伝えようとすることです。人間であれば（通常は）こうした情報を解釈できますが、コンピュータは同じように情報を捉えません。一つひとつの要素が何を意味するのかをコンピュータに説明しない限り（これは難しい作業です！）、コンピュータはデータ同士がどのように関連し合っているのかを理解することができません。
+El error más común es tratar los programas de hojas de cálculo como cuadernos de laboratorio; es decir, depender del contexto, de las notas en el margen, de la disposición espacial de los datos y de los campos para transmitir información. Como seres humanos, podemos (generalmente) interpretar estas cosas, pero las computadoras no ven la información de la misma manera y, a menos que le expliquemos a la computadora qué significa cada detalle (¡y eso puede resultar difícil!), no podrá comprender cómo encajan nuestros datos entre sí.
 
-コンピュータの力を活用すれば、はるかに効率的かつ迅速にデータを管理・分析できます。しかし、その力を活かすには、コンピュータが理解できる形でデータを準備する必要があります（コンピュータは非常に文字通りに解釈するためです）。
+Gracias a la potencia de las computadoras, podemos gestionar y analizar datos de manera mucho más eficaz y rápida, pero para aprovechar esa potencia, debemos preparar nuestros datos para que la computadora pueda comprenderlos (y las computadoras son muy literales).
 
-だからこそ、最初の予備実験でデータ入力を始める前から、あらかじめ適切にフォーマットされた表を用意しておくことが極めて重要なのです。データの整理は研究プロジェクトの基盤となります。分析を進める過程でデータの扱いが容易になることもあれば、逆に困難になることもあるため、データ入力や実験のセットアップを行う段階で検討しておく価値があります。スプレッドシートではさまざまな方法で設定できますが、その選択によっては、他のプログラムでデータを扱ったり、半年後の自分や共同研究者がデータを扱う際に支障をきたしたりする可能性があります。
+Por eso es extremadamente importante configurar tablas bien formateadas desde el principio —antes de empezar siquiera a introducir datos de su primer experimento preliminar—. La organización de los datos es la base de su proyecto de investigación. Puede facilitar o dificultar el trabajo con sus datos a lo largo de todo el análisis, por lo que vale la pena reflexionar al momento de introducir los datos o configurar su experimento. Puede organizar las cosas de diferentes maneras en hojas de cálculo, pero algunas de estas opciones pueden limitar su capacidad para trabajar con los datos en otros programas o para que usted mismo dentro de 6 meses o su colaborador trabajen con los datos.
 
-**注：** データ入力やデータ分析に最適なレイアウトやフォーマット（ならびにソフトウェアやインターフェース）は、それぞれ異なる場合があります。この点に留意し、理想的には一方から他方への変換を自動化することが重要です。
+**Nota:** los mejores diseños/formatos (así como el software y las interfaces) para la entrada y análisis de datos pueden ser diferentes. Es importante tener esto en cuenta y, idealmente, automatizar la conversión de uno a otro.
 
-### 解析の記録管理
+### Seguimiento de sus análisis
 
-スプレッドシートを用いてデータの整理や分析を行っていると、元の状態とは大きく異なるスプレッドシートになってしまうことがよくあります。分析結果を再現したり、査読者や指導教員から別の分析を求められた際に何を行ったかを確認したりするためには、
+Cuando trabajas con hojas de cálculo, durante la limpieza o análisis de datos, es muy fácil terminar con una hoja de cálculo que se vea muy diferente de aquella con la que empezaste. Para poder reproducir tus análisis o averiguar qué hiciste cuando un revisor o instructor solicite un análisis diferente, debes
 
-- クリーニングまたは解析済みのデータを用いて、新しいファイルを作成してください。元のデータセットは変更しないでください。さもないと、どこから始めたのか分からなくなってしまいます！
+- crea un archivo nuevo con tus datos limpios o analizados. No modifiques el conjunto de datos original, ¡o nunca sabrás desde dónde empezaste!
 
-- クリーニングや解析で行った手順を記録しておいてください。これらの手順は、実験における他の手順と同様に記録してください。データファイルと同じフォルダに保存したプレーンテキストファイルに記録することをお勧めします。
+- lleve un registro de los pasos que haya seguido en la limpieza o el análisis. Debe registrar estos pasos tal como lo haría con cualquier paso de un experimento. Recomendamos hacerlo en un archivo de texto plano almacenado en la misma carpeta que el archivo de datos.
 
-これはスプレッドシートの構成例かもしれません。
+Este podría ser un ejemplo de configuración de una hoja de cálculo:
 
 
 ```{r, results="markup", fig.cap="Spreadsheet example setip", fig.alt="SCreenshot of a spreadsheet and a README.txt file.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
@@ -146,232 +146,232 @@ knitr::include_graphics("fig/spreadsheet-setup-updated.png")
 ```
 
 
-これらの原則を、本日の演習で早速実践してみましょう。
+Ponga en práctica estos principios hoy mismo durante sus ejercicios.
 
-本コースではバージョン管理は範囲外となりますが、データの**バージョン管理**方法については、The Carpentriesの['Git'](https://swcarpentry.github.io/git-novice/)に関するレッスンをご参照ください。また、簡単なチュートリアルについてはこちらの[ブログ記事](https://lgatto.github.io/github-intro/)を、より研究向けの活用事例については @Perez-Riverol:2016 をご覧ください。
+Aunque el control de versiones queda fuera del alcance de este curso, puede consultar la lección de Carpentries sobre ['Git'](https://swcarpentry.github.io/git-novice/) para aprender a mantener el **control de versiones** de sus datos. Consulte también esta [entrada de blog](https://lgatto.github.io/github-intro/) para un tutorial rápido o  @Perez-Riverol:2016  para un caso de uso más orientado a la investigación.
 
-### スプレッドシートでのデータ構造化
+### Estructuración de datos en hojas de cálculo
 
-データ処理にスプレッドシートソフトを使用する際の基本原則：
+Las reglas fundamentales para utilizar programas de hojas de cálculo con datos:
 
-1. すべての変数を列に配置してください。「weight」や「temperature」のように、測定対象となるものです。
-2. 各観測値をそれぞれ別の行に記述してください。
-3. 1つのセルに複数の情報をまとめて入力しないでください。一見すると1つの項目のように見えても、データの利用や並べ替えにおいて、その方法しか選択肢がないのかどうかを考えてみてください。
-4. 生データはそのままにしておいてください。変更しないでください！
-5. クリーニング済みのデータをCSV（カンマ区切り値）形式などのテキストベースの形式でエクスポートしてください。これにより、誰でもデータを利用できるようになります。また、ほとんどのデータリポジトリでこの形式が求められています。
+1. Coloque todas sus variables en columnas: lo que está midiendo, como 'peso' o 'temperatura'.
+2. Coloque cada observación en su propia fila.
+3. No combine varias piezas de información en una sola celda. A veces parece ser una sola cosa, pero piense si esa es la única manera en que querría poder utilizar o ordenar esos datos.
+4. Deja los datos brutos brutos: ¡no los cambies!
+5. Exporte los datos limpios a un formato basado en texto, como el formato CSV (valores separados por comas). Esto garantiza que cualquier persona pueda utilizar los datos, y es requisito de la mayoría de los repositorios de datos.
 
-例えば、ベルギーのブリュッセルにある複数の病院を受診した患者のデータがあります。そこには、受診日、病院、患者の性別、体重、および血液型が記録されています。
+Por ejemplo, disponemos de datos de pacientes que visitaron varios hospitales en Bruselas, Bélgica. Registraron la fecha de la visita, el hospital, el sexo del paciente, el peso y el grupo sanguíneo.
 
-このようにデータを管理したとしたら：
+Si tuviéramos que llevar el seguimiento de los datos de esta manera:
 
 ```{r, results="markup", fig.cap="Multiple variable in a single column.", fig.alt="A table showing the blood and rhesus types encoded together in one column.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/multiple-info.png")
 ```
 
-問題は、ABO群とRhesus群が同じ`Blood`型の列にあることです。そのため、A群のすべての観測値を確認したり、ABO群ごとの体重分布を調べたりしたい場合、このデータ構成では困難になります。代わりにABO群とRhesus群を別々の列に配置すれば、はるかに簡単になることがわかります。
+el problema es que los grupos ABO y Rhesus están en la misma columna de tipo `Blood`. Por lo tanto, si quisieran consultar todas las observaciones del grupo A o analizar las distribuciones de peso por grupo ABO, resultaría complicado hacerlo con esta configuración de datos. Si, en cambio, colocamos los grupos ABO y Rhesus en columnas diferentes, puede ver que sería mucho más sencillo.
 
 
 ```{r, results="markup", fig.cap="Variables encoded in a single column each.", fig.alt="A table showing the blood and rhesus types encoded together in different columns.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/single-info.png")
 ```
 
-データシートを作成する際の重要なルールは、**列を変数に**、**行を観測値に**用いることです。
+Una regla importante al configurar una hoja de cálculo es que **las columnas se utilizan para variables** y **las filas se utilizan para observaciones**:
 
-- 列は変数です。
-- 行は観測値です。
-- セルは個々の値です。
+- las columnas son variables
+- las filas son observaciones
+- las celdas son valores individuales
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：乱雑なデータセットを取り上げ、どのようにクリーニングするかを説明します。
+## Desafío: Tomaremos un conjunto de datos desordenado y describiremos cómo lo limpiaríamos.
 
-1. [こちらのリンク](./data/messy_covid.xlsx)をクリックして、乱雑なデータセットをダウンロードしてください。
+1. Descargue un conjunto de datos desordenado [haciendo clic en este enlace](./data/messy_covid.xlsx).
 
-2. スプレッドシートソフトでデータを開いてください。
+2. Abra los datos en un programa de hojas de cálculo.
 
-3. 2つのタブがあることがわかります。データには、2020年の新型コロナウイルス感染症の第1波および第2波の際に、ブリュッセルのさまざまな病院で記録された多様な臨床変数が含まれています。ご覧の通り、3月の波と11月の波では、データの記録方法が異なります。さて、あなたはこのプロジェクトの担当者となり、データの分析に取りかかりたいと考えています。
+3. Puede ver que hay dos pestañas. Los datos contienen diversas variables clínicas registradas en varios hospitales de Bruselas durante la primera y segunda ola de COVID-19 en 2020. Como puede ver, los datos se han registrado de manera diferente durante las olas de marzo y noviembre. Ahora usted es la persona responsable de este proyecto y desea poder comenzar a analizar los datos.
 
-4. 隣の人と一緒に、このスプレッドシートの問題点を指摘してください。また、第1波と第2波のタブを整理し、それらを一つのスプレッドシートにまとめるためにどのような手順を踏む必要があるかについても話し合ってください。
+4. Junto con la persona que te acompaña, identifica qué es lo que falla en esta hoja de cálculo. También analiza los pasos que tendrías que seguir para limpiar las pestañas de la primera y segunda ola, y para reunirlas todas en una sola hoja de cálculo.
 
-**重要：** 最初のアドバイスを忘れないでください。クリーニング済みデータ用の新しいファイル（またはタブ）を作成し、元の（生の）データは絶対に修正しないでください。
+**Importante:** No olvide nuestro primer consejo: cree un nuevo archivo (o una nueva pestaña) para los datos limpios y nunca modifique sus datos originales (brutos).
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-この演習を終えた後、このデータのどこに問題があったのか、そしてどのように修正すべきかについて、グループで話し合います。
+Después de realizar este ejercicio, analizaremos en grupo qué fallaba en estos datos y cómo los corregirías.
 
-<!-- - この演習には10分ほどかけてください。 -->
+<!-- - Tómese unos 10 minutos para realizar este ejercicio. -->
 
-<!-- - 以下の「よくある間違い」セクションにある誤りはすべて、 -->
+<!-- - Todos los errores de la sección *errores comunes* a continuación están -->
 
-<!--   乱雑なデータセットに含まれています。ワークショップで演習を行う場合は、 -->
+<!--   presentes en el conjunto de datos desordenado. Si el ejercicio se realiza -->
 
-<!--   データのどこに問題があると感じたかを参加者に尋ねてください。 -->
+<!--   durante un taller, pregunte a las personas qué consideraron incorrecto en -->
 
-<!--   参加者がさまざまな点を指摘するにつれ、「よくある間違い」を参照したり、 -->
+<!--   los datos. A medida que planteen diferentes puntos, puede hacer referencia -->
 
-<!--   指摘された点について少し詳しく補足したりしてください。 -->
+<!--   a los errores comunes o ampliar un poco el punto que hayan mencionado. -->
 
-<!-- - 日付が修正されたという返信が来たら、 -->
+<!-- - Si recibes una respuesta en la que han corregido la fecha, -->
 
-<!--   一旦中断して日付のレッスンに進んでも構いません。 -->
+<!--   puedes hacer una pausa y pasar a la lección sobre fechas. -->
 
-<!--   あるいは、最後に日付の話に戻ると伝えてもよいでしょう。 -->
+<!--   O puedes decir que volverás a las fechas al final. -->
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題：データを整理したら、以下の質問に答えてください。
+## Desafío: Una vez que hayas organizado los datos, responde a las siguientes preguntas:
 
-- この研究には男女それぞれ何人が参加しましたか？
-- A型、AB型、B型はそれぞれ何例検査されましたか？
-- 上記と同様ですが、汚染サンプルを除外した場合はどうなりますか？
-- Rhesus +と-はそれぞれ何例検査されましたか？
-- これまでに何人の万能ドナー（O-）が検査されましたか？
-- AB型男性の平均体重はどれくらいですか？
-- 各病院でいくつの検体が検査されましたか？
+- ¿Cuántos hombres y mujeres participaron en el estudio?
+- ¿Cuántos tipos A, AB y B se han analizado?
+- ¿Como arriba, pero descontando las muestras contaminadas?
+- ¿Cuántos Rhesus + y - se han analizado?
+- ¿Cuántos donantes universales (O-) se han analizado?
+- ¿Cuál es el peso promedio de los hombres AB?
+- ¿Cuántas muestras se han analizado en los diferentes hospitales?
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-特にRのスクリプトに関しては、*Tidy Data*の論文 @Wickham:2014. が**優れた参考資料**となります。
+Una **excelente referencia**, especialmente en lo que respecta a la programación en R, es el artículo *Tidy Data*  @Wickham:2014.
 
-## スプレッドシートでよくある間違い
+## Errores comunes en hojas de cálculo
 
-**質問**
+**Preguntas**
 
-- スプレッドシートでデータをフォーマットする際によくある課題にはどのようなものがあり、それらをどのように回避できるでしょうか。
+- ¿Cuáles son algunos de los desafíos comunes al formatear datos en hojas de cálculo y cómo podemos evitarlos?
 
-**目的**
+**Objetivos**
 
-- スプレッドシートでよくある書式の問題を認識し、解決します。
+- Identificar y resolver problemas comunes de formato de hojas de cálculo.
 
-**要点**
+**Puntos clave**
 
-- 1つのスプレッドシート内で複数の表を使用することは避けてください。
-- データを複数のタブに分散させないようにしてください。
-- 0は0として記録してください。
-- 欠損データの記録には、適切なヌル値を使用してください。
-- 情報を伝えたり、スプレッドシートの見栄えを良くしたりするために、書式設定を使用しないでください。
-- コメントは別の列に記入してください。
-- 列見出しに記録単位を記載してください。
-- セルには情報を1つだけ入力してください。
-- 列見出しにスペース、数字、特殊文字は使用しないでください。
-- データに特殊文字を含めないようにしてください。
-- メタデータは別のプレーンテキストファイルに記録してください。
+- Evite utilizar múltiples tablas dentro de una sola hoja de cálculo.
+- Evite distribuir los datos en múltiples pestañas.
+- Registre los ceros como ceros.
+- Utilice un valor nulo adecuado para registrar datos faltantes.
+- No utilice el formato para transmitir información ni para que su hoja de cálculo se vea bonita.
+- Coloque los comentarios en una columna separada.
+- Registre las unidades en los encabezados de las columnas.
+- Incluya solo una pieza de información en cada celda.
+- Evite los espacios, los números y los caracteres especiales en los encabezados de las columnas.
+- Evite los caracteres especiales en sus datos.
+- Registre los metadatos en un archivo de texto plano independiente.
 
-<!-- 本レッスンは、学習者が前回のレッスンで扱った乱雑なデータセット -->
+<!-- Esta lección está pensada para servir como referencia para la discusión mientras -->
 
-<!-- の問題点を特定する際の、ディスカッションの参考資料として活用す -->
+<!-- los alumnos identifican problemas con el conjunto de datos desordenado analizado -->
 
-<!-- ることを想定しています。講師の方は、前回のレッスンの演習に対 -->
+<!-- en la lección anterior. Instructores: no revisen esta lección a menos que -->
 
-<!-- する回答を参照する場合を除き、本レッスンは進めないでください。 -->
+<!-- necesiten hacer referencia a las respuestas al ejercicio de la lección anterior. -->
 
-ご自身のデータだけでなく、共同研究者やインターネットから入手したデータにおいても、注意すべき潜在的なエラーがいくつかあります。こうしたエラーや、その後のデータ分析および結果の解釈に及ぼし得る悪影響を認識していれば、ご自身やプロジェクトメンバーがそれらを回避しようという意欲につながるでしょう。スプレッドシートでのデータ書式設定にわずかな変更を加えるだけでも、データのクリーニングや分析における効率性と信頼性に大きな影響を与える可能性があります。
+Hay algunos errores potenciales que debe tener en cuenta tanto en sus propios datos como en los de colaboradores o de Internet. Si conoce estos errores y el posible efecto negativo en el análisis de datos posterior y en la interpretación de los resultados, esto podría motivarlo a usted y a los miembros de su proyecto a intentar evitarlos. Realizar pequeños cambios en la forma en que formatea sus datos en hojas de cálculo puede tener un gran impacto en la eficiencia y la fiabilidad cuando se trata de la limpieza y el análisis de datos.
 
-- [複数の表の使用](#tables)
-- [複数のタブの使用](#tabs)
-- [ゼロを補完しない](#zeros)
-- [問題のある欠損値の使用](#null)
-- [書式を用いて情報を伝える](#formatting)
-- [書式設定でデータシートをきれいに見せる](#formattingpretty)
-- [セルへのコメントや単位の入力](#units)
-- [セルに複数の情報を入力する](#info)
-- [問題のあるフィールド名の使用](#fieldname)
-- [データにおける特殊文字の使用](#special)
-- [データテーブルへのメタデータの組み込み](#metadata)
+- [Uso de múltiples tablas](#tables)
+- [Uso de varias pestañas](#tabs)
+- [No completar los ceros](#zeros)
+- [Uso de valores nulos problemáticos](#null)
+- [Uso de formato para transmitir información](#formatting)
+- [Uso de formato para que la hoja de datos se vea bien](#formattingpretty)
+- [Colocar comentarios o unidades en celdas](#units)
+- [Ingresar más de una pieza de información en una celda](#info)
+- [Uso de nombres de campo problemáticos](#fieldname)
+- [Uso de caracteres especiales en los datos](#special)
+- [Inclusión de metadatos en la tabla de datos](#metadata)
 
-### 複数の表の使用 {#tables}
+### Uso de múltiples tablas {#tables}
 
-よくある手法として、1つのスプレッドシート内に複数のデータテーブルを作成することが挙げられます。これはコンピュータを混乱させるため、絶対に行わないでください！1つのスプレッドシート内に複数のテーブルを作成すると、コンピュータは各行を観測値として扱うため、データ間に誤った関連性を導き出してしまいます。また、同じフィールド名を複数箇所で使用する可能性もあり、そうなるとデータを使いやすい形式に整理することがより困難になります。以下の例がその問題を示しています：
+Una estrategia común consiste en crear múltiples tablas de datos dentro de una sola hoja de cálculo. Esto confunde a la computadora, ¡así que no lo hagas! Cuando creas múltiples tablas dentro de una sola hoja de cálculo, estableces asociaciones erróneas entre elementos para la computadora, que ve cada fila como una observación. También podrías estar utilizando el mismo nombre de campo en varios lugares, lo que dificultará la limpieza de tus datos para convertirlos en un formato utilizable. El siguiente ejemplo ilustra el problema:
 
 ```{r, results="markup", fig.cap="A sheet with many subtable.", fig.alt="A sheet with many subtable.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/2_datasheet_example.jpg")
 ```
 
-上記の例では、コンピュータは（例えば）4行目を認識し、列A～AFがすべて同一のサンプルを指していると判断します。この行は実際には、4つの異なる採取日（5月29日、6月12日、6月19日、6月26日）それぞれのサンプル1という4つの個別のサンプルと、そのうち2つのサンプルに関する算出済みの要約統計量（平均値（avr）および測定標準誤差（SEM））を表しています。他の行も同様に問題があります。
+En el ejemplo anterior, la computadora verá (por ejemplo) la fila 4 y asumirá que todas las columnas A-AF se refieren a la misma muestra. Esta fila representa en realidad cuatro muestras distintas (muestra 1 para cada una de cuatro fechas de recolección diferentes: 29 de mayo, 12 de junio, 19 de junio y 26 de junio), así como algunas estadísticas resumidas calculadas (un promedio (avr) y un error estándar de medición (SEM)) para dos de esas muestras. Otras filas presentan problemas similares.
 
-### 複数のタブの使用 {#tabs}
+### Uso de múltiples pestañas {#tabs}
 
-では、ワークブックのタブはどうでしょうか。データを整理する簡単な方法に思えますよね。ですが、一概にそうとは言えません。タブを追加してしまうと、データに存在する関係性をコンピュータに認識させることができなくなります（この関係性を確保するには、スプレッドシートアプリケーション固有の関数やスクリプトを導入する必要があります）。例えば、測定を行う日ごとに個別のタブを作成したとしましょう。
+Pero, ¿qué pasa con las pestañas del libro de trabajo? Parece una forma sencilla de organizar los datos, ¿verdad? Pues bien, sí y no. Al crear pestañas adicionales, no permites que la computadora identifique las relaciones que ya existen en los datos (debes introducir funciones específicas de la aplicación de hojas de cálculo o programación para garantizar dicha conexión). Digamos, por ejemplo, que creas una pestaña separada para cada día en que tomas una medición.
 
-これは2つの理由から、好ましくない手法です。
+Esto no es una buena práctica por dos razones:
 
-1. 測定を行うたびに新しいタブでデータの記録を始めると、誤ってデータに不整合が生じやすくなります。また、
+1. es más probable que introduzcas inconsistencias accidentalmente en tus datos si, cada vez que tomas una medición, empiezas a registrar los datos en una pestaña nueva, y
 
-2. たとえあらゆる不整合の混入を防げたとしても、これらのデータを一つのデータテーブルに統合する必要があるため、分析前に余計な手間がかかることになります。タブをどのように統合するかをコンピュータに明示的に指示しなければならず、もしタブの書式が統一されていない場合は、手作業で行わなければならないことさえあります。
+2. incluso si logra evitar que entren todas las inconsistencias, se añadirá un paso adicional antes de analizar los datos, ya que tendrá que combinar estos datos en una sola tabla de datos. Tendrá que indicar explícitamente al ordenador cómo combinar las pestañas —y si las pestañas tienen un formato inconsistente, es posible que incluso tenga que hacerlo manualmente.
 
-次にデータを入力する際、別のタブやテーブルを作成しようとしたら、元のスプレッドシートに列を一つ追加するだけで、このタブを省けないか考えてみてください。乱雑なデータファイルの例では複数のタブを使用しましたが、これでデータを再構成し、タブを統合する方法がお分かりいただけたかと思います。
+La próxima vez que ingrese datos y vaya a crear otra pestaña o tabla, pregúntese si podría evitar añadir esta pestaña añadiendo otra columna a su hoja de cálculo original. Utilizamos múltiples pestañas en nuestro ejemplo de un archivo de datos desordenado, pero ahora ha visto cómo puede reorganizar sus datos para consolidarlos entre pestañas.
 
-実験が進むにつれて、データシートが非常に長くなることがあります。スプレッドシートの上部に見出しが表示されないと、データの入力が困難になります。ただし、見出し行を繰り返さないでください。見出し行がデータに紛れ込みやすく、後々問題の原因となることがあります。代わりに、[列見出しを固定](https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a)すれば、行数の多いスプレッドシートでも見出しを表示したままにできます。
+Tu hoja de datos puede volverse muy larga a lo largo del experimento. Esto dificulta la introducción de datos si no puedes ver tus encabezados en la parte superior de la hoja de cálculo. Pero no repitas tu fila de encabezados. Las filas de encabezados repetidas pueden mezclarse fácilmente con los datos, lo que podría causar problemas más adelante. En su lugar, puedes [congelar los encabezados de las columnas](https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a) para que sigan siendo visibles incluso cuando tengas una hoja de cálculo con muchas filas.
 
-### ゼロを補完しない {#zeros}
+### No completar los ceros {#zeros}
 
-何かを測定する場合、通常はゼロになることがあります。例えば、調査でウサギが観察された回数などです。ほとんどがゼロなのに、わざわざその列に「0」と書き込む必要があるでしょうか。
+Puede que, al medir algo, el resultado sea habitualmente cero, por ejemplo, el número de veces que se observa un conejo en la encuesta. ¿Para qué molestarse en escribir el número cero en esa columna, cuando la mayoría son ceros?
 
-ただし、スプレッドシートにおける「0」と「空白セル」は異なります。コンピュータにとって、0は実際にはデータです。測定またはカウントされたものです。一方、空白セルは測定されなかったことを意味し、コンピュータはそれを未知の値（ヌル値または欠損値とも呼ばれます）として解釈します。
+Sin embargo, hay una diferencia entre un cero y una celda en blanco en una hoja de cálculo. Para la computadora, un cero es, en realidad, un dato. Lo midió o contó. Una celda en blanco significa que no se midió y la computadora lo interpretará como un valor desconocido (también conocido como valor nulo o faltante).
 
-スプレッドシートや統計ソフトでは、ゼロとして意図した空白セルが誤って解釈される可能性があります。観測値を入力しないことで、そのデータを「不明」または「欠損（null）」として扱うようコンピュータに指示することになります。これにより、後続の計算や分析で問題が生じることがあります。例えば、1つの欠損値を含む数値群の平均値は、常に欠損値となります（コンピュータが欠損した観測値の値を推測できないためです）。このため、ゼロはゼロとして、真に欠損しているデータは欠損値として記録することが極めて重要です。
+Es probable que las hojas de cálculo o los programas estadísticos malinterpreten las celdas vacías que usted pretende que sean ceros. Al no introducir el valor de su observación, le indica a su computadora que represente esos datos como desconocidos o faltantes (null). Esto puede causar problemas en los cálculos o análisis posteriores. Por ejemplo, la media de un conjunto de números que incluye un único valor null siempre es null (porque la computadora no puede adivinar el valor de las observaciones faltantes). Por ello, es muy importante registrar los ceros como ceros y los datos realmente faltantes como nulls.
 
-### 問題のある欠損値の使用 {#null}
+### Uso de valores nulos problemáticos {#null}
 
-**例**: -999やその他の数値（または0）を用いて欠損データを表す方法。
+**Ejemplo**: utilizar -999 u otros valores numéricos (o cero) para representar datos faltantes.
 
-**解答**:
+**Soluciones**:
 
-データセット内で欠損値がそれぞれ異なる形式で表現されるのには、いくつかの理由があります。測定機器から紛らわしい欠損値が自動的に記録される場合があります。その場合はどうすることもできませんが、分析前に[OpenRefine](https://www.datacarpentry.org/OpenRefine-ecology-lesson/)のようなツールを用いてデータクリーニングを行うことで対処可能です。また、データが存在しない理由に応じて、異なる欠損値が使い分けられることもあります。これは把握しておくべき重要な情報ですが、実質的に1つの列で2つの情報を表現していることになります。[書式を用いて情報を伝える](#formatting)場合と同様に、ここでも「data\_missing」のような新しい列を作成し、その列で異なる理由を記録するのが良いでしょう。
+Existen algunas razones por las que los valores nulos se representan de manera diferente dentro de un conjunto de datos. A veces, los valores nulos confusos se registran automáticamente desde el dispositivo de medición. Si ese es el caso, no hay mucho que hacer, pero puede abordarse en la limpieza de datos con una herramienta como [OpenRefine](https://www.datacarpentry.org/OpenRefine-ecology-lesson/) antes del análisis. En otras ocasiones, se utilizan valores nulos diferentes para transmitir diferentes razones por las cuales los datos no están presentes. Esta es información importante que debe capturarse, pero en efecto se está utilizando una sola columna para capturar dos piezas de información. Al igual que con [el uso del formato para transmitir información](#formatting), sería conveniente crear aquí una nueva columna como 'data\_missing' y utilizar dicha columna para capturar las diferentes razones.
 
-理由はどうあれ、未知のデータや欠損データが-999、999、または0として記録されているのは問題です。
+Sea cual sea el motivo, es un problema que los datos desconocidos o faltantes se registren como -999, 999 o 0.
 
-多くの統計ソフトでは、これらが欠損値（null値）を表す意図であるとは認識されません。これらの値がどのように解釈されるかは、データの解析に使用するソフトウェアによって異なります。明確に定義され、一貫したnull指標を用いることが不可欠です。
+Muchos programas estadísticos no reconocerán que estos están destinados a representar valores faltantes (nulos). La forma en que se interpreten estos valores dependerá del software que utilice para analizar sus datos. Es fundamental utilizar un indicador de valores nulos claramente definido y consistente.
 
-空白（ほとんどのアプリケーション）やNA（Rの場合）が適しています。 @White:2013  は記事の中で、さまざまなソフトウェアアプリケーションにおけるヌル値の表記として適切な選択肢について解説しています。
+Los espacios en blanco (la mayoría de las aplicaciones) y NA (para R) son buenas opciones.  @White:2013  explican opciones adecuadas para indicar valores nulos en diferentes aplicaciones de software en su artículo:
 
 
 ```{r, results="markup", fig.cap="Commonly used null values.", fig.alt="A table extracted from a paper showing commonly used null values.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/3_white_table_1.jpg")
 ```
 
-### 書式を用いて情報を伝える {#formatting}
+### Uso de formato para transmitir información {#formatting}
 
-**例**: 解析から除外すべきセル、行、または列をハイライトしたり、データの区切りを示すために空行を設けたりすることです。
+**Ejemplo**: resaltar celdas, filas o columnas que deben excluirse de un análisis, dejando filas en blanco para indicar separaciones en los datos.
 
 ```{r, results="markup", fig.cap="Colours used to ecode information.", fig.alt="A table showing several cells highlighted in yellow used to encode sample contamination.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/formatting.png")
 ```
 
 
-**解決策**: 除外すべきデータをエンコードするための新しいフィールドを作成します。
+**Solución**: crear un nuevo campo para codificar qué datos deben excluirse.
 
 ```{r, results="markup", fig.cap="A new variable encoding sample contamination", fig.alt="Same table as above with a new variable encoding contambination.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/good_formatting.png")
 ```
 
-### 書式設定を用いてデータシートの見栄えを整える {#formattingpretty}
+### Uso de formato para que la hoja de datos se vea bien {#formattingpretty}
 
-**例**: セルの結合。
+**Ejemplo**: fusionar celdas.
 
-**解決策**: 注意しないと、ワークシートの見栄えを良くするために書式設定を行うと、コンピュータがデータ内の関連性を認識できなくなる恐れがあります。セルを結合すると、統計ソフトでデータを読み取れなくなります。データを整理する際にセルを結合する必要がないよう、データの再構成を検討してください。
+**Solución**: Si no se tiene cuidado, ajustar el formato de una hoja de cálculo para que sea más estética puede comprometer la capacidad de su computadora para identificar asociaciones en los datos. Las celdas unidas harán que sus datos sean ilegibles para el software estadístico. Considere reestructurar sus datos de tal manera que no sea necesario unir celdas para organizarlos.
 
-### セルへのコメントや単位の入力 {#units}
+### Colocar comentarios o unidades en celdas {#units}
 
-ほとんどの解析ソフトウェアはExcelやLibreOfficeのコメントを認識できず、データセル内に記述されたコメントを誤認してしまいます。書式設定について前述した通り、セルにメモを追加する必要がある場合は、別のフィールドを作成してください。同様に、セル内に単位を含めないでください。理想的には、1つの列に配置するすべての測定値は同じ単位であるべきですが、何らかの理由で異なる場合は、別のフィールドを作成し、そのセルの単位を指定してください。
+La mayoría del software de análisis no puede leer los comentarios de Excel o LibreOffice, y se confundiría con los comentarios colocados dentro de las celdas de datos. Como se describió anteriormente respecto al formato, cree otro campo si necesita añadir notas a las celdas. Del mismo modo, no incluya unidades en las celdas: idealmente, todas las mediciones que coloque en una sola columna deberían estar en la misma unidad, pero si por alguna razón no lo están, cree otro campo y especifique la unidad de la celda.
 
-### セルに複数の情報を入力する {#info}
+### Ingresar más de una pieza de información en una celda {#info}
 
-**例**: ABO型とRh型のグループを、A+、B+、A-...のように1つのセルに記録します。
+**Ejemplo**: Registrar los grupos ABO y Rhesus en una sola celda, como A+, B+, A-, ...
 
-**解決策**: 1つのセルに複数の情報を入れないでください。1つのセルに複数の情報を入れると、データの分析方法が制限されてしまいます。これら両方の測定値が必要な場合は、それらの情報を含めるようにデータシートを設計してください。例えば、ABO群用とRh群用にそれぞれ1列ずつ設けてください。
+**Solución**: No incluya más de una pieza de información en una sola celda. Incluir varios datos en una sola celda limitará las formas en que se pueden analizar los datos. Si necesita ambas mediciones, diseñe su hoja de datos para incluir esta información. Por ejemplo, incluya una columna para el grupo ABO y otra para el grupo Rhesus.
 
-### 問題のあるフィールド名の使用 {#fieldname}
+### Uso de nombres de campo problemáticos {#fieldname}
 
-説明的なフィールド名を選択してください。ただし、スペースや数字、いかなる種類の特殊文字も含まないようご注意ください。スペースは、空白を区切り文字として使用するパーサーによって誤認される可能性があります。また、一部のプログラムでは、数字で始まるテキスト文字列のフィールド名を処理できない場合があります。
+Elija nombres de campos descriptivos, pero tenga cuidado de no incluir espacios, números ni caracteres especiales de ningún tipo. Los espacios pueden ser interpretados erróneamente por analizadores que utilizan el espacio en blanco como delimitador, y algunos programas no admiten nombres de campos que consistan en cadenas de texto que comienzan con números.
 
-アンダースコア（`_`）はスペースに代わる有効な選択肢です。可読性を高めるため、名称はキャメルケース（例：ExampleFileName）で記述することを検討してください。現時点では意味が通じる略語であっても、6か月後には必ずしもそうとは限らない点に留意してください。ただし、名称を過度に長くしすぎないようにしましょう。フィールド名に単位を含めることで混乱を防ぎ、他者がフィールドの内容を容易に解釈できるようになります。
+Los guiones bajos (`_`) son una buena alternativa a los espacios. Considere escribir los nombres en camel case (como este: ExampleFileName) para mejorar la legibilidad. Tenga en cuenta que las abreviaturas que tengan sentido en este momento puede que no sean tan claras dentro de 6 meses, pero no abuse de los nombres excesivamente largos. Incluir las unidades en los nombres de los campos evita confusiones y permite que otros interpreten sus campos fácilmente.
 
-**例**
+**Ejemplos**
 
-| 適切な名称 | 優れた代替案 | 避ける |
+| Nombre aceptable | Alternativa recomendable | Evitar |
 | ---------------- | ----------------- | ----------------- |
 | Max\_temp\_C       | MaxTemp           | Maximum Temp (°C) |
 | Precipitation\_mm | Precipitation     | precmm            |
@@ -381,85 +381,85 @@ knitr::include_graphics("fig/good_formatting.png")
 | cell\_type        | CellType          | Cell Type         |
 | Observation\_01   | first\_observation | 1st Obs           |
 
-### データにおける特殊文字の使用 {#special}
+### Uso de caracteres especiales en los datos {#special}
 
-**例**: メモを作成する際、スプレッドシートソフトをワードプロセッサのように扱い、例えばWordや他のアプリケーションからデータを直接コピーすることがあります。
+**Ejemplo**: Trata su programa de hojas de cálculo como un procesador de textos al escribir notas, por ejemplo, copiando datos directamente de Word u otras aplicaciones.
 
-**解決策**: これはよくある手法です。例えば、セルに長い文章を記述する際、スプレッドシートに改行やエムダッシュなどを含めることがよくあります。また、Wordなどのアプリケーションからデータをコピーすると、書式や特殊な非標準文字（左揃え・右揃えの引用符など）が含まれてしまいます。こうしたデータをコーディング・統計環境やリレーショナルデータベースにエクスポートすると、行が途中で切れたり、エンコーディングエラーが発生したりといった問題が生じる可能性があります。
+**Solución**: Esta es una estrategia común. Por ejemplo, al escribir textos más extensos en una celda, es frecuente incluir saltos de línea, guiones em, etc., en la hoja de cálculo. Asimismo, al copiar datos desde aplicaciones como Word, se incluyen el formato y caracteres no estándar especiales (como comillas alineadas a la izquierda y a la derecha). Al exportar estos datos a un entorno de programación/estadística o a una base de datos relacional, pueden ocurrir problemas graves, como que las líneas se corten por la mitad y se produzcan errores de codificación.
 
-一般的なベストプラクティスとしては、改行やタブ、垂直タブなどの文字を追加しないことが推奨されます。言い換えれば、テキストセルはテキストとスペースしか入力できないシンプルなウェブフォームであるかのように扱ってください。
+La mejor práctica general es evitar añadir caracteres como saltos de línea, tabulaciones y tabulaciones verticales. En otras palabras, trate una celda de texto como si fuera un formulario web sencillo que solo puede contener texto y espacios.
 
-### データテーブルへのメタデータの組み込み {#metadata}
+### Inclusión de metadatos en la tabla de datos {#metadata}
 
-**例**: データテーブルの上部または下部に、列の意味や単位、例外事項などを説明する凡例を追加します。
+**Ejemplo**: Añades una leyenda en la parte superior o inferior de tu tabla de datos que explique el significado de las columnas, las unidades, las excepciones, etc.
 
-**解決策**: データに関する情報（「メタデータ」）を記録しておくことは不可欠です。データの収集や分析を行っている最中はデータセットに精通しているかもしれませんが、数ヶ月、1年、あるいはそれ以上の時間が経過した後に、例えば変数「sglmemgp」がグループの単一メンバーを意味することや、変数の変換や派生変数の作成に使用した正確なアルゴリズムを、依然として覚えていられる可能性は低いでしょう。
+**Solución**: Registrar datos sobre sus datos ("metadatos") es esencial. Es posible que conozca a fondo su conjunto de datos mientras lo recopila y analiza, pero es poco probable que recuerde, tras unos meses, un año o más, que la variable "sglmemgp" significa miembro único del grupo, por ejemplo, o el algoritmo exacto que utilizó para transformar una variable o crear una derivada.
 
-また、他者があなたのデータを精査したり利用したりしたいと考える理由は数多くあります。得られた知見を理解するため、その妥当性を検証するため、投稿した論文を査読するため、結果を再現するため、同様の研究を設計するため、あるいは他者がアクセスし再利用できるようデータをアーカイブするためなどです。デジタルデータは定義上、機械可読ですが、その意味を理解するのは人間の役割です。研究の収集・分析段階においてデータを文書化することの重要性は、とりわけその研究が学術的記録の一部となる場合には、いくら強調してもしすぎることはありません。
+Asimismo, existen muchas razones por las que otras personas podrían querer examinar o utilizar sus datos: para comprender sus hallazgos, verificarlos, revisar su publicación enviada, replicar sus resultados, diseñar un estudio similar o incluso archivar sus datos para que otros puedan acceder a ellos y reutilizarlos. Si bien los datos digitales son, por definición, legibles por máquinas, comprender su significado es tarea humana. No se puede sobreestimar la importancia de documentar sus datos durante la fase de recopilación y análisis de su investigación, especialmente si su trabajo formará parte del registro académico.
 
-ただし、メタデータはデータファイル自体に含めるべきではありません。論文の表や補足ファイルとは異なり、メタデータ（凡例形式）はデータではないため、データファイルに含めるべきではありません。また、これを含めると、コンピュータプログラムによるデータファイルの解釈に支障をきたす可能性があります。むしろ、メタデータはデータファイルと同じディレクトリに別ファイルとして保存し、できればデータファイルとの関連性が明確にわかる名称を付けたプレーンテキスト形式で保存してください。メタデータファイルは自由形式であるため、文書化は重要でありながらデータファイルのフォーマットを乱す可能性のあるコメントや単位、欠損値の符号化方法などの情報を記述することも可能です。
+Sin embargo, los metadatos no deben incluirse en el propio archivo de datos. A diferencia de una tabla en un artículo o de un archivo complementario, los metadatos (en forma de leyendas) no deben incluirse en un archivo de datos, ya que esta información no es dato, e incluirlos puede alterar la forma en que los programas informáticos interpretan el archivo de datos. En su lugar, los metadatos deben almacenarse como un archivo independiente en el mismo directorio que el archivo de datos, preferiblemente en formato de texto plano y con un nombre que lo asocie claramente con el archivo de datos. Debido a que los archivos de metadatos están en formato de texto libre, también permiten codificar comentarios, unidades, información sobre cómo se codifican los valores nulos, etc., que son importantes de documentar pero pueden alterar el formato del archivo de datos.
 
-さらに、ファイルまたはデータベースレベルのメタデータでは、データセットを構成するファイル同士の関係性やフォーマット、およびそれらが以前のファイルに優先するか、あるいはそれらに取って代わられるかが記述されます。フォルダレベルの readme.txt ファイルは、プロジェクト内のすべてのファイルとフォルダを記録する定番の手法です。
+Además, los metadatos a nivel de archivo o base de datos describen cómo se relacionan los archivos que conforman el conjunto de datos; en qué formato se encuentran; y si sustituyen a otros archivos o han sido sustituidos por ellos. Un archivo readme.txt a nivel de carpeta es la forma clásica de registrar todos los archivos y carpetas de un proyecto.
 
-（メタデータのテキストは、エディンバラ大学のEDINAおよびData Libraryによるオンラインコース「Research Data [MANTRA](https://datalib.edina.ac.uk/mantra)」を基に作成されています。MANTRAは[クリエイティブ・コモンズ 表示 4.0 国際ライセンス](https://creativecommons.org/licenses/by/4.0/)の下でライセンスされています。）
+(El texto sobre metadatos está adaptado del curso en línea Research Data [MANTRA](https://datalib.edina.ac.uk/mantra) de EDINA y Data Library, Universidad de Edimburgo. MANTRA está licenciado bajo una [Licencia Creative Commons Atribución 4.0 Internacional](https://creativecommons.org/licenses/by/4.0/).)
 
-## データのエクスポート
+## Exportación de datos
 
-**質問**
+**Pregunta**
 
-- スプレッドシートから後続のアプリケーションで活用しやすい形でデータをエクスポートするにはどうすればよいでしょうか。
+- ¿Cómo podemos exportar datos de hojas de cálculo de manera que resulten útiles para aplicaciones posteriores?
 
-**目的**
+**Objetivos**
 
-- スプレッドシートのデータを汎用的なファイル形式で保存します。
-- スプレッドシートからCSVファイルにデータをエクスポートします。
+- Guardar datos de hojas de cálculo en formatos de archivo universales.
+- Exportar datos de una hoja de cálculo a un archivo CSV.
 
-**要点**
+**Puntos clave**
 
-- 一般的なスプレッドシート形式で保存されたデータは、データ分析ソフトウェアで正しく読み込まれないことが多く、その結果、データにエラーが生じることがあります。
+- Los datos almacenados en formatos comunes de hojas de cálculo a menudo no se leerán correctamente en software de análisis de datos, lo que introducirá errores en los datos.
 
-- スプレッドシートからCSVやTSVなどの形式にデータをエクスポートすることで、ほとんどのプログラムで一貫して利用できる形式になります。
+- Exportar datos desde hojas de cálculo a formatos como CSV o TSV los coloca en un formato que la mayoría de los programas pueden utilizar de manera consistente.
 
-分析に使用するデータを、Excelのデフォルトファイル形式（Excelのバージョンに応じて`*.xls`または`*.xlsx`）で保存するのは得策ではありません。なぜでしょうか？
+Guardar los datos con los que va a trabajar para sus análisis en el formato de archivo predeterminado de Excel (`*.xls` o `*.xlsx` - según la versión de Excel) no es una buena idea. ¿Por qué?
 
-- これはプロプライエタリな形式であり、将来的には、そのファイルを開くための技術が存在しなくなる（または非常にまれになる）ことで、ファイルを開くことが不可能になったり、少なくとも不便になったりする可能性があるためです。
+- Porque es un formato propietario, y es posible que en el futuro la tecnología necesaria para abrir el archivo deje de existir (o se vuelva muy poco común), lo que hará difícil, si no imposible, abrir el archivo.
 
-- 他のスプレッドシートソフトでは、独自のExcel形式で保存されたファイルを開けない場合があります。
+- Otros programas de hojas de cálculo podrían no ser capaces de abrir archivos guardados en un formato propietario de Excel.
 
-- Excelのバージョンによってデータの扱いが異なる場合があり、それが不整合を招くことがあります。[日付](https://datacarpentry.org/spreadsheet-ecology-lesson/03-dates-as-data/index.html)は、データ保存における不整合のよく知られた例です。
+- Diferentes versiones de Excel pueden gestionar los datos de manera distinta, lo que provoca inconsistencias. [Fechas](https://datacarpentry.org/spreadsheet-ecology-lesson/03-dates-as-data/index.html) es un ejemplo bien documentado de inconsistencias en el almacenamiento de datos.
 
-- 最後に、データリポジトリへのデータ寄託を求める学術誌や助成機関が増えており、その多くはExcel形式を受け付けていません。以下で説明する形式のいずれかである必要があります。
+- Por último, cada vez más revistas y organismos de subvenciones exigen que deposite sus datos en un repositorio de datos, y la mayoría de ellos no aceptan el formato Excel. Debe estar en uno de los formatos analizados a continuación.
 
-- 上記の点は、LibreOffice / Open Officeで使用されるオープンデータ形式などの他の形式にも当てはまります。これらの形式は静的なものではなく、ソフトウェアパッケージによって解析方法が異なります。
+- Los puntos anteriores también se aplican a otros formatos, como los formatos de datos abiertos utilizados por LibreOffice / Open Office. Estos formatos no son estáticos y no se analizan de la misma manera por diferentes paquetes de software.
 
-汎用的でオープン、かつ静的な形式でデータを保存することは、この問題の解決に役立ちます。タブ区切り（タブ区切り値またはTSV）やカンマ区切り（カンマ区切り値またはCSV）を試してみてください。CSVファイルは、列がカンマで区切られたプレーンテキストファイルであり、そのため「カンマ区切り値」またはCSVと呼ばれます。ExcelやSPSSなどのファイルに対するCSVファイルの利点は、TextEditやメモ帳のようなプレーンテキストエディタを含め、ほぼあらゆるソフトウェアでCSVファイルを開いて読み取れる点にあります。また、CSVファイル内のデータは、SQLiteやRなどの他の形式や環境へも簡単にインポートできます。CSVファイルを扱う際は、特定の高価なプログラムの特定のバージョンに縛られることがないため、最大限の移植性と永続性を確保する上で優れた形式と言えます。ほとんどの表計算ソフトでは、ファイルエクスポート時に警告が表示される場合がありますが、CSVのような区切り文字付きテキスト形式へ簡単に保存できます。
+Almacenar los datos en un formato universal, abierto y estático ayudará a resolver este problema. Pruebe el formato separado por tabulaciones (valores separados por tabulaciones o TSV) o el separado por comas (valores separados por comas o CSV). Los archivos CSV son archivos de texto plano donde las columnas están separadas por comas, de ahí el nombre de «valores separados por comas» o CSV. La ventaja de un archivo CSV frente a un archivo de Excel/SPSS/etc. es que podemos abrir y leer un archivo CSV utilizando prácticamente cualquier software, incluidos los editores de texto plano como TextEdit o NotePad. Los datos de un archivo CSV también pueden importarse fácilmente a otros formatos y entornos, como SQLite y R. No estamos atados a una versión específica de un programa costoso al trabajar con archivos CSV, por lo que es un buen formato para lograr la máxima portabilidad y perdurabilidad. La mayoría de los programas de hojas de cálculo pueden guardar fácilmente en formatos de texto separados por comas como CSV, aunque es posible que aparezca una advertencia durante la exportación del archivo.
 
-Excelで開いたファイルをCSV形式で保存するには：
+Para guardar un archivo abierto en Excel en formato CSV:
 
-1. 上部メニューから「ファイル」→「名前を付けて保存」を選択してください。
-2. 「書式」フィールドで、一覧から「カンマ区切り値」(`*.csv`)を選択してください。
-3. ファイル名と保存先を再確認し、「保存」をクリックしてください。
+1. En el menú superior, seleccione 'Archivo' y 'Guardar como'.
+2. En el campo 'Formato', seleccione 'Valores separados por comas' (`*.csv`) de la lista.
+3. Revise dos veces el nombre del archivo y la ubicación donde desea guardarlo y haga clic en 'Guardar'.
 
-後方互換性に関する重要な注意点：CSVファイルはExcelで開くことができます！
+Una nota importante para la compatibilidad retroactiva: ¡puedes abrir archivos CSV en Excel!
 
 ```{r, results="markup", fig.cap="Saving an Excel file to CSV.", fig.alt="Excel menu to export data in a csv format on MacOS ", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/excel-to-csv.png")
 ```
 
-**Rと`xls`に関する注記**: `xls`ファイル（およびGoogleスプレッドシート）を読み込めるRパッケージがあります。`xls`ドキュメント内の異なるワークシートにアクセスすることさえ可能です。
+**Una nota sobre R y `xls`**: Existen paquetes de R que pueden leer archivos `xls` (así como hojas de cálculo de Google). Incluso es posible acceder a diferentes hojas de trabajo en los documentos `xls`.
 
-**しかし**
+**Pero**
 
-- これらの中には、Windowsでしか動作しないものもあります。
-- これは、（単純ながらも手作業による）`csv`へのエクスポートを、データ分析用のRコードにおけるさらなる複雑さや依存関係に置き換えることに相当します。
-- データフォーマットのベストプラクティスは引き続き適用されます。
-- `csv`（あるいはそれに類するもの）では不十分な、本当に納得のいく理由があるのでしょうか？
+- algunos de estos solo funcionan en Windows.
+- esto equivale a sustituir una exportación (sencilla pero manual) a `csv` por una complejidad/dependencias adicionales en el código de R para el análisis de datos.
+- Siguen aplicándose las mejores prácticas de formato de datos.
+- ¿Realmente hay alguna buena razón por la cual `csv` (o algo similar) no sea adecuado?
 
-### カンマに関する注意点
+### Consideraciones sobre las comas
 
-一部のデータセットでは、データ値自体にカンマ（,）が含まれている場合があります。その場合、使用するソフトウェア（Excelを含む）では、データが列単位で誤って表示される可能性が高くなります。これは、データ値の一部であるカンマが区切り文字として解釈されるためです。
+En algunos conjuntos de datos, los propios valores de los datos pueden incluir comas (,). En ese caso, es muy probable que el software que utilice (incluido Excel) muestre los datos incorrectamente en columnas. Esto se debe a que las comas que forman parte de los valores de los datos se interpretarán como delimitadores.
 
-例えば、データは次のようになっているかもしれません。
+Por ejemplo, nuestros datos podrían verse así:
 
 ```
 species_id,genus,species,taxa
@@ -469,15 +469,15 @@ AS,Ammodramus,savannarum,Bird
 BA,Baiomys,taylori,Rodent
 ```
 
-レコード `AH,Ammospermophilus,harrisi,Rodent, not censused` の `taxa` の値にはカンマ (`Rodent, not censused`) が含まれています。上記の内容を Excel（または他のスプレッドシートソフト）で読み込もうとすると、次のような結果になります。
+En el registro `AH,Ammospermophilus,harrisi,Rodent, not censused`, el valor de `taxa` incluye una coma (`Rodent, not censused`). Si intentamos leer lo anterior en Excel (u otro programa de hojas de cálculo), obtendremos algo como esto:
 
 ```{r, results="markup", fig.cap="The risks of having commas inside comma-separated data.", fig.alt="A table illustrating ill-imported data that contained a comma in a cell. That cell has been split in two cells.", echo=FALSE, purl=FALSE, out.width="80%", fig.align="center"}
 knitr::include_graphics("fig/csv-mistake.png")
 ```
 
-`taxa` の値は（1つの列 `D` にまとめられるのではなく）2つの列に分割されました。これにより、さらに多くのエラーが連鎖的に発生する可能性があります。例えば、追加された列は多くの欠損値を含む列（かつ適切なヘッダーのない列）として解釈されます。加えて、3行目のレコード（つまり 'taxa' の値にカンマが含まれていた行）における列 `D` の値が、現在は正しくありません。
+El valor de `taxa` se dividió en dos columnas (en lugar de situarse en una sola columna `D`). Esto puede derivar en una serie de errores adicionales. Por ejemplo, la columna adicional se interpretará como una columna con muchos valores faltantes (y sin un encabezado adecuado). Además, el valor de la columna `D` para el registro de la fila 3 (es decir, aquel en el que el valor de 'taxa' contenía la coma) ahora es incorrecto.
 
-データを`csv`形式で保存したい場合で、データ値にカンマが含まれる可能性があるときは、値を引用符（""）で囲むことで、前述の問題を回避できます。このルールを適用すると、データは次のようになります。
+Si desea almacenar sus datos en formato `csv` y prevé que los valores de sus datos puedan contener comas, puede evitar el problema analizado anteriormente colocando los valores entre comillas (""). Al aplicar esta regla, nuestros datos podrían verse así:
 
 ```
 species_id,genus,species,taxa
@@ -487,28 +487,28 @@ species_id,genus,species,taxa
 "BA","Baiomys","taylori","Rodent"
 ```
 
-このファイルをExcelで`csv`として開いても、余分な列が追加されることはありません。Excelでは、引用符の外側にあるカンマのみを区切り文字として使用するためです。
+Ahora, abrir este archivo como un `csv` en Excel no provocará la aparición de una columna adicional, ya que Excel solo utilizará las comas que se encuentran fuera de las comillas como caracteres delimitadores.
 
-あるいは、カンマを含むデータを扱う場合は、スプレッドシートで作業する際に別の区切り文字を使用する必要があるでしょう[^decsep]。この場合は、区切り文字としてタブを使用し、TSVファイルを扱うことを検討してください。TSVファイルは、CSVファイルと同様の方法でスプレッドシートソフトからエクスポートできます。
+Alternativamente, si trabaja con datos que contienen comas, es probable que necesite utilizar otro delimitador al trabajar en una hoja de cálculo[^decsep]. En este caso, considere utilizar tabulaciones como delimitador y trabajar con archivos TSV. Los archivos TSV pueden exportarse desde programas de hojas de cálculo de la misma manera que los archivos CSV.
 
-[^decsep]: これは、カンマを小数点区切り文字として使用する欧州諸国において特に当てはまります。このような場合、CSVファイルのデフォルトの値区切り文字はセミコロン（;）になるか、あるいは値が一律に引用符で囲まれます。
+[^decsep]: Esto es especialmente relevante en los países europeos, donde la coma se utiliza como separador decimal. En tales casos, el separador de valores predeterminado en un archivo csv será el punto y coma (;), o los valores se encerrarán sistemáticamente entre comillas.
 
-データ値が「""」で囲まれておらず、区切り文字とデータ値の一部の両方にカンマが使用されている既存のデータセットを扱っている場合、データクリーニングにおいて重大な問題に直面している可能性があります。扱うデータセットに数百から数千件のレコードが含まれている場合、手動でクリーニングを行う（データ値からカンマを削除するか、値を引用符 "" で囲む）作業は、膨大な時間を要するだけでなく、誤って多くのエラーを混入させてしまう恐れもあります。
+Si está trabajando con un conjunto de datos ya existente en el que los valores de los datos no están incluidos entre "", pero en el que se utilizan comas tanto como delimitadores como dentro de los valores de los datos, es posible que se encuentre con un problema grave de limpieza de datos. Si el conjunto de datos que está manejando contiene cientos o miles de registros, limpiarlos manualmente (ya sea eliminando las comas de los valores de los datos o colocando los valores entre comillas - "") no solo llevará horas y horas, sino que podría terminar introduciendo accidentalmente muchos errores.
 
-データセットのクリーニングは、多くの科学分野における主要な課題の一つです。その手法は、ほぼ常に具体的な状況によって異なります。しかし、例えばスクリプトを記述して実行するなど、自動化された方法でデータをクリーニングすることは良い習慣です。PythonとRのレッスンでは、適切なスクリプトを作成するためのスキルを身につける基礎を学ぶことができます。
+La limpieza de conjuntos de datos es uno de los problemas principales en muchas disciplinas científicas. El enfoque depende casi siempre del contexto particular. No obstante, es una buena práctica limpiar los datos de manera automatizada, por ejemplo, escribiendo y ejecutando un script. Las lecciones de Python y R le proporcionarán las bases para desarrollar las habilidades necesarias para crear scripts pertinentes.
 
-## 概要
+## Resumen
 
 ```{r analysis, results="asis", fig.margin=TRUE, fig.cap="A typical data analysis workflow.", fig.alt="The tidy data analysis circle, iterating over data transformation, visualisation and modelling.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
 knitr::include_graphics("fig/analysis.png")
 ```
 
-典型的なデータ分析のワークフローを上の図に示しています。ここでは、データの変換、可視化、モデリングが繰り返し行われます。この反復作業は、データが理解されるまで何度も繰り返されます。しかし実際の現場では、実際に分析して理解することよりも、データのクリーニングや準備に大半の時間が費やされることが多いのが現状です。
+Un flujo de trabajo típico de análisis de datos se ilustra en la figura anterior, donde los datos se transforman, visualizan y modelan repetidamente. Esta iteración se repite varias veces hasta que se comprendan los datos. Sin embargo, en muchos casos reales, la mayor parte del tiempo se dedica a limpiar y preparar los datos, en lugar de analizarlos y comprenderlos realmente.
 
-変換・可視化・モデリングのサイクルを迅速に数回繰り返すアジャイルなデータ分析ワークフローが実現可能なのは、データが予測可能な形式で整備されており、データを直接確認したり修正したりすることなく内容を推論できる場合に限られます。
+Un flujo de trabajo de análisis de datos ágil, con varias iteraciones rápidas del ciclo transformar/visualizar/modelar, solo es viable si los datos están formateados de manera predecible y se puede analizar la información sin tener que mirarla y/o corregirla.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- 適切なデータ整理は、あらゆる研究プロジェクトの基盤となります。
+- Una buena organización de los datos es la base de cualquier proyecto de investigación.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

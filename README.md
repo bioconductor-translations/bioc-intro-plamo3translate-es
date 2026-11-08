@@ -65,16 +65,16 @@ Community](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcb
 Computational Biology 21 (4): e1012925.
 
 
-## Updating the Japanese episodes
+## Updating the Spanish episodes
 
-The translation tool reads the English episodes from `upstream/main`, reuses
-the reviewed Japanese translations, and translates changed prose with the
+The translation tool reads the English episodes from `english/main`, reuses
+the available Spanish translation memory, and translates changed prose with the
 pinned PLaMo model:
 
 ```sh
-git fetch upstream main
-uv run --locked scripts/translate.py --source-ref upstream/main --dry-run
-uv run --locked scripts/translate.py --source-ref upstream/main --update-memory
+git fetch english main
+uv run --locked scripts/translate.py --source-ref english/main --dry-run
+uv run --locked scripts/translate.py --source-ref english/main --update-memory
 ```
 
 See [the translation guide](translation/README.md) for setup, offline replay,
@@ -89,7 +89,7 @@ the network:
 python3.12 -m unittest discover -s tests -v
 ```
 
-To build the translated site with Japanese navigation, bibliography citations,
+To build the translated site with Spanish navigation, bibliography citations,
 and theme icons, run:
 
 ```sh

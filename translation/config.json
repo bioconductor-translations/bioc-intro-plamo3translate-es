@@ -4,11 +4,10 @@
     "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
     "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
     "source_language": "en",
-    "target_language": "ja",
-    "form": "polite",
+    "target_language": "es",
     "temperature": 0
   },
-  "upstream": {"remote": "upstream", "branch": "main", "ref": "upstream/main"},
+  "upstream": {"remote": "english", "branch": "main", "ref": "english/main"},
   "memory": "seed-cache.json",
   "glossary": "glossary.json",
   "contexts": "reviewed-context.json",

@@ -1,6 +1,6 @@
 ---
 source: Rmd
-title: "データの可視化"
+title: "Visualización de datos"
 teaching: 60
 exercises: 60
 ---
@@ -13,17 +13,17 @@ download.file(url = "https://github.com/carpentries-incubator/bioc-intro/raw/mai
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- ggplotを用いて、散布図、箱ひげ図、折れ線グラフなどを作成します。
-- 共通のプロット設定を行います。
-- ファセットとは何かを説明し、ggplotでファセットを適用してください。
-- 既存のggplotプロットの外観（軸ラベルや色を含む）を変更してください。
-- データフレーム内のデータから、複雑でカスタマイズされたプロットを作成します。
+- Generar gráficos de dispersión, gráficos de cajas, gráficos de líneas, etc., utilizando ggplot.
+- Configurar los ajustes universales del gráfico.
+- Describa qué es el faceting y aplique el faceting en ggplot.
+- Modifique la estética de un gráfico ggplot existente (incluyendo las etiquetas de los ejes y el color).
+- Crear gráficos complejos y personalizados a partir de datos en un marco de datos.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- Rによる可視化
+- Visualización en R
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -31,57 +31,57 @@ download.file(url = "https://github.com/carpentries-incubator/bioc-intro/raw/mai
 rna <- read.csv("data/rnaseq.csv")
 ```
 
-> このエピソードは、Data Carpentriesの*「生態学者のためのRによるデータ分析と可視化」*レッスンに基づいています。
+> Este episodio se basa en la lección *Data Analysis and Visualisation in R for Ecologists* de Data Carpentries.
 
-## データの可視化
+## Visualización de datos
 
-まず、必要なパッケージを読み込みます。**`ggplot2`**は**`tidyverse`**パッケージに含まれています。
+Comenzamos cargando los paquetes necesarios. **`ggplot2`** está incluido en el paquete **`tidyverse`**.
 
 ```{r load-package, message=FALSE, purl=TRUE}
 library("tidyverse")
 ```
 
-まだワークスペースにない場合は、前回のレッスンで保存したデータを読み込んでください。
+Si aún no se encuentra en el espacio de trabajo, cargue los datos que guardamos en la lección anterior.
 
 ```{r load-data, eval=FALSE, purl=TRUE}
 rna <- read.csv("data/rnaseq.csv")
 ```
 
-[データ可視化チートシート](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)では、`ggplot2`の基本機能から高度な機能までを解説します。また、本パッケージで利用可能な多彩なデータ表現の概要を把握するとともに、備忘録としてもご活用いただけます。Thomas Lin Pedersen氏による以下のビデオチュートリアル（[パート1](https://www.youtube.com/watch?v=h29g21z0a68)および[パート2](https://www.youtube.com/watch?v=0m4yywqNPVY)）も非常に参考になります。
+La [Hoja de trucos de visualización de datos](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf) cubrirá los conceptos básicos y las funciones más avanzadas de `ggplot2`, y ayudará, además de servir como recordatorio, a obtener una visión general de las numerosas representaciones de datos disponibles en el paquete. Los siguientes videotutoriales ([parte 1](https://www.youtube.com/watch?v=h29g21z0a68) y [parte 2](https://www.youtube.com/watch?v=0m4yywqNPVY)) de Thomas Lin Pedersen también son muy instructivos.
 
-## `ggplot2`によるプロット
+## Representación gráfica con `ggplot2`
 
-`ggplot2`は、データフレーム内のデータから複雑なプロットを簡単に作成できるプロットパッケージです。どの変数をプロットするか、どのように表示するか、および全般的な視覚的プロパティを指定するための、よりプログラム的なインターフェースを提供します。`ggplot2`を支える理論的基盤は、*Grammar of Graphics*（ @Wilkinson:2005 ）です。この手法を用いれば、基礎となるデータが変更された場合や、棒グラフから散布図に変更する場合でも、最小限の変更で済みます。これにより、最小限の調整や微調整で、論文掲載レベルのプロットを作成することが可能になります。
+`ggplot2` es un paquete de gráficos que facilita la creación de gráficos complejos a partir de datos en un marco de datos. Proporciona una interfaz más programática para especificar qué variables representar, cómo mostrarlas y las propiedades visuales generales. La base teórica que sustenta a `ggplot2` es la *Grammar of Graphics* ( @Wilkinson:2005 ). Al utilizar este enfoque, solo necesitamos cambios mínimos si los datos subyacentes cambian o si decidimos pasar de un gráfico de barras a un gráfico de dispersión. Esto ayuda a crear gráficos de calidad para publicaciones con la mínima cantidad de ajustes y retoques.
 
-`ggplot2` ( @ggplot2book ) に関する書籍があり、概要を把握するのに適していますが、内容は古くなっています。第3版が準備中で、[オンラインで無料で公開](https://ggplot2-book.org/)される予定です。`ggplot2`のウェブページ ([https://ggplot2.tidyverse.org](https://ggplot2.tidyverse.org)) には充実したドキュメントが掲載されています。
+Existe un libro sobre `ggplot2` ( @ggplot2book ) que ofrece una buena visión general, pero está desactualizado. La tercera edición está en preparación y estará [disponible gratuitamente en línea](https://ggplot2-book.org/). La página web de `ggplot2` ([https://ggplot2.tidyverse.org](https://ggplot2.tidyverse.org)) proporciona una documentación amplia.
 
-`ggplot2` は、「ロング」形式（つまり、次元ごとに1列、観測値ごとに1行）のデータを想定して動作します。適切に構造化されたデータを使用することで、`ggplot2` で図を作成する際の時間を大幅に短縮できます。
+`ggplot2` funciona con datos en formato «largo», es decir, una columna por cada dimensión y una fila por cada observación. Los datos bien estructurados le ahorrarán mucho tiempo al crear figuras con `ggplot2`.
 
-ggplotのグラフィックスは、新しい要素を順次追加することで構築されます。このようにレイヤーを重ねていくことで、プロットの自由度とカスタマイズ性を大幅に高めることができます。
+Los gráficos de ggplot se construyen paso a paso añadiendo nuevos elementos. Añadir capas de esta manera permite una gran flexibilidad y personalización de los gráficos.
 
-> Grammar of Graphicsの考え方は、あらゆるグラフを次の3つの構成要素から構築できるというものです。(1) データセット、(2) 座標系、(3) geoms — すなわち、データポイントを表す視覚的なマーク [^three\_comp\_ggplot2]
+> La idea detrás de la Gramática de Gráficos es que se puede construir cualquier gráfico a partir de los mismos 3 componentes: (1) un conjunto de datos, (2) un sistema de coordenadas y (3) geoms — es decir, marcas visuales que representan puntos de datos [^three\_comp\_ggplot2]
 
-[^three\_comp\_ggplot2]: 出典：[データ可視化チートシート](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)。
+[^three\_comp\_ggplot2]: Fuente: [Data Visualization Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf).
 
-ggplotを作成する際は、さまざまな種類のプロットに活用できる以下の基本テンプレートを使用します。
+Para crear un ggplot, utilizaremos la siguiente plantilla básica que puede emplearse para diferentes tipos de gráficos:
 
 ```
 ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 ```
 
-- `ggplot()`関数を使用し、`data`引数を用いてプロットを特定の**データフレーム**に紐付けます。
+- utilice la función `ggplot()` y vincule el gráfico a un **marco de datos** específico mediante el argumento `data`
 
 ```{r, eval=FALSE}
 ggplot(data = rna)
 ```
 
-- プロットする変数を選択し、それらをグラフ上でどのように表示するか（例：x/y座標、あるいはサイズ、形状、色などの属性）を指定することで、**マッピング**（aesthetic (`aes`) 関数を使用）を定義します。
+- defina un **mapeo** (utilizando la función aesthetic (`aes`)), seleccionando las variables a representar y especificando cómo presentarlas en el gráfico, por ejemplo, como posiciones x/y o características como tamaño, forma, color, etc.
 
 ```{r, eval=FALSE}
 ggplot(data = rna, mapping = aes(x = expression))
 ```
 
-- 「**geoms**」――プロットにおけるデータの幾何学的表現（点、線、棒）を追加します。`ggplot2`では多種多様なgeomsが提供されています。今回は、以下を含む代表的なものをいくつか使用します：
+- añada '**geoms**' - geometrías, o representaciones gráficas de los datos en el gráfico (puntos, líneas, barras). `ggplot2` ofrece muchas geometrías diferentes; hoy utilizaremos algunas comunes, entre ellas:
 
   ```
   * `geom_point()` for scatter plots, dot plots, etc.
@@ -90,14 +90,14 @@ ggplot(data = rna, mapping = aes(x = expression))
   * `geom_line()` for trend lines, time series, etc.
   ```
 
-プロットに図形を追加するには、`+` 演算子を使用します。まずは `geom_histogram()` を使ってみましょう。
+Para añadir una geometría al gráfico, use el operador `+`. Empecemos usando `geom_histogram()`:
 
 ```{r first-ggplot, cache=FALSE, purl=TRUE, fig.alt="Default histogram produced by ggplot() and geom_histogram() for the expression data."}
 ggplot(data = rna, mapping = aes(x = expression)) +
   geom_histogram()
 ```
 
-`ggplot2`パッケージの`+`は、既存の`ggplot`オブジェクトを変更できるため、特に便利です。これにより、プロットテンプレートを簡単に作成し、さまざまな種類のプロットを手軽に探索できるようになります。したがって、上記のプロットは次のようなコードでも生成可能です。
+El `+` del paquete `ggplot2` es particularmente útil porque permite modificar objetos `ggplot` existentes. Esto significa que puede configurar fácilmente plantillas de gráficos y explorar cómodamente diferentes tipos de gráficos, por lo que el gráfico anterior también puede generarse con un código como este:
 
 ```{r, eval=FALSE, purl=TRUE}
 # Assign plot to a variable
@@ -110,20 +110,20 @@ rna_plot + geom_histogram()
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-ヒストグラムを描画する際に、自動的にメッセージが表示されることにお気づきかと思います。
+Probablemente hayas notado un mensaje automático que aparece al dibujar el histograma:
 
 ```{r, echo=FALSE, fig.show="hide"}
 ggplot(rna, aes(x = expression)) +
   geom_histogram()
 ```
 
-`geom_histogram()` の引数 `bins` または `binwidth` を変更することで、ビンの数や幅を変更できます。
+Cambie los argumentos `bins` o `binwidth` de `geom_histogram()` para cambiar el número o el ancho de los intervalos.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, purl=TRUE, fig.alt="Histograms produced by ggplot() and geom_histogram() for the expression data with bin set of 15 (top) and binwith set to 2000 (bottom)."}
 # change bins
@@ -139,32 +139,32 @@ ggplot(rna, aes(x = expression)) +
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-ここでは、データが右に歪んでいることが分かります。より対称的な分布にするために、底が2の対数変換を適用できます。なお、発現値が0の場合に`-Inf`が返されるのを避けるため、ここでは小さな定数値（`+1`）を加算しています。
+Aquí podemos observar que los datos están sesgados hacia la derecha. Podemos aplicar una transformación logarítmica en base 2 para obtener una distribución más simétrica. Tenga en cuenta que aquí añadimos un pequeño valor constante (`+1`) para evitar que se devuelvan valores de `-Inf` para valores de expresión iguales a 0.
 
 ```{r log-transfo, cache=FALSE, purl=TRUE, fig.alt="Histogram produced by ggplot() and geom_histogram() for the log of expression (computed on-the-fly)."}
 rna <- rna |>
   mutate(expression_log = log2(expression + 1))
 ```
 
-ここで、log2変換した発現量のヒストグラムを描くと、分布は確かに正規分布に近づいています。
+Si ahora trazamos el histograma de las expresiones transformadas logarítmicamente en base 2, la distribución es, en efecto, más cercana a una distribución normal.
 
 ```{r second-ggplot, cache=FALSE, purl=TRUE, fig.alt="Histogram produced by ggplot() and geom_histogram() for the pre-computed log of expression."}
 ggplot(rna, aes(x = expression_log)) + geom_histogram()
 ```
 
-以降は、対数変換済みの発現値を扱います。
+A partir de ahora, trabajaremos con los valores de expresión transformados logarítmicamente.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-この変換を可視化するもう一つの方法は、観測値のスケールを検討することです。例えば、プロット空間内で観測値をより適切に配置するために、軸のスケールを変更することが有効かもしれません。軸のスケール変更は、他のコンポーネントを追加・修正する場合と同様に（つまり、コマンドを段階的に追加することで）行います。実際にこの修正を試してみてください：
+Otra forma de visualizar esta transformación es considerar la escala de las observaciones. Por ejemplo, puede valer la pena cambiar la escala del eje para distribuir mejor las observaciones en el espacio del gráfico. Cambiar la escala de los ejes se hace de manera similar a añadir o modificar otros componentes (es decir, añadiendo comandos de forma incremental). Intente realizar esta modificación:
 
-- 変換前の発現量をlog10スケールで表示してください。`scale_x_log10()`を参照してください。先ほどのグラフと比較してください。なぜ今度は警告メッセージが表示されるようになったのでしょうか？
+- Represente la expresión sin transformar en la escala log10; consulte `scale_x_log10()`. Compárela con el gráfico anterior. ¿Por qué ahora aparecen mensajes de advertencia?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, eval=TRUE, purl=TRUE, echo=TRUE, fig.alt="Histogram produced by ggplot(), geom_histogram() and scale_x_log10() for the log of expression."}
 ggplot(data = rna,mapping = aes(x = expression))+
@@ -176,11 +176,11 @@ ggplot(data = rna,mapping = aes(x = expression))+
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-**注記**
+**Notas**
 
-- `ggplot()`関数に記述した内容は、追加するあらゆるgeomレイヤーで反映されます（つまり、これらはプロット全体の設定となります）。これには、`aes()`で設定したx軸およびy軸のマッピングも含まれます。
-- また、`ggplot()`関数でグローバルに定義されたマッピングとは独立して、特定のgeomに対するマッピングを指定することも可能です。
-- 新しいレイヤーを追加する際に使用する`+`記号は、*直前の*レイヤーが含まれる行の末尾に配置する必要があります。代わりに、新しいレイヤーが含まれる行の先頭に`+`記号を付加した場合、`ggplot2`は新しいレイヤーを追加せず、エラーメッセージを返します。
+- Cualquier elemento que incluya en la función `ggplot()` será visible en cualquier capa geom que añada (es decir, se trata de configuraciones globales del gráfico). Esto incluye el mapeo de los ejes x e y que configure en `aes()`.
+- También puede especificar mapeos para un geom determinado de forma independiente de los mapeos definidos globalmente en la función `ggplot()`.
+- El signo `+` utilizado para añadir nuevas capas deberá colocarse al final de la línea que contiene la capa *anterior*. Si, en cambio, se añade el signo `+` al principio de la línea que contiene la nueva capa, `ggplot2` no añadirá la nueva capa y devolverá un mensaje de error.
 
 ```{r, eval=FALSE}
 # This is the correct syntax for adding layers
@@ -192,9 +192,9 @@ rna_plot
   + geom_histogram()
 ```
 
-## プロットの反復的な作成
+## Creación iterativa de gráficos
 
-次に、2つの連続変数と`geom_point()`関数を用いて散布図を作成します。このグラフでは、時刻8対時刻0、および時刻4対時刻0における発現量のlog2倍変化を表します。そのために、まず遺伝子ごと・時刻ごとの対数変換後の発現値の平均値を算出し、次に時刻8対時刻0、および時刻4対時刻0の平均対数発現値を差し引くことで、log倍変化を求めます。なお、ここでは後ほど遺伝子を表すために使用する遺伝子バイオタイプも含めています。倍変化の値は、`rna_fc.`という新しいデータフレームに保存します。
+A continuación, dibujaremos un gráfico de dispersión con dos variables continuas y la función `geom_point()`. Este gráfico representará los cambios relativos de expresión en escala log2 comparando el tiempo 8 frente al tiempo 0, y el tiempo 4 frente al tiempo 0. Para ello, primero necesitamos calcular los promedios de los valores de expresión transformados logarítmicamente por gen y tiempo, y luego los cambios relativos en escala logarítmica restando el promedio de las expresiones logarítmicas entre el tiempo 8 y el tiempo 0, y entre el tiempo 4 y el tiempo 0. Tenga en cuenta que aquí también incluimos el biotipo del gen que utilizaremos más adelante para representar los genes. Guardaremos los cambios relativos de expresión en un nuevo marco de datos llamado `rna_fc.`.
 
 ```{r rna_fc, cache=FALSE, purl=TRUE}
 rna_fc <- rna |> select(gene, time,
@@ -207,35 +207,35 @@ rna_fc <- rna |> select(gene, time,
 
 ```
 
-次に、新たに作成したデータセット `rna_fc` を用いて ggplot を作成します。`ggplot2` を用いたプロット作成は、通常、反復的なプロセスとなります。まず、使用するデータセットを定義し、軸を配置し、geom を選択します：
+A continuación, podemos crear un ggplot con el conjunto de datos recién creado `rna_fc`. Crear gráficos con `ggplot2` suele ser un proceso iterativo. Comenzamos definiendo el conjunto de datos que utilizaremos, disponiendo los ejes y eligiendo un geom:
 
 ```{r create-ggplot-object, cache=FALSE, purl=TRUE, fig.alt="Scatter plot produced by ggplot() and geom_point() comparing the log-foldchanges computed above. All dots are black."}
 ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
   geom_point()
 ```
 
-次に、このプロットを修正して、より多くの情報を抽出していきます。例えば、重なりを防ぐために透明度（`alpha`）を追加できます。
+A continuación, comenzamos a modificar este gráfico para extraer más información de él. Por ejemplo, podemos añadir transparencia (`alpha`) para evitar el solapamiento:
 
 ```{r adding-transparency, cache=FALSE, purl=TRUE, , fig.alt="Scatter plot produced by ggplot() and geom_point() comparing the log-foldchanges computed above. All dots are semi-transparent black."}
 ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
   geom_point(alpha = 0.3)
 ```
 
-また、すべての点に色を付けることもできます。
+También podemos añadir colores a todos los puntos:
 
 ```{r adding-colors, cache=FALSE, purl=TRUE, fig.alt="Scatter plot produced by ggplot() and geom_point() comparing the log-foldchanges computed above. All dots are semi-transparent blue."}
 ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
   geom_point(alpha = 0.3, color = "blue")
 ```
 
-あるいは、プロット内の各遺伝子を異なる色で塗り分けるには、引数 **color** にベクトルを指定することもできます。`ggplot2` は、ベクトル内の異なる値に対応するそれぞれ異なる色を割り当てます。以下に、`gene_biotype` を用いて色分けを行う例を示します。
+O bien, para colorear cada gen en el gráfico de manera diferente, podría utilizar un vector como entrada para el argumento **color**. `ggplot2` proporcionará un color diferente correspondiente a distintos valores del vector. Aquí tiene un ejemplo donde se colorea con `gene_biotype`:
 
 ```{r color-by-gene_biotype1, cache=FALSE, purl=TRUE, fig.alt="Scatter plot produced by ggplot() and geom_point() comparing the log-foldchanges computed above. Dots are colour-coded based on the gene's biotype."}
 ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
   geom_point(alpha = 0.3, aes(color = gene_biotype))
 ```
 
-また、`ggplot()`関数で指定されるマッピング内で直接色を指定することも可能です。この色はすべてのgeomレイヤーに反映され、マッピングは`aes()`で設定されたx軸およびy軸によって決定されます。
+También podemos especificar los colores directamente dentro del mapeo proporcionado en la función `ggplot()`. Esto será visible en cualquier capa geom y el mapeo se determinará según la configuración de los ejes x e y en `aes()`.
 
 ```{r color-by-gene_biotype2, cache=FALSE, purl=TRUE, fig.alt="Scatter plot produced by ggplot() and geom_point() comparing the log-foldchanges computed above. Dots are colour-coded based on the gene's biotype."}
 ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
@@ -243,7 +243,7 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
   geom_point(alpha = 0.3)
 ```
 
-最後に、`geom_abline()`関数を使って斜線を追加することもできます。
+Por último, también podríamos añadir una línea diagonal con la función `geom_abline()`:
 
 ```{r adding-diag, cache=FALSE, purl=TRUE, fig.alt="Scatter plot produced by ggplot() and geom_point() comparing the log-foldchanges computed above. Dots are colour-coded based on the gene's biotype. A black line of slope 1 crossing the origin was added by geom_abline()."}
 ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
@@ -252,7 +252,7 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
   geom_abline(intercept = 0)
 ```
 
-geomレイヤーを`geom_point`から`geom_jitter`に変更しても、色は引き続き`gene_biotype`によって決定される点にご留意ください。
+Nótese que podemos cambiar la capa geom de `geom_point` a `geom_jitter` y los colores seguirán determinados por `gene_biotype`.
 
 ```{r color-by-gene_biotype3, cache=FALSE, purl=TRUE, fig.alt="Scatter plot produced by ggplot() and geom_point() comparing the log-foldchanges computed above. Dots are colour-coded based on the gene's biotype. A black line of slope 1 crossing the origin was added by geom_abline()."}
 ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0,
@@ -267,19 +267,19 @@ library("hexbin")
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-散布図は、小規模なデータセットにおいて有用な探索的ツールとなり得ます。`rna_fc`データセットのように観測値数が多いデータセットでは、点の重なりが散布図の制約となる場合があります。このような状況に対処する一つの手法は、観測値を六角形ビンニングすることです。プロット領域は六角形に分割されます。各六角形には、その境界内に含まれる観測値の数に基づいて色が割り当てられます。
+Los gráficos de dispersión pueden ser herramientas exploratorias útiles para conjuntos de datos pequeños. Para conjuntos de datos con un gran número de observaciones, como el conjunto de datos `rna_fc`, la superposición de puntos puede representar una limitación de los gráficos de dispersión. Una estrategia para manejar tales escenarios consiste en utilizar el agrupamiento hexagonal de las observaciones. El espacio del gráfico se tesela en hexágonos. A cada hexágono se le asigna un color basado en el número de observaciones que caen dentro de sus límites.
 
-- `ggplot2`で六角形ビンニングを使用するには、まずCRANからRパッケージ`hexbin`をインストールし、ロードしてください。
+- Para utilizar el agrupamiento hexagonal en `ggplot2`, primero instale el paquete de R `hexbin` desde CRAN y cárguelo.
 
-- 次に、`geom_hex()`関数を使用してhexbin図を作成します。
+- A continuación, utilice la función `geom_hex()` para generar la figura de hexbin.
 
-- 六角形ビンプロットは、散布図と比較してどのような相対的な長所と短所があるでしょうか。上記の散布図を確認し、作成した六角形ビンプロットと比較してください。
+- ¿Cuáles son las fortalezas y debilidades relativas de un gráfico de cuadrículas hexagonales en comparación con un gráfico de dispersión? Examine el gráfico de dispersión anterior y compárelo con el gráfico de cuadrículas hexagonales que creó.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, eval=FALSE, purl=TRUE}
 install.packages("hexbin")
@@ -300,13 +300,13 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-先ほど学んだ内容を活用して、`rna`データセットから`expression_log`を`sample`に対してプロットした散布図を作成し、時間を異なる色で表示してください。このようなデータを示す方法として、これは適切でしょうか？
+Utiliza lo que acabas de aprender para crear un gráfico de dispersión de `expression_log` sobre `sample` del conjunto de datos `rna`, con el tiempo mostrado en diferentes colores. ¿Es esta una buena manera de representar este tipo de datos?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, eval=TRUE, purl=TRUE, fig.alt="Figures showing a stretch of overlapping points indicating the log of expression + 1 for each sample. The points are coloured with different shades of blue for samples collected at different time points."}
 ggplot(data = rna, mapping = aes(y = expression_log, x = sample)) +
@@ -317,9 +317,9 @@ ggplot(data = rna, mapping = aes(y = expression_log, x = sample)) +
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## 箱ひげ図
+## Gráfico de cajas
 
-箱ひげ図を用いて、各サンプルにおける遺伝子発現の分布を可視化できます。
+Podemos utilizar gráficos de cajas para visualizar la distribución de la expresión génica dentro de cada muestra:
 
 ```{r boxplot, cache=FALSE, purl=TRUE, fig.alt="Boxplot showing the distribution of log expression + 1 values for each sample, as produced by geom_boxlpot(). Each boxplot is filled with white colour."}
 ggplot(data = rna,
@@ -327,7 +327,7 @@ ggplot(data = rna,
   geom_boxplot()
 ```
 
-箱ひげ図に点を追加することで、測定値の数やその分布をより明確に把握できます。
+Al añadir puntos al gráfico de cajas, podemos tener una mejor idea del número de mediciones y de su distribución:
 
 ```{r boxplot-with-points, cache=FALSE, purl=TRUE, fig.alt="Boxplot and dots showing the distribution of log expression + 1 values for each sample, as produced by geom_boxlpot(). Each boxplot is transparent and the jittered dots are semi-transparent tomato-coloured and behind the boxpots."}
 ggplot(data = rna,
@@ -338,15 +338,15 @@ ggplot(data = rna,
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-ボックスプロットのレイヤーがジッターレイヤーよりも前面に配置されている点に注目してください。ボックスプロットを点の下に配置するには、コードのどこを変更すればよいでしょうか？
+Observa cómo la capa del gráfico de cajas está por delante de la capa de jitter. ¿Qué debes cambiar en el código para colocar el gráfico de cajas debajo de los puntos?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
-これら2つのgeomの順序を入れ替えるべきです。
+Deberíamos cambiar el orden de estos dos geoms:
 
 ```{r boxplot-with-points2, cache=FALSE, purl=TRUE, fig.alt="Boxplot and dots showing the distribution of log expression + 1 values for each sample, as produced by geom_boxlpot(). Each boxplot is transparent and the jittered dots are semi-transparent tomato-coloured. This time, the boxplots are behind the dots."}
 ggplot(data = rna,
@@ -359,7 +359,7 @@ ggplot(data = rna,
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-x軸の値がまだ適切に読み取れないことに気づくかもしれません。ラベルの向きを変更し、重なり合わないように垂直方向と水平方向に調整しましょう。90度の角度を使うか、あるいは試行錯誤して斜め向きのラベルに適した角度を見つけてください：
+Es posible que notes que los valores del eje x todavía no son correctamente legibles. Cambiemos la orientación de las etiquetas y ajustémoslas vertical y horizontalmente para que no se solapen. Puedes usar un ángulo de 90 grados, o experimentar para encontrar el ángulo adecuado para las etiquetas orientadas diagonalmente:
 
 ```{r boxplot-xaxis-rotated, cache=FALSE, purl=TRUE, fig.alt="Boxplot and dots showing the distribution of log expression + 1 values for each sample, as produced by geom_boxlpot(). Each boxplot is transparent and the jittered dots are semi-transparent tomato-coloured. The sample labels are displayed vertically and readable."}
 ggplot(data = rna,
@@ -371,15 +371,15 @@ ggplot(data = rna,
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-箱ひげ図のデータポイントに、感染期間（`time`）に応じた色を付けてください。
+Añada color a los puntos de datos de su gráfico de cajas según la duración de la infección (`time`).
 
-*ヒント：* クラス `time` を確認してください。ggplot のマッピングで、`time` のクラスを整数から因子に直接変更することを検討してください。なぜこれにより、R のグラフ作成方法が変わるのでしょうか？
+*Pista:* Compruebe la clase de `time`. Considere cambiar la clase de `time` de entero a factor directamente en la asignación de ggplot. ¿Por qué esto cambia la forma en que R crea el gráfico?
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r boxplot-color-time, cache=FALSE, purl=TRUE, fig.alt="Boxplot and dots showing the distribution of log expression + 1 values for each sample, as produced by geom_boxlpot(). On the first figure, each boxplot is transparent and the jittered dots are semi-transparent and coloured in different shares of blue. On the second figures, each boxplot is transparent and the jittered dots are semi-transparent and coloured red, green and blue."}
 # time as integer
@@ -405,15 +405,15 @@ ggplot(data = rna,
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-箱ひげ図は有用な要約手法ですが、分布の*形状*は見えなくなります。例えば、分布が二峰性である場合、箱ひげ図ではそれが分かりません。箱ひげ図に代わる手法としてバイオリンプロットがあり、こちらでは（点の密度の）形状が描かれます。
+Los gráficos de cajas son resúmenes útiles, pero ocultan la *forma* de la distribución. Por ejemplo, si la distribución es bimodal, no se vería en un gráfico de cajas. Una alternativa al gráfico de cajas es el gráfico de violín, donde se dibuja la forma (de la densidad de los puntos).
 
-- 箱ひげ図をバイオリンプロットに置き換えてください。`geom_violin()`を参照してください。引数`fill`を用いて、時間に応じてバイオリンプロットを塗りつぶしてください。
+- Sustituya el gráfico de cajas por un gráfico de violín; consulte `geom_violin()`. Rellene los violines según el tiempo con el argumento `fill`.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, eval=TRUE, echo=TRUE, cache=FALSE, purl=TRUE, fig.alt="Violin plot showing the distribution of log expression + 1 values for each sample, as produced by geom_violin(). Each boxplot is transparent and the jittered dots are semi-transparent and coloured red, green and blue."}
 ggplot(data = rna,
@@ -428,13 +428,13 @@ ggplot(data = rna,
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-- バイオリンプロットを修正し、`sex`でバイオリンを塗りつぶしてください。
+- Modifique el gráfico en forma de violín para rellenar los violines mediante `sex`.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r, eval=TRUE, echo=TRUE, cache=FALSE, purl=TRUE, fig.alt="Violin plot showing the distribution of log expression + 1 values for each sample, as produced by geom_violon(). Each violin plot is coloured in red or blue depending on the sex variable."}
 ggplot(data = rna,
@@ -447,9 +447,9 @@ ggplot(data = rna,
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## 折れ線グラフ
+## Gráficos de líneas
 
-まず、時刻0と時刻8を比較した際に対数フォールドチェンジが最大となった10個の遺伝子について、感染期間ごとの平均発現量を算出しましょう。まず、遺伝子を選択し、選択した10個の遺伝子を含む`rna`のサブセット`sub_rna`を作成します。次に、データをグループ化し、各グループ内での平均遺伝子発現量を算出します：
+Calculemos la expresión media por duración de la infección para los 10 genes con los mayores cambios relativos de expresión en escala logarítmica al comparar el tiempo 8 con el tiempo 0. Primero, debemos seleccionar los genes y crear un subconjunto de `rna` llamado `sub_rna` que contenga los 10 genes seleccionados; luego, debemos agrupar los datos y calcular la expresión génica media dentro de cada grupo:
 
 ```{r, purl=TRUE}
 rna_fc <- rna_fc |> arrange(desc(time_8_vs_0))
@@ -466,14 +466,14 @@ mean_exp_by_time <- sub_rna |>
 mean_exp_by_time
 ```
 
-x軸に感染期間、y軸に平均発現量をとった折れ線グラフを作成できます。
+Podemos crear el gráfico de líneas con la duración de la infección en el eje x y la expresión media en el eje y:
 
 ```{r first-time-series, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), but the lines are clearly not show what we expect."}
 ggplot(data = mean_exp_by_time, mapping = aes(x = time, y = mean_exp)) +
   geom_line()
 ```
 
-残念ながら、すべての遺伝子のデータを一括してプロットしたため、これではうまくいきません。aesthetic関数に`group = gene`を含めるように修正し、ggplotに遺伝子ごとに線を描画させる必要があります。
+Lamentablemente, esto no funciona porque representamos los datos de todos los genes juntos. Necesitamos indicar a ggplot que dibuje una línea para cada gen modificando la función estética para incluir `group = gene`:
 
 ```{r time-series-by-gene, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), with 10 lines showing increasing expression values over time."}
 ggplot(data = mean_exp_by_time,
@@ -481,7 +481,7 @@ ggplot(data = mean_exp_by_time,
   geom_line()
 ```
 
-色を追加すれば、プロット上で遺伝子を区別できるようになります（`color` を使用するとデータも自動的にグループ化されます）：
+Podremos distinguir los genes en el gráfico si añadimos colores (el uso de `color` también agrupa automáticamente los datos):
 
 ```{r time-series-with-colors, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), with 10 colour-coded lines showing increasing expression values over time."}
 ggplot(data = mean_exp_by_time,
@@ -489,9 +489,9 @@ ggplot(data = mean_exp_by_time,
   geom_line()
 ```
 
-## ファセット化
+## Faceting
 
-`ggplot2`には、データセットに含まれる因子に基づいて1つのプロットを複数の（サブ）プロットに分割できる「ファセット化」という特殊な手法があります。これらの異なるサブプロットは、直接比較しやすくするため、同一のプロパティ（軸の範囲、目盛りなど）を継承します。これを用いて、各遺伝子の経時変化を示す折れ線グラフを作成します。
+`ggplot2` cuenta con una técnica especial llamada *faceting* que permite al usuario dividir un gráfico en múltiples gráficos (subgráficos) basándose en un factor incluido en el conjunto de datos. Estos diferentes subgráficos heredan las mismas propiedades (límites de los ejes, marcas, ...) para facilitar su comparación directa. Lo utilizaremos para crear un gráfico de líneas a lo largo del tiempo para cada gen:
 
 ```{r first-facet, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), with 10 sub-plots/facets, each showing one line with increasing expression values over time. All y-scales are identical."}
 ggplot(data = mean_exp_by_time,
@@ -499,7 +499,7 @@ ggplot(data = mean_exp_by_time,
   facet_wrap(~ gene)
 ```
 
-ここでは、すべてのサブプロットにおいてx軸とy軸のスケールが同一になっています。`scales`を修正してy軸のスケールを自由に設定することで、このデフォルトの動作を変更できます。
+Aquí, tanto el eje x como el y tienen la misma escala en todos los subgráficos. Puede cambiar este comportamiento predeterminado modificando `scales` para permitir una escala libre para el eje y:
 
 ```{r first-facet-scales, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), with 10 sub-plots/facets, each showing one line with increasing expression values over time. y-scales are now adapted to the expression range for each facet/gene."}
 ggplot(data = mean_exp_by_time,
@@ -508,7 +508,7 @@ ggplot(data = mean_exp_by_time,
   facet_wrap(~ gene, scales = "free_y")
 ```
 
-次に、各プロットの線をマウスの性別ごとに分けたいと思います。そのためには、データフレーム内で`gene`、`time`、および`sex`でグループ化した平均発現量を算出する必要があります：
+Ahora queremos dividir la línea en cada gráfico según el sexo de los ratones. Para ello, necesitamos calcular la expresión media en el marco de datos agrupado por `gene`, `time` y `sex`:
 
 ```{r data-facet-by-gene-and-sex, purl=TRUE}
 mean_exp_by_time_sex <- sub_rna |>
@@ -518,7 +518,7 @@ mean_exp_by_time_sex <- sub_rna |>
 mean_exp_by_time_sex
 ```
 
-次に、`color`を用いて（単一のプロット内で）さらに性別で分割することで、面分けプロットを作成できます。
+Ahora podemos crear el gráfico facetado dividiendo aún más por sexo utilizando `color` (dentro de un único gráfico):
 
 ```{r facet-by-gene-and-sex, cache=FALSE, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), with 10 sub-plots/facets, each showing two coloured lines (red for Female and blue for Make) with increasing expression values over time."}
 ggplot(data = mean_exp_by_time_sex,
@@ -527,7 +527,7 @@ ggplot(data = mean_exp_by_time_sex,
   facet_wrap(~ gene, scales = "free_y")
 ```
 
-通常、背景が白のプロットは印刷した際により見やすくなります。`theme_bw()`関数を使用して、背景を白に設定できます。さらに、グリッドを削除することも可能です。
+Por lo general, los gráficos con fondo blanco resultan más legibles al imprimirlos. Podemos establecer el fondo en blanco utilizando la función `theme_bw()`. Además, podemos eliminar la cuadrícula:
 
 ```{r facet-by-gene-and-sex-white-bg, cache=FALSE, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), with 10 sub-plots/facets, each showing two coloured lines (red for Female and blue for Make) with increasing expression values over time. The figure background is now white."}
 ggplot(data = mean_exp_by_time_sex,
@@ -540,13 +540,13 @@ ggplot(data = mean_exp_by_time_sex,
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-先ほど学んだ内容を活用して、感染期間を通じて各染色体の平均発現量がどのように変化するかを示すプロットを作成してください。
+Utiliza lo que acabas de aprender para crear un gráfico que represente cómo varía la expresión promedio de cada cromosoma a lo largo de la duración de la infección.
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
 ```{r mean-exp-chromosome-time-series, purl=TRUE, fig.alt="Line plot, as produced by geom_line(), with 21 sub-plots/facets, each showing one line with expression values over time for each chromosome."}
 mean_exp_by_chromosome <- rna |>
@@ -563,9 +563,9 @@ ggplot(data = mean_exp_by_chromosome, mapping = aes(x = time,
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-`facet_wrap` ジオメトリでは、プロットを任意の次元数で抽出できるため、1ページにすっきりと収めることができます。一方、`facet_grid` ジオメトリでは、数式表記を用いてプロットの配置方法を明示的に指定できます（`rows ~ columns`；`.` は、1行または1列のみを示すプレースホルダーとして使用できます）。
+La geometría `facet_wrap` extrae los gráficos en un número arbitrario de dimensiones para que quepan correctamente en una sola página. Por otro lado, la geometría `facet_grid` permite especificar explícitamente cómo se desea que estén dispuestos los gráficos mediante la notación de fórmula (`rows ~ columns`; un `.` puede utilizarse como marcador que indique una sola fila o columna).
 
-先ほどのプロットを修正して、オスとメスの平均遺伝子発現が経時的にどのように変化したかを比較してみましょう。
+Modifiquemos el gráfico anterior para comparar cómo ha cambiado la expresión génica media de los machos y las hembras a lo largo del tiempo:
 
 ```{r mean-exp-time-facet-sex-rows, purl=TRUE, fig.alt="Two line plots above each other, each showing 10 lines coloured by gene. The top facet shows the expression values for Female sample, the bottom one for Male samples."}
 # One column, facet by rows
@@ -583,19 +583,19 @@ ggplot(data = mean_exp_by_time_sex,
   facet_grid(. ~ sex)
 ```
 
-## `ggplot2` テーマ
+## Temas de `ggplot2`
 
-プロットの背景を白に変更する`theme_bw()`のほか、`ggplot2`には可視化の外観を素早く変更する際に役立つテーマが他にもいくつか用意されています。テーマの全一覧は[https://ggplot2.tidyverse.org/reference/ggtheme.html](https://ggplot2.tidyverse.org/reference/ggtheme.html)で確認できます。`theme_minimal()`と`theme_light()`は人気があり、`theme_void()`は独自のテーマを新規に作成する際の出発点として有用です。
+Además de `theme_bw()`, que cambia el fondo del gráfico a blanco, `ggplot2` incluye varios otros temas que pueden resultar útiles para cambiar rápidamente la apariencia de su visualización. La lista completa de temas está disponible en [https://ggplot2.tidyverse.org/reference/ggtheme.html](https://ggplot2.tidyverse.org/reference/ggtheme.html). `theme_minimal()` y `theme_light()` son populares, y `theme_void()` puede resultar útil como punto de partida para crear un nuevo tema diseñado a mano.
 
-[ggthemes](https://jrnold.github.io/ggthemes/reference/index.html) パッケージでは、多彩なオプション（Excel 2003 テーマを含む）が提供されています。[`ggplot2` 拡張機能ウェブサイト](https://exts.ggplot2.tidyverse.org/) では、追加テーマを含む、`ggplot2` の機能を拡張するパッケージの一覧が掲載されています。
+El paquete [ggthemes](https://jrnold.github.io/ggthemes/reference/index.html) ofrece una amplia variedad de opciones (incluido un tema de Excel 2003). El [sitio web de extensiones `ggplot2`](https://exts.ggplot2.tidyverse.org/) proporciona una lista de paquetes que amplían las capacidades de `ggplot2`, incluidos temas adicionales.
 
-## カスタマイズ
+## Personalización
 
-時間と遺伝子ごとの平均発現量を、性別で色分けしたファセットプロットに戻りましょう。
+Volvamos al gráfico facetado de la expresión media según el tiempo y el gen, coloreado por sexo.
 
-[`ggplot2` チートシート](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)を確認し、プロットを改善する方法を考えてみてください。
+Echa un vistazo a la [hoja de trucos `ggplot2`](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf) y piensa en formas de mejorar el gráfico.
 
-次に、軸の名前を「time」や「mean\_exp」よりも分かりやすいものに変更し、図にタイトルを追加します。
+Ahora, podemos cambiar los nombres de los ejes por algo más informativo que 'time' y 'mean\_exp', y añadir un título a la figura:
 
 ```{r mean_exp-time-with-right-labels, cache=FALSE, purl=TRUE, fig.alt="Line plot with white background and custom title and axis legends."}
 ggplot(data = mean_exp_by_time_sex,
@@ -609,7 +609,7 @@ ggplot(data = mean_exp_by_time_sex,
        y = "Mean gene expression")
 ```
 
-軸にはより分かりやすい名称が付けられていますが、フォントサイズを大きくすることで視認性を向上させることができます。
+Los ejes tienen nombres más informativos, pero su legibilidad puede mejorarse aumentando el tamaño de la fuente:
 
 ```{r mean_exp-time-with-right-labels-xfont-size, cache=FALSE, purl=TRUE, fig.alt="Line plot with white background and larger custom title and axis legends."}
 ggplot(data = mean_exp_by_time_sex,
@@ -624,9 +624,9 @@ ggplot(data = mean_exp_by_time_sex,
   theme(text = element_text(size = 16))
 ```
 
-なお、プロットのフォントを変更することも可能です。Windowsをご利用の場合は、[**`extrafont`**パッケージ](https://cran.r-project.org/web/packages/extrafont/index.html)をインストールする必要がある場合があります。
+Tenga en cuenta que también es posible cambiar las fuentes de sus gráficos. Si utiliza Windows, es posible que tenga que instalar el [paquete **`extrafont`**](https://cran.r-project.org/web/packages/extrafont/index.html).
 
-さらに、x軸・y軸のテキストの色やグリッドの色などをカスタマイズできます。また、例えば`legend.position`を`"top"`に設定することで、凡例を上部に移動させることも可能です。
+Podemos personalizar aún más el color del texto de los ejes x e y, el color de la cuadrícula, etc. También podemos, por ejemplo, mover la leyenda a la parte superior estableciendo `legend.position` en `"top"`.
 
 ```{r mean_exp-time-with-theme, cache=FALSE, purl=TRUE, fig.alt="Line plot with white background and larger custom title and axis legends and blue grid."}
 ggplot(data = mean_exp_by_time_sex,
@@ -645,7 +645,7 @@ ggplot(data = mean_exp_by_time_sex,
         legend.position = "top")
 ```
 
-作成した変更がデフォルトのテーマよりも気に入った場合は、オブジェクトとして保存しておけば、今後作成する他のプロットにも簡単に適用できます。以下に、以前に作成したヒストグラムを用いた例を示します。
+Si te gustan más los cambios que has realizado que el tema predeterminado, puedes guardarlos como un objeto para poder aplicarlos fácilmente a otros gráficos que crees. Aquí tienes un ejemplo con el histograma que creamos anteriormente.
 
 ```{r mean_exp-time-with-right-labels-xfont, cache=FALSE, purl=TRUE, fig.alt="Custrom 'blue_theme() showing a blue grid and blue axis legends."}
 blue_theme <- theme(axis.text.x = element_text(colour = "royalblue4",
@@ -662,19 +662,19 @@ ggplot(rna, aes(x = expression_log)) +
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
-## 課題
+## Desafío
 
-以上の情報を踏まえ、さらに5分ほど時間をかけて、この演習で生成したプロットのいずれかを改善するか、あるいはご自身で見栄えの良いグラフを作成してみてください。参考にRStudioの[`ggplot2`チートシート](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf)をご活用ください。いくつかアイデアを挙げます：
+Con toda esta información a mano, tómese otros cinco minutos para mejorar uno de los gráficos generados en este ejercicio o crear su propio gráfico impecable. Utilice la [hoja de trucos `ggplot2`](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf) de RStudio para inspirarse. Aquí tiene algunas ideas:
 
-- 線の太さを変えられるか試してみてください。
-- 凡例の名前を変更する方法はありますか？ラベルはどうでしょうか？（ヒント：`scale_`で始まるggplot関数を探してみてください）
-- 別のカラーパレットを試すか、線の色を手動で指定してみてください（[https://www.cookbook-r.com/Graphs/Colors\_(ggplot2)/](https://www.cookbook-r.com/Graphs/Colors_\(ggplot2\)/)を参照してください）。
+- Mira si puedes cambiar el grosor de las líneas.
+- ¿Puedes encontrar una forma de cambiar el nombre de la leyenda? ¿Y sus etiquetas? (pista: busca una función de ggplot que empiece por `scale_`)
+- Prueba a utilizar una paleta de colores diferente o a especificar manualmente los colores de las líneas (consulta [https://www.cookbook-r.com/Graphs/Colors\_(ggplot2)/](https://www.cookbook-r.com/Graphs/Colors_\(ggplot2\)/)).
 
 :::::::::::::::  solution
 
-## 解答
+## Solución
 
-例えば、このプロットに基づくと：
+Por ejemplo, basándose en este gráfico:
 
 ```{r, purl=TRUE, fig.alt="Plain facetted line plot, as produced by theme_bw() and a blank grid above."}
 ggplot(data = mean_exp_by_time_sex,
@@ -685,7 +685,7 @@ ggplot(data = mean_exp_by_time_sex,
   theme(panel.grid = element_blank())
 ```
 
-以下のようにカスタマイズできます。
+Podemos personalizarlo de las siguientes maneras:
 
 ```{r, purl=TRUE, fig.alt="Plain facetted line plot, as produced by theme_bw() and a blank grid with wide lines."}
 # change the thickness of the lines
@@ -736,13 +736,13 @@ ggplot(data = mean_exp_by_time_sex,
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## プロットの合成
+## Composición de gráficos
 
-ファセット機能は、1つのプロットを複数のサブプロットに分割するのに便利なツールです。しかし、異なる変数や、さらには異なるデータフレームに基づいた複数の独立したプロットを、1つの図にまとめたい場合もあるでしょう。
+El faceting es una herramienta excelente para dividir un gráfico en múltiples subgráficos, pero a veces es posible que desee crear una sola figura que contenga varios gráficos independientes, es decir, gráficos basados en variables diferentes o incluso en marcos de datos distintos.
 
-まずは、並べて表示したい2つのプロットを作成しましょう。
+Comencemos creando los dos gráficos que queremos disponer uno junto al otro:
 
-最初のグラフでは、染色体ごとのユニークな遺伝子数をカウントしています。まず、`chromosome_name`の水準を並べ替え、染色体ごとのユニークな遺伝子をフィルタリングします。また、視認性を高めるため、y軸のスケールをlog10スケールに変更します。
+El primer gráfico cuenta el número de genes únicos por cromosoma. Primero debemos reordenar los niveles de `chromosome_name` y filtrar los genes únicos por cromosoma. También cambiamos la escala del eje y a una escala logarítmica en base 10 para mejorar la legibilidad.
 
 ```{r sub1, purl=TRUE, fig.alt="A simple histogram with greed bars showing the log10 number of genes per chromosome."}
 rna$chromosome_name <- factor(rna$chromosome_name,
@@ -759,7 +759,7 @@ count_gene_chromosome <- rna |>
 count_gene_chromosome
 ```
 
-以下では、`legend.position`を`"none"`に設定することで、凡例を完全に削除します。
+A continuación, también eliminamos la leyenda por completo estableciendo `legend.position` en `"none"`.
 
 ```{r sub2, purl=TRUE, fig.alt="Transparently-filled red and blue boxplots for Female and Male expression values for different time points."}
 exp_boxplot_sex <- ggplot(rna, aes(y=expression_log, x = as.factor(time),
@@ -771,7 +771,7 @@ exp_boxplot_sex <- ggplot(rna, aes(y=expression_log, x = as.factor(time),
 exp_boxplot_sex
 ```
 
-[**patchwork**](https://github.com/thomasp85/patchwork) パッケージは、`+` を用いて図を（通常は左右に）配置することで、図を組み合わせるための洗練された手法を提供します。より具体的には、`|` は図を明示的に左右に配置し、`/` は図を上下に積み重ねます。
+El paquete [**patchwork**](https://github.com/thomasp85/patchwork) ofrece un enfoque elegante para combinar figuras utilizando `+` para organizarlas (normalmente una al lado de la otra). Más concretamente, `|` las organiza explícitamente una al lado de la otra y `/` las apila una sobre otra.
 
 ```{r install-patchwork, message=FALSE, eval=FALSE, purl=TRUE}
 install.packages("patchwork")
@@ -787,7 +787,7 @@ count_gene_chromosome + exp_boxplot_sex
 count_gene_chromosome / exp_boxplot_sex
 ```
 
-`plot_layout`を用いて最終的な構成のレイアウトをさらに調整することで、より複雑なレイアウトを作成できます。
+Podemos controlar aún más la disposición de la composición final con `plot_layout` para crear diseños más complejos:
 
 ```{r patchwork3, purl=TRUE, fig.alt="A composed figure show the histogram (top) and boxplots (bottom) on top or each other."}
 count_gene_chromosome + exp_boxplot_sex + plot_layout(ncol = 1)
@@ -800,7 +800,7 @@ count_gene_chromosome +
  plot_layout(ncol = 1)
 ```
 
-最後のプロットは、`|` と `/` のコンポーザーを使用して作成することもできます。
+El último gráfico también puede crearse utilizando los compositores `|` y `/`:
 
 ```{r patchwork5, purl=TRUE, fig.alt="As above, a figure composed of 4 plots with on top the histogram, in the middle the histogram and the boxpot, side-by-side, and at the bottom, the boxplot."}
 count_gene_chromosome /
@@ -808,9 +808,9 @@ count_gene_chromosome /
  exp_boxplot_sex
 ```
 
-`patchwork`の詳細については、[ウェブページ](https://patchwork.data-imaginist.com/)またはこちらの[動画](https://www.youtube.com/watch?v=0m4yywqNPVY)をご覧ください。
+Obtenga más información sobre `patchwork` en su [página web](https://patchwork.data-imaginist.com/) o en este [video](https://www.youtube.com/watch?v=0m4yywqNPVY).
 
-別の選択肢として、`grid.arrange()`を用いて個別のggplotを1つの図に統合できる**`gridExtra`**パッケージがあります。
+Otra opción es el paquete **`gridExtra`**, que permite combinar ggplots independientes en una sola figura mediante `grid.arrange()`:
 
 ```{r install-gridextra, message=FALSE, eval=FALSE, purl=TRUE}
 install.packages("gridExtra")
@@ -821,15 +821,15 @@ library("gridExtra")
 grid.arrange(count_gene_chromosome, exp_boxplot_sex, ncol = 2)
 ```
 
-シンプルな配置に用いる`ncol`や`nrow`といった引数に加え、[より複雑なレイアウトを構築する](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html)ためのツールも用意されています。
+Además de los argumentos `ncol` y `nrow`, utilizados para realizar diseños sencillos, existen herramientas para [construir diseños más complejos](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html).
 
-## プロットのエクスポート
+## Exportación de gráficos
 
-プロットを作成した後、お好みの形式でファイルに保存できます。RStudioの**Plot**ペインにある「Export」タブでは、プロットが低解像度で保存されます。この解像度は多くの学術誌で受理されず、ポスター用としても適切に拡大できません。
+Tras crear su gráfico, puede guardarlo en un archivo en su formato preferido. La pestaña Exportar en el panel **Plot** de RStudio guardará sus gráficos a baja resolución, la cual no será aceptada por muchas revistas y no escalará bien para pósteres.
 
-代わりに、`ggsave()`関数を使用してください。この関数では、適切な引数（`width`、`height`、`dpi`）を調整することで、プロットの寸法や解像度を簡単に変更できます。
+En su lugar, utilice la función `ggsave()`, que le permite cambiar fácilmente la dimensión y la resolución de su gráfico ajustando los argumentos correspondientes (`width`, `height` y `dpi`).
 
-作業ディレクトリに`fig_output/`フォルダがあることを確認してください。
+Asegúrese de tener la carpeta `fig_output/` en su directorio de trabajo.
 
 ```{r ggsave-example, eval=FALSE, purl=TRUE}
 my_plot <- ggplot(data = mean_exp_by_time_sex,
@@ -856,7 +856,7 @@ ggsave("fig_output/combo_plot_chromosome_sex.png", combo_plot,
        width = 10, dpi = 300)
 ```
 
-注：パラメータ `width` と `height` は、保存されるプロットのフォントサイズも決定します。
+Nota: Los parámetros `width` y `height` también determinan el tamaño de la fuente en el gráfico guardado.
 
 ```{r final-challenge, eval=FALSE, purl=TRUE, echo=FALSE}
 ### Final plotting challenge:
@@ -867,13 +867,13 @@ ggsave("fig_output/combo_plot_chromosome_sex.png", combo_plot,
 ##  https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf
 ```
 
-## 可視化用のその他のパッケージ
+## Otros paquetes para la visualización
 
-`ggplot2`は非常に強力なパッケージであり、私たちの*整然データ*および*整然ツール*のパイプラインに非常にうまく適合します。Rには、他にも見逃せない可視化パッケージがあります。
+`ggplot2` es un paquete muy potente que encaja a la perfección en nuestro pipeline de *datos ordenados* y *herramientas ordenadas*. Existen otros paquetes de visualización en R que no deberían pasarse por alto.
 
-### 基本グラフィックス
+### Gráficos básicos
 
-Rに標準で搭載されているグラフィックスシステム（一般に*base R graphics*と呼ばれます）は、シンプルで高速です。これは*ペインターモデルまたはキャンバスモデル*に基づいており、異なる出力が直接重ね合わせられます（[下の図](#fig:paintermodel)参照）。この点は、専用のオブジェクトを返し、それらを画面やファイルにレンダリングし、さらには更新することさえ可能な`ggplot2`（および後述する`lattice`）とは根本的に異なります。
+El sistema gráfico predeterminado que incluye R, a menudo llamado *gráficos básicos de R*, es sencillo y rápido. Se basa en el *modelo del pintor o del lienzo*, donde diferentes resultados se superponen directamente entre sí (véase la figura  [siguiente](#fig:paintermodel) ). Esta es una diferencia fundamental con `ggplot2` (y con `lattice`, descrito más adelante), que devuelve objetos dedicados que se renderizan en pantalla o en un archivo, e incluso pueden actualizarse.
 
 <span id="fig:paintermodel"></span>
 
@@ -889,7 +889,7 @@ abline(h = 10, col = "red")
 rect(5, 5, 15, 15, lwd = 3)
 ```
 
-もう一つの主な違いは、base graphicsのプロット関数が入力型に応じて*適切な*処理を行おうとする点です。つまり、入力のクラスに基づいて動作を適応させます。これは、データフレームのみを入力として受け付け、プロットを一つひとつ構築する必要がある`ggplot2`の仕組みとは、ここでも大きく異なります。
+Otra diferencia principal es que las funciones de trazado de los gráficos básicos intentan hacer *lo correcto* según el tipo de entrada; es decir, adaptan su comportamiento en función de la clase de su entrada. Esto es, nuevamente, muy diferente a lo que tenemos en `ggplot2`, que solo acepta marcos de datos como entrada y requiere que los gráficos se construyan poco a poco.
 
 ```{r plotmethod, fig.width=8, fig.height=8, fig.cap="Plotting boxplots (top) and histograms (bottom) vectors (left) or a matrices (right).", fig.alt="A two-by-two composition of 2 boxplots at the top, and 2 histograms at the bottom."}
 par(mfrow = c(2, 2))
@@ -901,16 +901,16 @@ hist(rnorm(100))
 hist(matrix(rnorm(100), ncol = 10))
 ```
 
-baseグラフィックスの標準機能による手法は、シンプルで標準的な図表であれば非常に効率的であり、`plot`や`hist`、`boxplot`といった単一の関数とわずか1行のコードで極めて迅速に作成できます。しかし、デフォルト設定が必ずしも最適とは限らず、特に図表が複雑になる場合（例えばファセットを作成する場合など）、調整作業に多大な時間と手間がかかることがあります。
+El enfoque estándar de los gráficos básicos puede ser muy eficiente para figuras sencillas y estándar, que pueden producirse muy rápidamente con una sola línea de código y una sola función como `plot`, o `hist`, o `boxplot`, ... Sin embargo, los valores predeterminados no siempre son los más atractivos, y el ajuste de las figuras, especialmente cuando estas se vuelven más complejas (por ejemplo, para producir facetas), puede resultar largo y engorroso.
 
-### latticeパッケージ
+### El paquete lattice
 
-**`lattice`** パッケージは、データフレームを入力として用い、グラフィカルなオブジェクトを返し、ファセット機能をサポートするという点で `ggplot2` と似ています。一方、`lattice` はグラフィックスの文法に基づいておらず、インターフェースもより複雑です。
+El paquete **`lattice`** es similar a `ggplot2` en que utiliza marcos de datos como entrada, devuelve objetos gráficos y admite el faceting. `lattice`, sin embargo, no se basa en la gramática de gráficos y tiene una interfaz más compleja.
 
-`lattice`パッケージの優れたリファレンスは @latticebook. です。
+Una buena referencia para el paquete `lattice` es  @latticebook.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Rによる可視化
+- Visualización en R
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
