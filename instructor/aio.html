@@ -40,11 +40,8 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <a href="index.html">
-        <img id="incubator-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo.svg"></a>
-
-
-      </div>
+        <img id="incubator-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo.svg">
+</div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu">
@@ -90,9 +87,8 @@
       <span class="menu-title">Menú</span>
     </button>
     <div class="nav-logo">
-      <a href="index.html">
-      <img class="small-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo-sm.svg"></a>
-    </div>
+      <img class="small-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo-sm.svg">
+</div>
     <div class="lesson-title-md">
       Introducción al análisis de datos con R y Bioconductor
     </div>
@@ -139,7 +135,7 @@
       </fieldset>
     </form>
     -->
-    <a id="search-button-nav" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Buscar en la página All In One">Buscar en la página All In One</a>
+    <a id="search-button" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Buscar en la página All In One">Buscar en la página All In One</a>
   </div>
 <!--/div.container-fluid -->
 </nav><div class="container">
@@ -151,9 +147,6 @@
           <i class="search-icon" data-feather="x" role="img"></i>
         </button>
         <div class="sidebar-inner">
-          <div class="row mobile-row" id="theme-row-mobile">
-            <a id="search-button-sidebar" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Buscar en la página All In One">Buscar en la página All In One</a>
-          </div>
           <div class="row mobile-row" id="theme-row-mobile">
             <menu class="col theme-selector" id="theme-selector-sidebar">
 <li class="nav-item dropdown theme-button-list" id="theme-button-list-sidebar">
@@ -202,7 +195,6 @@
 <!--/div.accordion-item-->
                 </div>
 <!--/div.accordion-flush-->
-
               </div>
 <!--div.sidenav-view-selector -->
             </div>
@@ -323,34 +315,6 @@
             </div>
 
             <hr class="half-width">
-<div class="accordion accordion-flush" id="accordion-links-toggle">
-                <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-heading-links-toggle">
-                  <button class="accordion-button collapsed" id="links" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-links-toggle" aria-expanded="false" aria-controls="flush-collapse-links-toggle">
-                    LINKS
-                  </button>
-                </h2>
-                <div id="flush-collapse-links-toggle" class="accordion-collapse show collapse" data-bs-parent="#accordion-links-toggle">
-                    <div class="accordion-body">
-                        <ul>
-<li>
-                            <a href="../instructor/key-points.html">Puntos Clave</a>
-                            </li>
-                            <li>
-                            <a href="../instructor/instructor-notes.html">Notas de la instructora</a>
-                            </li>
-                            <li>
-                            <a href="../instructor/images.html">Extraer todas las imágenes</a>
-                            </li>
-                        </ul>
-</div>
-                </div>
-                </div>
-<!--/div.accordion-item-->
-            </div>
-<!--/div.accordion-flush-->
-
-            <hr class="half-width">
 <div class="accordion accordion-flush lesson-resources" id="accordion-resources-toggle">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-heading-resources-toggle">
@@ -361,7 +325,16 @@
                 <div id="flush-collapse-resources-toggle" class="accordion-collapse collapse" data-bs-parent="#accordion-resources-toggle">
                   <div class="accordion-body">
                     <ul>
-<hr>
+<li>
+                        <a href="../instructor/key-points.html">Puntos Clave</a>
+                      </li>
+                      <li>
+                        <a href="../instructor/instructor-notes.html">Notas de la instructora</a>
+                      </li>
+                      <li>
+                        <a href="../instructor/images.html">Extraer todas las imágenes</a>
+                      </li>
+                      <hr>
 <li><a class="dropdown-item" href="discuss.html">Discussion</a></li>
 <li><a class="dropdown-item" href="reference.html">Reference</a></li>
                     </ul>
@@ -518,11 +491,11 @@ mostrar datos. Los datos formateados como tablas son también el tema
 principal de este capítulo, y veremos cómo organizar los datos en tablas
 de manera estandarizada para garantizar un análisis posterior
 eficiente.</p>
-<div id="desafío-analice-los-siguientes-puntos-con-su-vecino" class="callout challenge">
+<div id="desafío-analice-los-siguientes-puntos-con-su-vecino" class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<span class="callout-header">Desafío</span>
+<span class="callout-header">Discusión</span>
 <div id="desafío-analice-los-siguientes-puntos-con-su-vecino" class="callout-inner">
 <h3 class="callout-title">Desafío: Analice los siguientes puntos con su
 vecino</h3>
@@ -702,11 +675,11 @@ Variables encoded in a single column each.
 <li>las filas son observaciones</li>
 <li>las celdas son valores individuales</li>
 </ul>
-<div id="desafío-tomaremos-un-conjunto-de-datos-desordenado-y-describiremos-cómo-lo-limpiaríamos." class="callout challenge">
+<div id="desafío-tomaremos-un-conjunto-de-datos-desordenado-y-describiremos-cómo-lo-limpiaríamos." class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<span class="callout-header">Desafío</span>
+<span class="callout-header">Discusión</span>
 <div id="desafío-tomaremos-un-conjunto-de-datos-desordenado-y-describiremos-cómo-lo-limpiaríamos." class="callout-inner">
 <h3 class="callout-title">Desafío: Tomaremos un conjunto de datos
 desordenado y describiremos cómo lo limpiaríamos.</h3>
@@ -743,11 +716,11 @@ en estos datos y cómo los corregirías.</p>
 <!-- - Si recibes una respuesta en la que han corregido la fecha, -->
 <!--   puedes hacer una pausa y pasar a la lección sobre fechas. -->
 <!--   O bien, puedes decir que volverás a las fechas al final. -->
-<div id="desafío-una-vez-que-hayas-organizado-los-datos-responde-a-las-siguientes-preguntas" class="callout challenge">
+<div id="desafío-una-vez-que-hayas-organizado-los-datos-responde-a-las-siguientes-preguntas" class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<span class="callout-header">Desafío</span>
+<span class="callout-header">Discusión</span>
 <div id="desafío-una-vez-que-hayas-organizado-los-datos-responde-a-las-siguientes-preguntas" class="callout-inner">
 <h3 class="callout-title">Desafío: Una vez que hayas organizado los
 datos, responde a las siguientes preguntas:</h3>
@@ -1437,7 +1410,7 @@ adaptarlos de la mejor manera al marco analítico que necesite para
 analizar sus datos. Por ejemplo, R cuenta con paquetes para el análisis
 de imágenes, SIG, series temporales, genética poblacional y mucho
 más.</p>
-<figure style="text-align: center"><img src="../fig/cran.png" alt="Two graphs showing the exponential increase of the number of CRAN packages from 2000 to 2018. The figure on the right shows linear trend for the log of number of packages." class="figure mx-auto d-block"><figcaption>
+<figure style="text-align: center"><img src="../fig/cran.png" alt="Two graphs showing the exponential increase of the number of CRAN packages from 2000 to 2018. The figure on the right shows linear trend for the log of number of packages." width="975" class="figure mx-auto d-block"><figcaption>
 Exponential increase of the number of packages available on <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, the Comprehensive R Archive
 Network. From the R Journal, Volume 10/2, December 2018.
 </figcaption></figure>
@@ -1609,11 +1582,11 @@ almacenar nuestros datos brutos, y utilizaremos
 <code>data_output/</code> para cuando aprendamos a exportar datos como
 archivos CSV, y la carpeta <code>fig_output/</code> para las figuras que
 guardaremos.</p>
-<div id="desafío-crea-la-estructura-de-directorios-de-tu-proyecto" class="callout challenge">
+<div id="desafío-crea-la-estructura-de-directorios-de-tu-proyecto" class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<span class="callout-header">Desafío</span>
+<span class="callout-header">Discusión</span>
 <div id="desafío-crea-la-estructura-de-directorios-de-tu-proyecto" class="callout-inner">
 <h3 class="callout-title">Desafío: crea la estructura de directorios de
 tu proyecto</h3>
@@ -1936,7 +1909,7 @@ muy útil para comprender su problema.</p>
 <div class="codewrapper">
 <h3 class="code-label">SALIDA<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>R version 4.6.1 (2026-06-24)
+<pre class="output" tabindex="0"><code>R version 4.6.2 (2026-10-29)
 Platform: aarch64-apple-darwin23
 Running under: macOS Golden Gate 27.2.1
 
@@ -1954,8 +1927,8 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base
 
 loaded via a namespace (and not attached):
-[1] compiler_4.6.1 cli_3.6.6      tools_4.6.1    otel_0.3.0     knitr_1.52
-[6] xfun_0.62      rlang_1.3.0    evaluate_1.0.5</code></pre>
+[1] compiler_4.6.2 cli_3.6.6      tools_4.6.2    otel_0.2.0     knitr_1.52
+[6] xfun_0.62      rlang_1.3.0    png_0.1-9      evaluate_1.0.5</code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -2336,11 +2309,11 @@ un nuevo objeto, <code>weight_lb</code>:</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weight_kg</span> <span class="op">&lt;-</span> <span class="fl">100</span></span></code></pre>
 </div>
-<div id="desafío" class="callout challenge">
+<div id="desafío" class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<span class="callout-header">Desafío</span>
+<span class="callout-header">Discusión</span>
 <div id="desafío" class="callout-inner">
 <h3 class="callout-title">Desafío:</h3>
 <div class="callout-content">
@@ -2363,11 +2336,11 @@ teclado. Si solo desea comentar una línea, puede colocar el cursor en
 cualquier punto de dicha línea (es decir, no es necesario seleccionar
 toda la línea) y luego presionar <kbd>Ctrl</kbd> + <kbd>Shift</kbd> +
 <kbd>C</kbd>.</p>
-<div id="desafío-1" class="callout challenge">
+<div id="desafío-1" class="callout discussion">
 <div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
+<i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<span class="callout-header">Desafío</span>
+<span class="callout-header">Discusión</span>
 <div id="desafío-1" class="callout-inner">
 <h3 class="callout-title">Desafío</h3>
 <div class="callout-content">
@@ -4282,7 +4255,7 @@ las siguientes preguntas?</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ul>
 <li>clase: tabla de datos</li>
@@ -4393,7 +4366,7 @@ rna.</p></li>
   Solución
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4605,7 +4578,7 @@ respectivamente.</li>
   Solución
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4659,7 +4632,7 @@ corregirlos? ¡No dudes en experimentar!</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <ul>
 <li>faltan comillas alrededor de los nombres de los animales</li>
@@ -4712,7 +4685,7 @@ al leer hojas de cálculo basadas en texto en R utilizando
   Solución
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4803,7 +4776,7 @@ los paquetes actualmente instalados en tu computadora. Explórala.</p>
   Solución:
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb40">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4849,7 +4822,7 @@ distribuidos (media 0, desviación estándar 1)</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb41">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5133,9 +5106,9 @@ caracteres, una matriz, una tabla de datos y otra lista:</p>
 <pre class="output" tabindex="0"><code>List of 5
  $ : int [1:10] 1 2 3 4 5 6 7 8 9 10
  $ : chr [1:26] "a" "b" "c" "d" ...
- $ : chr [1:211, 1:17] "assertthat" "backports" "base64enc" "brio" ...
+ $ : chr [1:261, 1:17] "litedown" "metabolomicsWorkbenchR" "mgcv" "MultiAssayExperiment" ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:211] "assertthat" "backports" "base64enc" "brio" ...
+  .. ..$ : chr [1:261] "litedown" "metabolomicsWorkbenchR" "mgcv" "MultiAssayExperiment" ...
   .. ..$ : chr [1:17] "Package" "LibPath" "Version" "Priority" ...
  $ :'data.frame':	50 obs. of  2 variables:
   ..$ speed: num [1:50] 4 4 7 7 8 9 10 10 10 11 ...
@@ -5809,7 +5782,7 @@ conserve únicamente las columnas <code>gene</code>, <code>sample</code>,
   Solución
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -5932,7 +5905,7 @@ para generar esta tabla de datos!</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6210,7 +6183,7 @@ temporales.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb49">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6426,7 +6399,7 @@ momento 0, el momento 4 y el momento 8.</li>
   Solución
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb66">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6680,7 +6653,7 @@ en nuevos nombres de columna;</li>
 <li>el <code>values_from</code>: la columna cuyos valores llenarán las
 nuevas columnas.</li>
 </ol>
-<figure style="text-align: center"><img src="../fig/pivot_wider.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the values in the 'sample' column on the left have become column names on the right and how the values in the 'expression' column on the left have become values on the the right. Below is the call to 'pivot_wider()' with annotations pointing to the 'sample' and 'expression' function arguments." class="figure mx-auto d-block"><figcaption>
+<figure style="text-align: center"><img src="../fig/pivot_wider.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the values in the 'sample' column on the left have become column names on the right and how the values in the 'expression' column on the left have become values on the the right. Below is the call to 'pivot_wider()' with annotations pointing to the 'sample' and 'expression' function arguments." width="3709" class="figure mx-auto d-block"><figcaption>
 Wide pivot of the <code>rna</code> data.
 </figcaption></figure><div class="codewrapper sourceCode" id="cb80">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -6807,7 +6780,7 @@ queremos crear y llenar con los valores actuales;</li>
 variables <code>names_to</code> y <code>values_to</code> (o las columnas
 que se excluirán de la transformación).</li>
 </ol>
-<!-- a la derecha y flechas que ilustran cómo los valores de la --><!-- columna 'sample' a la izquierda se han convertido en nombres de --><!-- columnas a la derecha y cómo los valores de la columna 'expression' --><!-- a la izquierda se han convertido en valores a la derecha. --><figure style="text-align: center"><img src="../fig/pivot_longer.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the column names on the left have become a new column 'sample' on the left and the values in the wide table on the right have become a new column 'expression' on the left.  Below is the call to 'pivot_wider()' with annotations pointing to the 'sample', 'expression' and the '-gene' arguments." class="figure mx-auto d-block"><figcaption>
+<!-- a la derecha y flechas que ilustran cómo los valores de la --><!-- columna 'sample' a la izquierda se han convertido en nombres de --><!-- columnas a la derecha y cómo los valores de la columna 'expression' --><!-- a la izquierda se han convertido en valores a la derecha. --><figure style="text-align: center"><img src="../fig/pivot_longer.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the column names on the left have become a new column 'sample' on the left and the values in the wide table on the right have become a new column 'expression' on the left.  Below is the call to 'pivot_wider()' with annotations pointing to the 'sample', 'expression' and the '-gene' arguments." width="4245" class="figure mx-auto d-block"><figcaption>
 Long pivot of the <code>rna</code> data.
 </figcaption></figure><p>Para recrear <code>rna_long</code> a partir de <code>rna_wide</code>,
 crearíamos una clave llamada <code>sample</code> y un valor llamado
@@ -6999,7 +6972,7 @@ en formato largo.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb100">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -7072,7 +7045,7 @@ datos <code>rna</code> y despliegue la tabla de datos con
 <code>sex</code> como columnas, <code>chromosome_name</code> como filas
 y la expresión media de los genes ubicados en cada cromosoma como
 valores, como en el siguiente tibble:</p>
-<figure><img src="../fig/Exercise_pivot_W.png" alt="A two by two table with  X and Y row names and Female and Male column names showing the total counts for each X/Y and Female/Male combination. The Y/Female combinations shows 3 counts, while all other counts are above 2000 counts." style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>¡Tendrá que resumir antes de reestructurar!</p>
+<figure><img src="../fig/Exercise_pivot_W.png" alt="A two by two table with  X and Y row names and Female and Male column names showing the total counts for each X/Y and Female/Male combination. The Y/Female combinations shows 3 counts, while all other counts are above 2000 counts." width="1347" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>¡Tendrá que resumir antes de reestructurar!</p>
 </div>
 </div>
 </div>
@@ -7083,7 +7056,7 @@ valores, como en el siguiente tibble:</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
 <div class="accordion-body">
 <p>Primero calculemos el nivel medio de expresión de los genes situados
 en los cromosomas X e Y en las muestras de ratones machos y hembras…</p>
@@ -7204,7 +7177,7 @@ temporales.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
 <div class="accordion-body">
 <p>Primero, calculemos la expresión media por gen y por momento.</p>
 <div class="codewrapper sourceCode" id="cb113">
@@ -7448,7 +7421,7 @@ calculados.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
 <div class="accordion-body">
 <p>Partiendo del tibble rna_time:</p>
 <div class="codewrapper sourceCode" id="cb129">
@@ -7737,7 +7710,7 @@ genes <em>Klk6</em>, <em>mt-Tf</em>, <em>mt-Rnr1</em>, <em>mt-Tv</em>,
   Solución
   </h4>
 </button>
-<div id="collapseSolution9" class="accordion-collapse collapse" aria-labelledby="headingSolution9" data-bs-parent="#accordionSolution9">
+<div id="collapseSolution9" class="accordion-collapse collapse" data-bs-parent="#accordionSolution9" aria-labelledby="headingSolution9">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb146">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -10072,7 +10045,7 @@ en las muestras al tiempo 0 y al tiempo 8.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb44">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -10143,7 +10116,7 @@ Cyp2d22       1821       4019</code></pre>
   Solución
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -10509,7 +10482,7 @@ es de código abierto y desarrollo abierto.<a href="#fnref1" class="footnote-bac
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Plantilla compartida bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> por <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Construido con <a href="https://github.com/carpentries/sandpaper/tree/0.21.1" class="external-link">sandpaper (0.21.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a> y <a href="https://github.com/carpentries/varnish/tree/1.1.3" class="external-link">varnish (1.1.3)</a></p>
+        <p>Construido con <a href="https://github.com/carpentries/sandpaper/tree/0.20.2" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a> y <a href="https://github.com/carpentries/varnish/tree/1.1.1" class="external-link">varnish (1.1.1)</a></p>
 		</div>
 		</footer>
 </div> <!-- / div.container -->
