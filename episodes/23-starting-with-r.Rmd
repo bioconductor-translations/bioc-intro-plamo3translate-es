@@ -218,9 +218,9 @@ weight_g
 
 En la primera línea, tomamos el vector original `weight_g`, añadimos el valor `90` al final y guardamos el resultado de nuevo en `weight_g`. Luego añadimos el valor `30` al principio, guardando nuevamente el resultado en `weight_g`.
 
-Podemos hacer esto una y otra vez para ampliar un vector o ensamblar un conjunto de datos. A medida que programamos, esto puede resultar útil para añadir los resultados que estamos recopilando o calculando.
+Podemos hacer esto una y otra vez para ampliar un vector o armar un conjunto de datos. A medida que programamos, esto puede resultar útil para añadir los resultados que estamos recopilando o calculando.
 
-Un **vector atómico** es el **tipo de dato** más sencillo de R y es un vector lineal de un único tipo. Arriba, vimos 2 de los 6 tipos principales de **vectores atómicos** que utiliza R: `"character"` y `"numeric"` (o `"double"`). Estos son los elementos básicos a partir de los cuales se construyen todos los objetos de R. Los otros 4 tipos de **vectores atómicos** son:
+Un **vector atómico** es el **tipo de datos** más sencillo de R y es un vector lineal de un único tipo. Arriba, vimos 2 de los 6 tipos principales de **vectores atómicos** que utiliza R: `"character"` y `"numeric"` (o `"double"`). Estos son los elementos básicos a partir de los cuales se construyen todos los objetos de R. Los otros 4 tipos de **vectores atómicos** son:
 
 - `"logical"` para `TRUE` y `FALSE` (el tipo de dato booleano)
 - `"integer"` para números enteros (p. ej., `2L`, el `L` indica a R que se trata de un número entero)
@@ -229,19 +229,19 @@ Un **vector atómico** es el **tipo de dato** más sencillo de R y es un vector 
 
 Puedes comprobar el tipo de tu vector utilizando la función `typeof()` y pasando tu vector como argumento.
 
-Los vectores son una de las muchas **estructuras de datos** que utiliza R. Otras importantes son las listas (`list`), las matrices (`matrix`), los marcos de datos (`data.frame`), los factores (`factor`) y los arrays (`array`).
+Los vectores son una de las muchas **estructuras de datos** que utiliza R. Otras importantes son las listas (`list`), las matrices (`matrix`), las tablas de datos (`data.frame`), los factores (`factor`) y los arrays (`array`).
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Desafío:
 
-Hemos visto que los vectores atómicos pueden ser de tipo carácter, numérico (o double), entero y lógico. Pero, ¿qué sucede si intentamos mezclar estos tipos en un mismo vector?
+Hemos visto que los vectores atómicos pueden ser de tipo carácter, numérico (o double), entero y lógico. Pero, ¿qué sucede si intentamos mezclar estos tipos en un único vector?
 
 :::::::::::::::  solution
 
 ## Solución
 
-R los convierte implícitamente a un mismo tipo
+R los convierte implícitamente para que tengan todos el mismo tipo
 
 
 
@@ -591,7 +591,7 @@ La función `rep` permite repetir un valor un número determinado de veces. Si q
 rep(-1, 5)
 ```
 
-Del mismo modo, para generar un vector lleno de valores faltantes, lo cual suele ser una buena forma de comenzar, sin establecer supuestos sobre los datos a recopilar:
+Del mismo modo, para generar un vector lleno de valores faltantes, lo cual suele ser una buena forma de comenzar, sin establecer supuestos sobre los datos a recolectar:
 
 ```{r, purl=TRUE}
 rep(NA, 5)
@@ -727,7 +727,7 @@ rnorm(5, 2, 2)
 rnorm(5, 100, 5)
 ```
 
-Ahora que hemos aprendido a escribir scripts y los conceptos básicos de las estructuras de datos de R, estamos listos para empezar a trabajar con datos más extensos y aprender sobre los marcos de datos.
+Ahora que hemos aprendido a escribir scripts y los conceptos básicos de las estructuras de datos de R, estamos listos para empezar a trabajar con datos más extensos y aprender sobre las tablas de datos.
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

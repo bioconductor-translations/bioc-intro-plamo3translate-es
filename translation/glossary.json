@@ -1,11 +1,19 @@
 [
   {
     "source": "data frame",
-    "target": "marco de datos"
+    "target": "tabla de datos"
   },
   {
     "source": "data frames",
-    "target": "marcos de datos"
+    "target": "tablas de datos"
+  },
+  {
+    "source": "dataframe",
+    "target": "tabla de datos"
+  },
+  {
+    "source": "dataframes",
+    "target": "tablas de datos"
   },
   {
     "source": "vector",

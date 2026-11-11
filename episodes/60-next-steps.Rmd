@@ -49,9 +49,9 @@ Los objetos de la clase SummarizedExperiment contienen:
 
 - **Uno o varios ensayos** que contienen los datos ómicos cuantitativos (datos de expresión), cada uno almacenado como un objeto similar a una matriz. Las características (genes, transcritos, proteínas, ...) se definen a lo largo de las filas y las muestras a lo largo de las columnas.
 
-- Una ranura de **metadatos de muestra** que contiene covariables de las muestras, almacenada como un marco de datos. Las filas de esta tabla representan las muestras (las filas coinciden exactamente con las columnas de los datos de expresión).
+- Una ranura de **metadatos de muestras** que contiene covariables de las muestras, almacenada como una tabla de datos. Las filas de esta tabla representan las muestras (las filas coinciden exactamente con las columnas de los datos de expresión).
 
-- Una ranura de **metadatos de características** que contiene covariables de características, almacenada como un marco de datos. Las filas de este marco de datos coinciden exactamente con las filas de los datos de expresión.
+- Una ranura de **metadatos de características** que contiene covariables de características, almacenada como una tabla de datos. Las filas de esta tabla de datos coinciden exactamente con las filas de los datos de expresión.
 
 La naturaleza coordinada de `SummarizedExperiment` garantiza que las dimensiones de los distintos componentes coincidan siempre durante la manipulación de datos (es decir, las columnas de los datos de expresión con las filas de los metadatos de las muestras, y las filas de los datos de expresión con las filas de los metadatos de las características). Por ejemplo, si tuviéramos que excluir una muestra del ensayo, esta se eliminaría automáticamente de los metadatos de las muestras en la misma operación.
 
@@ -156,7 +156,7 @@ se
 
 ### Guardar datos
 
-Exportar datos a una hoja de cálculo, como hicimos en un episodio anterior, presenta varias limitaciones, tales como las descritas en el primer capítulo (posibles inconsistencias con `,` y `.` como separadores decimales y la falta de definiciones de tipos de variables). Además, exportar datos a una hoja de cálculo solo es relevante para datos rectangulares, como los marcos de datos y las matrices.
+Exportar datos a una hoja de cálculo, como hicimos en un episodio anterior, presenta varias limitaciones, tales como las descritas en el primer capítulo (posibles inconsistencias con `,` y `.` como separadores decimales y la falta de definiciones de tipos de variables). Además, exportar datos a una hoja de cálculo solo es relevante para datos rectangulares, como las tablas de datos y las matrices.
 
 Una forma más general de guardar datos, específica de R y que garantiza que funcione en cualquier sistema operativo, es utilizar la función `saveRDS`. Guardar objetos de este modo generará una representación binaria en el disco (utilizando aquí la extensión de archivo `rds`), que puede cargarse de nuevo en R mediante la función `readRDS`.
 
@@ -167,7 +167,7 @@ se <- readRDS("data_output/se.rds")
 head(se)
 ```
 
-Para concluir, cuando se trata de guardar datos desde R que serán cargados nuevamente en R, el método preferido es guardar y cargar con `saveRDS` y `readRDS`. Si los datos en formato tabla deben compartirse con alguien que no utilice R, exportarlos a una hoja de cálculo basada en texto es una buena alternativa.
+Para concluir, cuando se trata de guardar datos desde R que serán cargados nuevamente en R, el método preferido es guardar y cargar con `saveRDS` y `readRDS`. Si los datos en formato tabular deben compartirse con alguien que no utilice R, exportarlos a una hoja de cálculo basada en texto es una buena alternativa.
 
 Utilizando esta estructura de datos, podemos acceder a la matriz de expresión con la función `assay`:
 
@@ -192,7 +192,7 @@ dim(rowData(se))
 
 ### Selección de subconjuntos de un SummarizedExperiment
 
-SummarizedExperiment puede utilizarse para obtener subconjuntos al igual que con los marcos de datos, mediante valores numéricos, cadenas de caracteres o valores lógicos.
+SummarizedExperiment puede utilizarse para obtener subconjuntos al igual que con las tablas de datos, mediante valores numéricos, cadenas de caracteres o valores lógicos.
 
 A continuación, creamos una nueva instancia de la clase SummarizedExperiment que contiene únicamente las 5 primeras características de las 3 primeras muestras.
 
@@ -284,7 +284,7 @@ colData(se)$center <- rep("University of Illinois", nrow(colData(se)))
 colData(se)
 ```
 
-¡Esto ilustra que los slots de metadatos pueden crecer indefinidamente sin afectar a las otras estructuras!
+¡Esto ilustra que los slots de los metadatos pueden crecer indefinidamente sin afectar a las otras estructuras!
 
 ### tidySummarizedExperiment
 

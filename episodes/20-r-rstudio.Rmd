@@ -23,11 +23,11 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-> Este episodio se basa en la lección *Data Analysis and Visualisation in R for Ecologists* de Data Carpentries.
+> Este episodio se basa en la lección *Análisis de datos y visualización en R para ecólogos* de Data Carpentries.
 
 ## ¿Qué es R? ¿Qué es RStudio?
 
-El término [R](https://www.r-project.org/) se utiliza para referirse al *lenguaje de programación*, al *entorno de computación estadística* y al *software* que interpreta los scripts escritos con él.
+El término [R](https://www.r-project.org/) se utiliza para referirse al *lenguaje de programación*, al *entorno para el cálculo estadístico* y al *software* que interpreta los scripts escritos con él.
 
 [RStudio](https://rstudio.com) es actualmente una forma muy popular no solo de escribir sus scripts de R, sino también de interactuar con el software R[^plainr]. Para funcionar correctamente, RStudio necesita R y, por lo tanto, ambos deben estar instalados en su computadora.
 
@@ -37,7 +37,7 @@ La [Hoja de trucos del IDE de RStudio](https://raw.githubusercontent.com/rstudio
 
 ## ¿Por qué aprender R?
 
-### R no requiere hacer muchos clics, y eso es algo bueno
+### R no requiere hacer muchos clics, y eso es algo bueno.
 
 La curva de aprendizaje puede ser más pronunciada que con otros softwares, pero con R, los resultados de tu análisis no dependen de recordar una sucesión de selecciones y clics, sino de una serie de comandos escritos, ¡y eso es algo bueno! Así que, si quieres volver a realizar tu análisis porque has recopilado más datos, no tienes que recordar qué botón pulsaste y en qué orden para obtener tus resultados; solo tienes que ejecutar tu script de nuevo.
 
@@ -81,7 +81,7 @@ Miles de personas utilizan R a diario. Muchas de ellas están dispuestas a ayuda
 
 ### R no solo es gratuito, sino que también es de código abierto y multiplataforma
 
-Cualquiera puede inspeccionar el código fuente para ver cómo funciona R. Gracias a esta transparencia, hay menos probabilidades de que ocurran errores y, si usted (o alguien más) encuentra algunos, puede reportar y corregir errores.
+Cualquiera puede inspeccionar el código fuente para ver cómo funciona R. Gracias a esta transparencia, hay menos probabilidades de que ocurran errores y, si usted (o alguien más) encuentra algunos, puede informar y corregir errores.
 
 ## Conocer RStudio
 
@@ -89,7 +89,7 @@ Comencemos aprendiendo sobre [RStudio](https://www.rstudio.com/), que es un ento
 
 El producto de código abierto RStudio IDE es gratuito bajo la [Licencia Pública General Affero (AGPL) v3](https://www.gnu.org/licenses/agpl-3.0.en.html). El RStudio IDE también está disponible con una licencia comercial y soporte prioritario por correo electrónico de Posit, Inc.
 
-Utilizaremos el IDE de RStudio para escribir código, navegar por los archivos de nuestro ordenador, inspeccionar las variables que vamos a crear y visualizar los gráficos que generaremos. RStudio también puede utilizarse para otras tareas (por ejemplo, control de versiones, desarrollo de paquetes, creación de aplicaciones Shiny) que no abordaremos durante el taller.
+Utilizaremos el IDE RStudio para escribir código, navegar por los archivos de nuestro ordenador, inspeccionar las variables que vamos a crear y visualizar los gráficos que generaremos. RStudio también puede utilizarse para otras tareas (por ejemplo, control de versiones, desarrollo de paquetes, creación de aplicaciones Shiny) que no abordaremos durante el taller.
 
 ```{r, results="markup", fig.cap="RStudio interface screenshot. Clockwise from top left: Source, Environment/History, Files/Plots/Packages/Help/Viewer, Console.", echo=FALSE, purl=FALSE, out.width="100%", fig.align="center", fig.alt="Screenshot of the RStudio interface showing the typical four panel setup."}
 knitr::include_graphics("fig/rstudio-screenshot.png")
@@ -108,7 +108,7 @@ Una de las ventajas de usar RStudio es que toda la información necesaria para e
 
 ## Configuración inicial
 
-Es una buena práctica mantener un conjunto de datos, análisis y textos relacionados de forma autónoma en una sola carpeta, denominada **directorio de trabajo**. Todos los scripts dentro de esta carpeta pueden entonces utilizar **rutas relativas** a los archivos que indiquen dónde se encuentra un archivo dentro del proyecto (en contraposición a las rutas absolutas, que apuntan a dónde está el archivo en una computadora específica). Trabajar de esta manera facilita considerablemente el desplazamiento del proyecto en su computadora y su compartición con otros, sin preocuparse por si los scripts subyacentes seguirán funcionando.
+Es una buena práctica mantener un conjunto de datos, análisis y texto relacionados de forma autónoma en una sola carpeta, denominada **directorio de trabajo**. Todos los scripts dentro de esta carpeta pueden entonces utilizar **rutas relativas** a los archivos que indiquen dónde se encuentra un archivo dentro del proyecto (en contraposición a las rutas absolutas, que apuntan a dónde está el archivo en una computadora específica). Trabajar de esta manera facilita considerablemente el desplazamiento del proyecto en su computadora y su compartición con otros, sin preocuparse por si los scripts subyacentes seguirán funcionando.
 
 RStudio ofrece un conjunto de herramientas útiles para lograrlo a través de su interfaz de "Proyectos", que no solo crea un directorio de trabajo para usted, sino que también recuerda su ubicación (lo que permite navegar rápidamente hasta él) y, opcionalmente, conserva la configuración personalizada y los archivos abiertos para facilitar la reanudación del trabajo tras un descanso. Siga los pasos a continuación para crear un "Proyecto R" para este tutorial.
 
@@ -116,7 +116,7 @@ RStudio ofrece un conjunto de herramientas útiles para lograrlo a través de su
 2. En el menú `File`, haga clic en `New project`. Elija `New directory` y luego `New project`.
 3. Ingrese un nombre para esta nueva carpeta (o "directorio") y elija una ubicación conveniente para ella. Este será su **directorio de trabajo** para esta sesión (o todo el curso) (p. ej., `bioc-intro`).
 4. Haga clic en `Create project`.
-5. (Opcional) Establezca las preferencias en 'Nunca' guardar el espacio de trabajo en RStudio.
+5. (Opcional) Establezca las preferencias en 'Nunca' para no guardar el espacio de trabajo en RStudio.
 
 Las preferencias predeterminadas de RStudio suelen funcionar bien, pero guardar un espacio de trabajo en .RData puede resultar engorroso, especialmente si se trabaja con conjuntos de datos más grandes. Para desactivar esto, vaya a Herramientas --> 'Opciones globales' y seleccione la opción 'Nunca' para 'Guardar espacio de trabajo en .RData' al salir.
 
@@ -124,7 +124,7 @@ Las preferencias predeterminadas de RStudio suelen funcionar bien, pero guardar 
 knitr::include_graphics("fig/rstudio-preferences.png")
 ```
 
-Para evitar [problemas de codificación de caracteres entre Windows y otros sistemas operativos](https://yihui.name/en/2018/11/biggest-regret-knitr/), configuraremos UTF-8 por defecto:
+Para evitar [problemas de codificación de caracteres entre Windows y otros sistemas operativos](https://yihui.name/en/2018/11/biggest-regret-knitr/), vamos a configurar UTF-8 por defecto:
 
 ```{r, results="markup", fig.cap="Set the default text encoding to UTF-8 to save us headache in the coming future. (Figure from the link above).", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center", fig.alt="Screenshot of the RStudio Code Options panel."}
 knitr::include_graphics("fig/utf8.png")
@@ -167,7 +167,7 @@ La **gestión de proyectos** también es aplicable a los proyectos de bioinform�
 
 [^bioindatascience]: En este curso, consideramos la bioinformática como la ciencia de datos aplicada a datos biológicos o biomédicos.
 
-> Los nombres de los directorios están en fuente grande y los nombres de los archivos en fuente más pequeña. Aquí solo se muestra un subconjunto de los archivos. Tenga en cuenta que las fechas están formateadas `<year>-<month>-<day>` para que puedan ordenarse cronológicamente. El código fuente `src/ms-analysis.c` se compila para crear `bin/ms-analysis` y está documentado en `doc/ms-analysis.html`. Los archivos `README` en los directorios de datos especifican quién descargó los archivos de datos desde qué URL y en qué fecha. El script controlador `results/2009-01-15/runall` genera automáticamente los tres subdirectorios split1, split2 y split3, que corresponden a tres divisiones de validación cruzada. El script `bin/parse-sqt.py` es llamado por ambos scripts controladores `runall`.
+> Los nombres de los directorios están en una fuente grande y los nombres de los archivos en una fuente más pequeña. Aquí solo se muestra un subconjunto de los archivos. Tenga en cuenta que las fechas están formateadas `<year>-<month>-<day>` para que puedan ordenarse cronológicamente. El código fuente `src/ms-analysis.c` se compila para crear `bin/ms-analysis` y está documentado en `doc/ms-analysis.html`. Los archivos `README` en los directorios de datos especifican quién descargó los archivos de datos desde qué URL y en qué fecha. El script controlador `results/2009-01-15/runall` genera automáticamente los tres subdirectorios split1, split2 y split3, correspondientes a tres divisiones de validación cruzada. El script `bin/parse-sqt.py` es llamado por ambos scripts controladores `runall`.
 
 ```{r bioinfoproj, fig.cap="Directory structure for a sample bioinformatics project.", out.width="100%", echo=FALSE, fig.alt="Figure form Nobel et al. (2009) showing a complex bioinformatics project structure."}
 knitr::include_graphics("fig/noble-bioinfo-project.png")
@@ -183,9 +183,9 @@ El aspecto más importante de un directorio de proyecto bien definido y bien doc
 
 ### El directorio de trabajo
 
-El directorio de trabajo es un concepto importante que conviene comprender. Es el lugar desde donde R buscará y guardará los archivos. Cuando escribe código para su proyecto, debe hacer referencia a los archivos en relación con la raíz de su directorio de trabajo y solo necesitará archivos dentro de esta estructura.
+El directorio de trabajo es un concepto importante que conviene comprender. Es el lugar desde donde R buscará y guardará los archivos. Cuando escribe código para su proyecto, debe hacer referencia a los archivos en relación con la raíz de su directorio de trabajo y solo necesitar los archivos dentro de esta estructura.
 
-El uso de proyectos de RStudio facilita esto y garantiza que el directorio de trabajo esté configurado correctamente. Si necesita comprobarlo, puede utilizar `getwd()`. Si por alguna razón su directorio de trabajo no es el adecuado, puede cambiarlo en la interfaz de RStudio navegando por el explorador de archivos donde debería estar su directorio de trabajo, haciendo clic en el icono del engranaje azul `More` y seleccionando `Set As Working Directory`. Alternativamente, puede utilizar `setwd("/path/to/working/directory")` para restablecer su directorio de trabajo. Sin embargo, sus scripts no deben incluir esta línea, ya que fallará en la computadora de otra persona.
+El uso de proyectos de RStudio facilita esto y garantiza que el directorio de trabajo esté configurado correctamente. Si necesita comprobarlo, puede utilizar `getwd()`. Si por alguna razón su directorio de trabajo no es el correcto, puede cambiarlo en la interfaz de RStudio navegando por el explorador de archivos donde debería estar su directorio de trabajo, haciendo clic en el icono del engranaje azul `More` y seleccionando `Set As Working Directory`. Alternativamente, puede utilizar `setwd("/path/to/working/directory")` para restablecer su directorio de trabajo. Sin embargo, sus scripts no deben incluir esta línea, ya que fallará en la computadora de otra persona.
 
 **Ejemplo**
 
@@ -205,7 +205,7 @@ Si estuviéramos en el directorio `data`, utilizaríamos la ruta relativa `../fi
 
 La base de la programación consiste en escribir instrucciones que la computadora siga y, a continuación, indicarle que siga dichas instrucciones. Escribimos, o *codificamos*, instrucciones en R porque es un lenguaje común que tanto la computadora como nosotros podemos entender. Llamamos a las instrucciones *comandos* e indicamos a la computadora que siga las instrucciones *ejecutando* (o *corriendo*) dichos comandos.
 
-Hay dos formas principales de interactuar con R: utilizando la **consola** o utilizando **scripts** (archivos de texto plano que contienen su código). El panel de la consola (en RStudio, el panel inferior izquierdo) es el lugar donde se pueden escribir comandos en lenguaje R y ejecutarlos inmediatamente mediante la computadora. También es donde se mostrarán los resultados de los comandos que se hayan ejecutado. Puede escribir comandos directamente en la consola y pulsar `Enter` para ejecutarlos, pero se perderán al cerrar la sesión.
+Hay dos formas principales de interactuar con R: utilizando la **consola** o utilizando **scripts** (archivos de texto plano que contienen su código). El panel de la consola (en RStudio, el panel inferior izquierdo) es el lugar donde se pueden escribir comandos en lenguaje R y ejecutarlos inmediatamente mediante la computadora. También es donde se mostrarán los resultados de los comandos que se hayan ejecutado. Puede escribir comandos directamente en la consola y presionar `Enter` para ejecutarlos, pero se perderán al cerrar la sesión.
 
 Dado que queremos que nuestro código y flujo de trabajo sean reproducibles, es mejor escribir los comandos que deseemos en el editor de scripts y guardar el script. De este modo, queda un registro completo de lo que hemos hecho, y cualquier persona (¡incluidos nosotros mismos en el futuro!) puede replicar fácilmente los resultados en su propio ordenador. Tenga en cuenta, sin embargo, que el simple hecho de escribir los comandos en el script no los *ejecuta* automáticamente; todavía es necesario enviarlos a la consola para su ejecución.
 
@@ -253,7 +253,7 @@ args(lm)
 
 ### Quiero usar una función que haga X, debe haber una función para ello, pero no sé cuál...
 
-Si busca una función para realizar una tarea específica, puede utilizar la función `help.search()`, que se invoca mediante el signo de interrogación doble `??`. Sin embargo, esto solo busca en los paquetes instalados páginas de ayuda que coincidan con su solicitud de búsqueda.
+Si busca una función para realizar una tarea específica, puede utilizar la función `help.search()`, que se invoca mediante el signo de interrogación doble `??`. Sin embargo, esta solo busca en los paquetes instalados páginas de ayuda que coincidan con su solicitud de búsqueda.
 
 ```{r, eval=FALSE, purl=TRUE}
 ??kruskal
@@ -281,7 +281,7 @@ La clave para recibir ayuda de alguien es que comprenda rápidamente tu problema
 
 Intente utilizar las palabras correctas para describir su problema. Por ejemplo, un paquete no es lo mismo que una biblioteca. La mayoría de las personas entenderán a qué se refiere, pero otras tienen opiniones muy marcadas sobre la diferencia de significado. El punto clave es que esto puede confundir a quienes intentan ayudarle. Sea lo más preciso posible al describir su problema.
 
-Si es posible, intente reducir lo que no funciona a un *ejemplo reproducible* sencillo. Si puede reproducir el problema utilizando un marco de datos muy pequeño en lugar del de 50 000 filas y 10 000 columnas, proporcione el marco pequeño junto con la descripción de su problema. Cuando sea apropiado, intente generalizar lo que está haciendo para que incluso personas que no pertenecen a su campo puedan entender la pregunta. Por ejemplo, en lugar de utilizar un subconjunto de su conjunto de datos real, cree uno genérico pequeño (3 columnas, 5 filas). Para obtener más información sobre cómo escribir un ejemplo reproducible, consulte [este artículo de Hadley Wickham](https://adv-r.had.co.nz/Reproducibility.html).
+Si es posible, intente reducir lo que no funciona a un *ejemplo reproducible* sencillo. Si puede reproducir el problema utilizando una tabla de datos muy pequeña en lugar de la de 50 000 filas y 10 000 columnas, proporcione la tabla pequeña junto con la descripción de su problema. Cuando sea apropiado, intente generalizar lo que está haciendo para que incluso personas que no pertenecen a su campo puedan entender la pregunta. Por ejemplo, en lugar de utilizar un subconjunto de su conjunto de datos real, cree uno genérico pequeño (3 columnas, 5 filas). Para obtener más información sobre cómo escribir un ejemplo reproducible, consulte [este artículo de Hadley Wickham](https://adv-r.had.co.nz/Reproducibility.html).
 
 Para compartir un objeto con otra persona, si es relativamente pequeño, puede utilizar la función `dput()`. Esta generará código R que puede usarse para recrear exactamente el mismo objeto que el que hay en la memoria:
 
@@ -291,7 +291,7 @@ Para compartir un objeto con otra persona, si es relativamente pequeño, puede u
 dput(head(iris))
 ```
 
-Si el objeto es más grande, proporcione el archivo bruto (es decir, su archivo CSV) junto con su script hasta el punto del error (y tras eliminar todo lo que no sea relevante para su problema). Alternativamente, especialmente si su pregunta no está relacionada con un marco de datos, puede guardar cualquier objeto de R en un archivo[^export]:
+Si el objeto es más grande, proporcione el archivo bruto (es decir, su archivo CSV) junto con su script hasta el punto del error (y tras eliminar todo lo que no sea relevante para su problema). Alternativamente, especialmente si su pregunta no está relacionada con una tabla de datos, puede guardar cualquier objeto de R en un archivo[^export]:
 
 ```{r, eval=FALSE, purl=FALSE}
 saveRDS(iris, file="/tmp/iris.rds")
@@ -326,7 +326,7 @@ sessionInfo()
 
 - [Esta entrada de blog de Jon Skeet](https://codeblog.jonskeet.uk/2010/08/29/writing-the-perfect-question/) ofrece consejos bastante exhaustivos sobre cómo hacer preguntas de programación.
 
-- El paquete [reprex](https://cran.rstudio.com/web/packages/reprex/) es muy útil para crear ejemplos reproducibles al solicitar ayuda. La convocatoria de la comunidad rOpenSci "How to ask questions so they get answered" ([enlace de GitHub](https://github.com/ropensci/commcalls/issues/14) y [grabación de vídeo](https://vimeo.com/208749032)) incluye una presentación del paquete reprex y de su filosofía.
+- El paquete [reprex](https://cran.rstudio.com/web/packages/reprex/) es muy útil para crear ejemplos reproducibles al solicitar ayuda. La convocatoria de la comunidad rOpenSci "How to ask questions so they get answered" ([enlace de GitHub](https://github.com/ropensci/commcalls/issues/14) y [grabación de video](https://vimeo.com/208749032)) incluye una presentación del paquete reprex y de su filosofía.
 
 ## Paquetes de R
 

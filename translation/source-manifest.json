@@ -1,11 +1,8 @@
 {
   "schema_version": 1,
   "upstream": {
-    "ref": "english/main",
-    "revision": "e298f2befb10a4a45b5a0b3f4732558a824ab1fb",
-    "remote": "english",
-    "url": "https://github.com/carpentries-incubator/bioc-intro.git",
-    "episodes_directory": "episodes"
+    "ref": "e298f2befb10a4a45b5a0b3f4732558a824ab1fb",
+    "revision": "e298f2befb10a4a45b5a0b3f4732558a824ab1fb"
   },
   "model": {
     "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
@@ -18,58 +15,44 @@
   "files": {
     "10-data-organisation.Rmd": {
       "source_sha256": "bcef1e2e788bf61f61e3fece854fa1d236bbc32e59d4bdc92e64ba8f9a9ff5bd",
-      "translated_sha256": "249bb193d0a7f4c663de8e2a8b9b67f8c0932aa22ac27d08b97361647d47eaf2",
-      "build_patches": [],
-      "prose_units": 221,
-      "comment_units": 4
+      "translated_sha256": "3f8d26bd517e4a307889a628f3b76cb81fe15e7296b0f2e6514e284b5a46a463",
+      "build_patches": []
     },
     "20-r-rstudio.Rmd": {
       "source_sha256": "78ae9f31c5cf3c178565dcafaeddb50e71a851fc72e5eff3da1a75c1b3af600d",
-      "translated_sha256": "908a9ff1d20be08f25656491db51350d689df0ae1e949af9a4614f24e313ef26",
-      "build_patches": [],
-      "prose_units": 136,
-      "comment_units": 0
+      "translated_sha256": "bde26b12c4fb23444de0c8b71e20a3bfbba8722eadcf72906686c212fa2588dd",
+      "build_patches": []
     },
     "23-starting-with-r.Rmd": {
       "source_sha256": "b93ae38b61df468b2ce58cb48582ffe42e434b3eef4c59dd23e07add5b5fd306",
-      "translated_sha256": "3ee8645f3168d7bae3f411a9158061f7716f7ceff7ac946cad83f7f2b02f7c85",
-      "build_patches": [],
-      "prose_units": 143,
-      "comment_units": 0
+      "translated_sha256": "d121fa69d7d9f7ec99d13470e5ade6024f1d1793702476078b30dccdd309b64e",
+      "build_patches": []
     },
     "25-starting-with-data.Rmd": {
       "source_sha256": "7a5b1d25d7ca28b5c2ff0b1eb5bb96339ab37d27bb81f15e13fe32555fb7328e",
-      "translated_sha256": "2bfd1e1879938b8f967b900af62bc7d612104c046c9857f0dd9a38ab879bb4fa",
+      "translated_sha256": "244d2f2cb8760d8cb1733dffd8106c4cd37d6fdef02c6a3ad1dbe43ebb4c99a5",
       "build_patches": [
         "data-frame-heading-id",
         "vector-generation-link"
-      ],
-      "prose_units": 149,
-      "comment_units": 6
+      ]
     },
     "30-dplyr.Rmd": {
       "source_sha256": "5c323e484cb48262574459e23a868bf42c5e7c37730deaa2b160afdfc925ad03",
-      "translated_sha256": "354ba8202665d946308e64b1feb6e6e150dc24bfe846db864acc856ae609a92e",
-      "build_patches": [],
-      "prose_units": 168,
-      "comment_units": 1
+      "translated_sha256": "084087516bcaa62e332c11507f3130683328ae7df5aca73a92384f59747c08fe",
+      "build_patches": []
     },
     "40-visualization.Rmd": {
       "source_sha256": "329007bcb72ff9176b37a6c4311f08de47651263cb7c1b39748041ac94c48090",
-      "translated_sha256": "40f112a758d515c89be2f0efc8db743036ad352869a124036eb99fba6b393f2f",
+      "translated_sha256": "8b9c68f69c24e3a5c7dba2f6bef2c24d25b7df0bbf7c34d129c8637881c7c98b",
       "build_patches": [
         "theme-object-call",
         "painter-model-link"
-      ],
-      "prose_units": 138,
-      "comment_units": 0
+      ]
     },
     "60-next-steps.Rmd": {
       "source_sha256": "0a506ddaa815eeec39a4e48746743f3d84bb1a099145dd1598132ed7a354e051",
-      "translated_sha256": "33dbcc4fe065d8006afc21b70d6e0e1a66797a4a7422a4d8f00b5f614549b3cd",
-      "build_patches": [],
-      "prose_units": 70,
-      "comment_units": 1
+      "translated_sha256": "adc794a7684c72d5d2882207a5e45a6d8a8fbdeb1c4fc98cab543d90839b70a7",
+      "build_patches": []
     }
   },
   "reviewed_context_records": 29,

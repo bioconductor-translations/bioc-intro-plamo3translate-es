@@ -58,7 +58,7 @@ Si busca hacer esto, una buena referencia es [Head First Excel](https://www.amaz
 
 - El análisis de datos en hojas de cálculo suele requerir mucho trabajo manual. Si desea cambiar un parámetro o ejecutar un análisis con un nuevo conjunto de datos, normalmente tiene que volver a hacerlo todo a mano. (Sabemos que es posible crear macros, pero consulte el siguiente punto).
 
-- También resulta difícil rastrear o reproducir análisis estadísticos o de gráficos realizados en programas de hojas de cálculo cuando se desea volver a trabajar en su trabajo o alguien solicita detalles de su análisis.
+- También resulta difícil rastrear o reproducir análisis estadísticos o de gráficos realizados en programas de hojas de cálculo cuando se desea volver al trabajo o alguien solicita detalles de su análisis.
 
 Existen muchos programas de hojas de cálculo. Dado que la mayoría de los participantes utilizan Excel como su programa principal, esta lección hará uso de ejemplos de Excel. Otro programa de hojas de cálculo gratuito que también puede utilizarse es LibreOffice. Los comandos pueden diferir un poco entre programas, pero la idea general es la misma.
 
@@ -86,9 +86,9 @@ Los programas de hojas de cálculo utilizan tablas para representar y mostrar da
 
 ### Problemas con las hojas de cálculo
 
-Las hojas de cálculo son útiles para la entrada de datos, pero en la práctica tendemos a utilizar los programas de hojas de cálculo para mucho más que solo la entrada de datos. Las utilizamos para crear tablas de datos para publicaciones, generar estadísticas resumidas y elaborar figuras.
+Las hojas de cálculo son útiles para la entrada de datos, pero en realidad tendemos a utilizar los programas de hojas de cálculo para mucho más que solo la entrada de datos. Las utilizamos para crear tablas de datos para publicaciones, generar estadísticas resumidas y elaborar figuras.
 
-Generar tablas para publicaciones en una hoja de cálculo no es lo ideal: a menudo, al dar formato a una tabla de datos para una publicación, presentamos estadísticas resumidas clave de una manera que no está pensada para leerse como datos, y a menudo implica un formato especial (fusionar celdas, crear bordes, embellecerla). Le recomendamos realizar este tipo de operaciones dentro de su software de edición de documentos.
+Generar tablas para publicaciones en una hoja de cálculo no es lo ideal: a menudo, al dar formato a una tabla de datos para una publicación, presentamos estadísticas resumidas clave de una manera que no está pensada para leerse como datos, y suele implicar un formato especial (fusionar celdas, crear bordes, embellecerla). Le recomendamos realizar este tipo de operaciones dentro de su software de edición de documentos.
 
 Las dos últimas aplicaciones, la generación de estadísticas y figuras, deben utilizarse con cautela: debido a la naturaleza gráfica y de arrastre y soltar de los programas de hojas de cálculo, puede resultar muy difícil, si no imposible, replicar sus pasos (mucho menos rastrear los de otros), particularmente si sus estadísticas o figuras requieren realizar cálculos más complejos. Además, al realizar cálculos en una hoja de cálculo, es fácil aplicar accidentalmente una fórmula ligeramente diferente a múltiples celdas adyacentes. Al utilizar un programa de estadísticas basado en línea de comandos como R o SAS, es prácticamente imposible aplicar un cálculo a una observación de su conjunto de datos pero no a otra, a menos que lo haga intencionadamente.
 
@@ -126,7 +126,7 @@ El error más común es tratar los programas de hojas de cálculo como cuadernos
 
 Gracias a la potencia de las computadoras, podemos gestionar y analizar datos de manera mucho más eficaz y rápida, pero para aprovechar esa potencia, debemos preparar nuestros datos para que la computadora pueda comprenderlos (y las computadoras son muy literales).
 
-Por eso es extremadamente importante configurar tablas bien formateadas desde el principio —antes de empezar siquiera a introducir datos de su primer experimento preliminar—. La organización de los datos es la base de su proyecto de investigación. Puede facilitar o dificultar el trabajo con sus datos a lo largo de todo el análisis, por lo que vale la pena reflexionar al momento de introducir los datos o configurar su experimento. Puede organizar las cosas de diferentes maneras en hojas de cálculo, pero algunas de estas opciones pueden limitar su capacidad para trabajar con los datos en otros programas o para que usted mismo dentro de 6 meses o su colaborador trabajen con los datos.
+Por eso es extremadamente importante configurar tablas bien formateadas desde el principio —antes de empezar siquiera a introducir datos de su primer experimento preliminar—. La organización de los datos es la base de su proyecto de investigación. Puede facilitar o dificultar el trabajo con sus datos a lo largo de todo el análisis, por lo que vale la pena reflexionar al momento de introducir los datos o configurar su experimento. Puede organizar las cosas de diferentes maneras en hojas de cálculo, pero algunas de estas opciones pueden limitar su capacidad para trabajar con los datos en otros programas o para que usted mismo, dentro de 6 meses, o su colaborador trabajen con los datos.
 
 **Nota:** los mejores diseños/formatos (así como el software y las interfaces) para la entrada y análisis de datos pueden ser diferentes. Es importante tener esto en cuenta y, idealmente, automatizar la conversión de uno a otro.
 
@@ -138,7 +138,7 @@ Cuando trabajas con hojas de cálculo, durante la limpieza o análisis de datos,
 
 - lleve un registro de los pasos que haya seguido en la limpieza o el análisis. Debe registrar estos pasos tal como lo haría con cualquier paso de un experimento. Recomendamos hacerlo en un archivo de texto plano almacenado en la misma carpeta que el archivo de datos.
 
-Este podría ser un ejemplo de configuración de una hoja de cálculo:
+Este podría ser un ejemplo de una configuración de hoja de cálculo:
 
 
 ```{r, results="markup", fig.cap="Spreadsheet example setip", fig.alt="SCreenshot of a spreadsheet and a README.txt file.", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center"}
@@ -160,7 +160,7 @@ Las reglas fundamentales para utilizar programas de hojas de cálculo con datos:
 4. Deja los datos brutos brutos: ¡no los cambies!
 5. Exporte los datos limpios a un formato basado en texto, como el formato CSV (valores separados por comas). Esto garantiza que cualquier persona pueda utilizar los datos, y es requisito de la mayoría de los repositorios de datos.
 
-Por ejemplo, disponemos de datos de pacientes que visitaron varios hospitales en Bruselas, Bélgica. Registraron la fecha de la visita, el hospital, el sexo del paciente, el peso y el grupo sanguíneo.
+Por ejemplo, disponemos de datos de pacientes que visitaron varios hospitales en Bruselas, Bélgica. Registraron la fecha de la visita, el hospital, el sexo de los pacientes, el peso y el grupo sanguíneo.
 
 Si tuviéramos que llevar el seguimiento de los datos de esta manera:
 
@@ -175,7 +175,7 @@ el problema es que los grupos ABO y Rhesus están en la misma columna de tipo `B
 knitr::include_graphics("fig/single-info.png")
 ```
 
-Una regla importante al configurar una hoja de cálculo es que **las columnas se utilizan para variables** y **las filas se utilizan para observaciones**:
+Una regla importante al configurar una hoja de datos es que **las columnas se utilizan para las variables** y **las filas se utilizan para las observaciones**:
 
 - las columnas son variables
 - las filas son observaciones
@@ -189,7 +189,7 @@ Una regla importante al configurar una hoja de cálculo es que **las columnas se
 
 2. Abra los datos en un programa de hojas de cálculo.
 
-3. Puede ver que hay dos pestañas. Los datos contienen diversas variables clínicas registradas en varios hospitales de Bruselas durante la primera y segunda ola de COVID-19 en 2020. Como puede ver, los datos se han registrado de manera diferente durante las olas de marzo y noviembre. Ahora usted es la persona responsable de este proyecto y desea poder comenzar a analizar los datos.
+3. Puede ver que hay dos pestañas. Los datos contienen diversas variables clínicas registradas en varios hospitales de Bruselas durante la primera y segunda ola de COVID-19 en 2020. Como puede ver, los datos se han registrado de manera diferente durante las olas de marzo y noviembre. Ahora usted es la persona encargada de este proyecto y quiere poder comenzar a analizar los datos.
 
 4. Junto con la persona que te acompaña, identifica qué es lo que falla en esta hoja de cálculo. También analiza los pasos que tendrías que seguir para limpiar las pestañas de la primera y segunda ola, y para reunirlas todas en una sola hoja de cálculo.
 
@@ -216,7 +216,7 @@ Después de realizar este ejercicio, analizaremos en grupo qué fallaba en estos
 
 <!--   puedes hacer una pausa y pasar a la lección sobre fechas. -->
 
-<!--   O puedes decir que volverás a las fechas al final. -->
+<!--   O bien, puedes decir que volverás a las fechas al final. -->
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -289,7 +289,7 @@ Una estrategia común consiste en crear múltiples tablas de datos dentro de una
 knitr::include_graphics("fig/2_datasheet_example.jpg")
 ```
 
-En el ejemplo anterior, la computadora verá (por ejemplo) la fila 4 y asumirá que todas las columnas A-AF se refieren a la misma muestra. Esta fila representa en realidad cuatro muestras distintas (muestra 1 para cada una de cuatro fechas de recolección diferentes: 29 de mayo, 12 de junio, 19 de junio y 26 de junio), así como algunas estadísticas resumidas calculadas (un promedio (avr) y un error estándar de medición (SEM)) para dos de esas muestras. Otras filas presentan problemas similares.
+En el ejemplo anterior, la computadora verá (por ejemplo) la fila 4 y asumirá que todas las columnas A-AF se refieren a la misma muestra. Esta fila representa, en realidad, cuatro muestras distintas (muestra 1 para cada una de cuatro fechas de recolección diferentes: 29 de mayo, 12 de junio, 19 de junio y 26 de junio), así como algunas estadísticas resumidas calculadas (un promedio (avr) y un error estándar de medición (SEM)) para dos de esas muestras. Otras filas presentan problemas similares.
 
 ### Uso de múltiples pestañas {#tabs}
 
@@ -297,9 +297,9 @@ Pero, ¿qué pasa con las pestañas del libro de trabajo? Parece una forma senci
 
 Esto no es una buena práctica por dos razones:
 
-1. es más probable que introduzcas inconsistencias accidentalmente en tus datos si, cada vez que tomas una medición, empiezas a registrar los datos en una pestaña nueva, y
+1. es más probable que introduzcas inconsistencias en tus datos por accidente si, cada vez que tomas una medición, empiezas a registrar los datos en una pestaña nueva, y
 
-2. incluso si logra evitar que entren todas las inconsistencias, se añadirá un paso adicional antes de analizar los datos, ya que tendrá que combinar estos datos en una sola tabla de datos. Tendrá que indicar explícitamente al ordenador cómo combinar las pestañas —y si las pestañas tienen un formato inconsistente, es posible que incluso tenga que hacerlo manualmente.
+2. incluso si logras evitar que entren todas las inconsistencias, añadirás un paso adicional antes de analizar los datos, ya que tendrás que combinar estos datos en una sola tabla de datos. Tendrás que indicar explícitamente al ordenador cómo combinar las pestañas —y si las pestañas tienen un formato inconsistente, podrías incluso tener que hacerlo manualmente.
 
 La próxima vez que ingrese datos y vaya a crear otra pestaña o tabla, pregúntese si podría evitar añadir esta pestaña añadiendo otra columna a su hoja de cálculo original. Utilizamos múltiples pestañas en nuestro ejemplo de un archivo de datos desordenado, pero ahora ha visto cómo puede reorganizar sus datos para consolidarlos entre pestañas.
 
@@ -351,11 +351,11 @@ knitr::include_graphics("fig/good_formatting.png")
 
 **Ejemplo**: fusionar celdas.
 
-**Solución**: Si no se tiene cuidado, ajustar el formato de una hoja de cálculo para que sea más estética puede comprometer la capacidad de su computadora para identificar asociaciones en los datos. Las celdas unidas harán que sus datos sean ilegibles para el software estadístico. Considere reestructurar sus datos de tal manera que no sea necesario unir celdas para organizarlos.
+**Solución**: Si no se tiene cuidado, ajustar el formato de una hoja de cálculo para que sea más estética puede comprometer la capacidad de su computadora para detectar asociaciones en los datos. Las celdas unidas harán que sus datos sean ilegibles para el software estadístico. Considere reestructurar sus datos de tal manera que no necesite unir celdas para organizarlos.
 
 ### Colocar comentarios o unidades en celdas {#units}
 
-La mayoría del software de análisis no puede leer los comentarios de Excel o LibreOffice, y se confundiría con los comentarios colocados dentro de las celdas de datos. Como se describió anteriormente respecto al formato, cree otro campo si necesita añadir notas a las celdas. Del mismo modo, no incluya unidades en las celdas: idealmente, todas las mediciones que coloque en una sola columna deberían estar en la misma unidad, pero si por alguna razón no lo están, cree otro campo y especifique la unidad de la celda.
+La mayoría del software de análisis no puede leer los comentarios de Excel o LibreOffice, y se confundiría con los comentarios colocados dentro de las celdas de datos. Como se describió anteriormente respecto al formato, cree otro campo si necesita añadir notas a las celdas. Del mismo modo, no incluya unidades en las celdas: idealmente, todas las mediciones que coloque en una sola columna deberían estar en la misma unidad, pero si por alguna razón no lo están, cree otro campo y especifique la unidad en la que se encuentra la celda.
 
 ### Ingresar más de una pieza de información en una celda {#info}
 
@@ -365,7 +365,7 @@ La mayoría del software de análisis no puede leer los comentarios de Excel o L
 
 ### Uso de nombres de campo problemáticos {#fieldname}
 
-Elija nombres de campos descriptivos, pero tenga cuidado de no incluir espacios, números ni caracteres especiales de ningún tipo. Los espacios pueden ser interpretados erróneamente por analizadores que utilizan el espacio en blanco como delimitador, y algunos programas no admiten nombres de campos que consistan en cadenas de texto que comienzan con números.
+Elija nombres de campos descriptivos, pero tenga cuidado de no incluir espacios, números ni caracteres especiales de ningún tipo. Los espacios pueden ser interpretados erróneamente por analizadores que utilizan el espacio en blanco como delimitador, y algunos programas no admiten nombres de campos que sean cadenas de texto que comiencen con números.
 
 Los guiones bajos (`_`) son una buena alternativa a los espacios. Considere escribir los nombres en camel case (como este: ExampleFileName) para mejorar la legibilidad. Tenga en cuenta que las abreviaturas que tengan sentido en este momento puede que no sean tan claras dentro de 6 meses, pero no abuse de los nombres excesivamente largos. Incluir las unidades en los nombres de los campos evita confusiones y permite que otros interpreten sus campos fácilmente.
 
@@ -381,7 +381,7 @@ Los guiones bajos (`_`) son una buena alternativa a los espacios. Considere escr
 | cell\_type        | CellType          | Cell Type         |
 | Observation\_01   | first\_observation | 1st Obs           |
 
-### Uso de caracteres especiales en los datos {#special}
+### Uso de caracteres especiales en datos {#special}
 
 **Ejemplo**: Trata su programa de hojas de cálculo como un procesador de textos al escribir notas, por ejemplo, copiando datos directamente de Word u otras aplicaciones.
 
@@ -393,7 +393,7 @@ La mejor práctica general es evitar añadir caracteres como saltos de línea, t
 
 **Ejemplo**: Añades una leyenda en la parte superior o inferior de tu tabla de datos que explique el significado de las columnas, las unidades, las excepciones, etc.
 
-**Solución**: Registrar datos sobre sus datos ("metadatos") es esencial. Es posible que conozca a fondo su conjunto de datos mientras lo recopila y analiza, pero es poco probable que recuerde, tras unos meses, un año o más, que la variable "sglmemgp" significa miembro único del grupo, por ejemplo, o el algoritmo exacto que utilizó para transformar una variable o crear una derivada.
+**Solución**: Registrar datos sobre sus datos ("metadatos") es esencial. Es posible que conozca a la perfección su conjunto de datos mientras lo recopila y analiza, pero es poco probable que recuerde, tras unos meses, un año o más, que la variable "sglmemgp" significa miembro individual del grupo, por ejemplo, o el algoritmo exacto que utilizó para transformar una variable o crear una derivada.
 
 Asimismo, existen muchas razones por las que otras personas podrían querer examinar o utilizar sus datos: para comprender sus hallazgos, verificarlos, revisar su publicación enviada, replicar sus resultados, diseñar un estudio similar o incluso archivar sus datos para que otros puedan acceder a ellos y reutilizarlos. Si bien los datos digitales son, por definición, legibles por máquinas, comprender su significado es tarea humana. No se puede sobreestimar la importancia de documentar sus datos durante la fase de recopilación y análisis de su investigación, especialmente si su trabajo formará parte del registro académico.
 
@@ -432,13 +432,13 @@ Guardar los datos con los que va a trabajar para sus análisis en el formato de 
 
 - Los puntos anteriores también se aplican a otros formatos, como los formatos de datos abiertos utilizados por LibreOffice / Open Office. Estos formatos no son estáticos y no se analizan de la misma manera por diferentes paquetes de software.
 
-Almacenar los datos en un formato universal, abierto y estático ayudará a resolver este problema. Pruebe el formato separado por tabulaciones (valores separados por tabulaciones o TSV) o el separado por comas (valores separados por comas o CSV). Los archivos CSV son archivos de texto plano donde las columnas están separadas por comas, de ahí el nombre de «valores separados por comas» o CSV. La ventaja de un archivo CSV frente a un archivo de Excel/SPSS/etc. es que podemos abrir y leer un archivo CSV utilizando prácticamente cualquier software, incluidos los editores de texto plano como TextEdit o NotePad. Los datos de un archivo CSV también pueden importarse fácilmente a otros formatos y entornos, como SQLite y R. No estamos atados a una versión específica de un programa costoso al trabajar con archivos CSV, por lo que es un buen formato para lograr la máxima portabilidad y perdurabilidad. La mayoría de los programas de hojas de cálculo pueden guardar fácilmente en formatos de texto separados por comas como CSV, aunque es posible que aparezca una advertencia durante la exportación del archivo.
+Almacenar los datos en un formato universal, abierto y estático ayudará a resolver este problema. Pruebe el formato separado por tabulaciones (valores separados por tabulaciones o TSV) o el separado por comas (valores separados por comas o CSV). Los archivos CSV son archivos de texto plano donde las columnas están separadas por comas, de ahí el nombre de «valores separados por comas» o CSV. La ventaja de un archivo CSV frente a un archivo de Excel/SPSS/etc. es que podemos abrir y leer un archivo CSV utilizando prácticamente cualquier software, incluidos los editores de texto plano como TextEdit o NotePad. Los datos de un archivo CSV también pueden importarse fácilmente a otros formatos y entornos, como SQLite y R. No estamos atados a una versión específica de un programa costoso al trabajar con archivos CSV, por lo que es un buen formato para lograr la máxima portabilidad y durabilidad. La mayoría de los programas de hojas de cálculo pueden guardar fácilmente en formatos de texto separados por comas, como CSV, aunque es posible que aparezca una advertencia durante la exportación del archivo.
 
 Para guardar un archivo abierto en Excel en formato CSV:
 
 1. En el menú superior, seleccione 'Archivo' y 'Guardar como'.
 2. En el campo 'Formato', seleccione 'Valores separados por comas' (`*.csv`) de la lista.
-3. Revise dos veces el nombre del archivo y la ubicación donde desea guardarlo y haga clic en 'Guardar'.
+3. Revise dos veces el nombre del archivo y la ubicación donde desea guardarlo y pulse 'Guardar'.
 
 Una nota importante para la compatibilidad retroactiva: ¡puedes abrir archivos CSV en Excel!
 
@@ -477,7 +477,7 @@ knitr::include_graphics("fig/csv-mistake.png")
 
 El valor de `taxa` se dividió en dos columnas (en lugar de situarse en una sola columna `D`). Esto puede derivar en una serie de errores adicionales. Por ejemplo, la columna adicional se interpretará como una columna con muchos valores faltantes (y sin un encabezado adecuado). Además, el valor de la columna `D` para el registro de la fila 3 (es decir, aquel en el que el valor de 'taxa' contenía la coma) ahora es incorrecto.
 
-Si desea almacenar sus datos en formato `csv` y prevé que los valores de sus datos puedan contener comas, puede evitar el problema analizado anteriormente colocando los valores entre comillas (""). Al aplicar esta regla, nuestros datos podrían verse así:
+Si desea almacenar sus datos en formato `csv` y prevé que los valores de sus datos puedan contener comas, puede evitar el problema analizado anteriormente poniendo los valores entre comillas (""). Al aplicar esta regla, nuestros datos podrían verse así:
 
 ```
 species_id,genus,species,taxa

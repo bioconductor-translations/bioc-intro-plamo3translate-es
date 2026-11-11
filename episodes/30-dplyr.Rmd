@@ -12,7 +12,7 @@ exercises: 75
 
 - Describa el propósito de los paquetes **`dplyr`** y **`tidyr`**.
 - Describa varias de sus funciones que son extremadamente útiles para manipular datos.
-- Describa el concepto de los formatos ancho y largo, y vea cómo reestructurar un marco de datos de un formato a otro.
+- Describa el concepto de los formatos de tabla ancho y largo, y vea cómo reestructurar una tabla de datos de un formato a otro.
 - Demostrar cómo unir tablas.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -37,9 +37,9 @@ La selección de subconjuntos mediante corchetes es práctica, pero puede result
 
 Algunos paquetes pueden facilitar considerablemente nuestra tarea al manipular datos. Los paquetes en R son, básicamente, conjuntos de funciones adicionales que nos permiten hacer más cosas. Las funciones que hemos estado utilizando hasta ahora, como `str()` o `data.frame()`, vienen integradas en R; cargar paquetes puede darnos acceso a otras funciones específicas. Antes de usar un paquete por primera vez, es necesario instalarlo en la máquina y, posteriormente, importarlo en cada sesión posterior de R cuando lo necesitemos.
 
-- El paquete **`dplyr`** ofrece herramientas potentes para tareas de manipulación de datos. Está diseñado para trabajar directamente con marcos de datos, con muchas tareas de manipulación optimizadas.
+- El paquete **`dplyr`** ofrece herramientas potentes para tareas de manipulación de datos. Está diseñado para funcionar directamente con tablas de datos, con muchas tareas de manipulación optimizadas.
 
-- Como veremos más adelante, a veces queremos que un marco de datos se reorganice para poder realizar ciertos análisis específicos o para su visualización. El paquete **`tidyr`** aborda este problema común de reorganización de datos y proporciona herramientas para manipular los datos de manera ordenada.
+- Como veremos más adelante, a veces queremos que una tabla de datos se reorganice para poder realizar ciertos análisis específicos o para su visualización. El paquete **`tidyr`** aborda este problema común de reorganización de datos y proporciona herramientas para manipular los datos de manera ordenada.
 
 Para obtener más información sobre **`dplyr`** y **`tidyr`** después del taller, puede consultar este [cheatsheet práctico de transformación de datos con **`dplyr`**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf) y este [de **`tidyr`**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf).
 
@@ -74,7 +74,7 @@ rna
 
 Nótese que la clase de los datos se denomina ahora «tibble».
 
-Los tibbles ajustan algunos de los comportamientos de los objetos de marco de datos que presentamos anteriormente. La estructura de datos es muy similar a la de un marco de datos. Para nuestros propósitos, las únicas diferencias son que:
+Los tibbles ajustan algunos de los comportamientos de los objetos de tabla de datos que presentamos anteriormente. La estructura de datos es muy similar a la de una tabla de datos. Para nuestros propósitos, las únicas diferencias son que:
 
 1. Muestra el tipo de datos de cada columna debajo de su nombre. Tenga en cuenta que \<`dbl`\> es un tipo de datos definido para almacenar valores numéricos con puntos decimales.
 
@@ -91,7 +91,7 @@ Ahora vamos a aprender algunas de las funciones **`dplyr`** más comunes:
 
 ## Selección de columnas y filtrado de filas
 
-Para seleccionar columnas de un marco de datos, utilice `select()`. El primer argumento de esta función es el marco de datos (`rna`), y los argumentos siguientes son las columnas a conservar.
+Para seleccionar columnas de una tabla de datos, utilice `select()`. El primer argumento de esta función es la tabla de datos (`rna`), y los argumentos siguientes son las columnas a conservar.
 
 ```{r select1, purl=TRUE}
 select(rna, gene, sample, tissue, expression)
@@ -135,7 +135,7 @@ filter(genes, !is.na(hsapiens_homolog_associated_gene_name))
 
 ¿Qué pasa si quieres seleccionar y filtrar al mismo tiempo? Hay tres formas de hacerlo: usar pasos intermedios, funciones anidadas o pipes.
 
-Con pasos intermedios, se crea un marco de datos temporal y se utiliza como entrada para la siguiente función, de la siguiente manera:
+Con pasos intermedios, se crea una tabla de datos temporal y se utiliza como entrada para la siguiente función, de la siguiente manera:
 
 ```{r pipemotiv1, purl=TRUE}
 rna2 <- filter(rna, sex == "Male")
@@ -160,7 +160,7 @@ Los pipes en R se representan como `%>%` (disponible a través del paquete **`ma
 
 En el código anterior, utilizamos el pipe para enviar primero el conjunto de datos `rna` a través de `filter()` para conservar las filas donde `sex` es Male, y luego a través de `select()` para conservar únicamente las columnas `gene`, `sample`, `tissue` y `expression`.
 
-El pipe `|>` toma el objeto a su izquierda y lo pasa directamente como primer argumento a la función a su derecha; ya no es necesario incluir explícitamente el marco de datos como argumento de las funciones `filter()` y `select()`.
+El pipe `|>` toma el objeto a su izquierda y lo pasa directamente como primer argumento a la función a su derecha; ya no es necesario incluir explícitamente la tabla de datos como argumento de las funciones `filter()` y `select()`.
 
 ```{r usepipe, purl=TRUE}
 rna |>
@@ -168,9 +168,9 @@ rna |>
   select(gene, sample, tissue, expression)
 ```
 
-A algunas personas les resulta útil leer el pipe como la palabra "luego". Por ejemplo, en el ejemplo anterior, tomamos el marco de datos `rna`, *luego* filtramos las filas con `sex == "Male"` mediante `filter`, *luego* seleccionamos las columnas `gene`, `sample`, `tissue` y `expression` mediante `select`.
+A algunas personas les resulta útil leer el pipe como la palabra "luego". Por ejemplo, en el ejemplo anterior, tomamos la tabla de datos `rna`, *luego* filtramos las filas con `sex == "Male"` mediante `filter`, *luego* seleccionamos las columnas `gene`, `sample`, `tissue` y `expression` mediante `select`.
 
-Las funciones **`dplyr`** por sí mismas son algo sencillas, pero al combinarlas en flujos de trabajo lineales mediante el pipe, podemos realizar manipulaciones más complejas de marcos de datos.
+Las funciones **`dplyr`** por sí mismas son algo sencillas, pero al combinarlas en flujos de trabajo lineales mediante el pipe, podemos realizar manipulaciones más complejas de tablas de datos.
 
 Si queremos crear un nuevo objeto con esta versión reducida de los datos, podemos asignarle un nombre nuevo:
 
@@ -229,9 +229,9 @@ rna |>
 
 ## Desafío
 
-Crea un nuevo marco de datos a partir de los datos `rna` que cumpla los siguientes criterios: contenga únicamente las columnas `gene`, `chromosome_name`, `phenotype_description`, `sample` y `expression`. Los valores de expresión deben estar transformados logarítmicamente. Este marco de datos debe contener únicamente genes ubicados en cromosomas sexuales, asociados a un phenotype\_description y con una expresión logarítmica superior a 5.
+Crea una nueva tabla de datos a partir de los datos `rna` que cumpla los siguientes criterios: contenga únicamente las columnas `gene`, `chromosome_name`, `phenotype_description`, `sample` y `expression`. Los valores de expresión deben estar transformados logarítmicamente. Esta tabla de datos debe contener únicamente genes ubicados en cromosomas sexuales, asociados a un phenotype\_description y con una expresión logarítmica superior a 5.
 
-**Pista**: ¡piensa en cómo deben ordenarse los comandos para generar este marco de datos!
+**Pista**: ¡piensa en cómo deben ordenarse los comandos para generar esta tabla de datos!
 
 :::::::::::::::  solution
 
@@ -393,7 +393,7 @@ rna |>
 1. ¿Cuántos genes se analizaron en cada muestra?
 2. Utilice `group_by()` y `summarise()` para evaluar la profundidad de secuenciación (la suma de todos los recuentos) en cada muestra. ¿Qué muestra tiene la mayor profundidad de secuenciación?
 3. Seleccione una muestra y evalúe el número de genes según el biotipo.
-4. Identifique los genes asociados con la descripción del fenotipo "abnormal DNA methylation" y calcule su expresión media (en log) en el tiempo 0, el tiempo 4 y el tiempo 8.
+4. Identifique los genes asociados con la descripción del fenotipo "abnormal DNA methylation" y calcule su expresión media (en log) en el momento 0, el momento 4 y el momento 8.
 
 :::::::::::::::  solution
 
@@ -451,7 +451,7 @@ rna |>
 
 Para convertir los valores de expresión génica de `rna` a un formato ancho, necesitamos crear una nueva tabla en la que los valores de la columna `sample` se conviertan en los nombres de las variables de columna.
 
-El punto clave aquí es que seguimos una estructura de datos ordenada, pero hemos **reconfigurado** los datos según las observaciones de interés: los niveles de expresión por gen en lugar de registrarlos por gen y por muestra.
+El punto clave aquí es que seguimos una estructura de datos ordenada, pero hemos **reconfigurado** los datos según las observaciones de interés: los niveles de expresión por gen, en lugar de registrarlos por gen y por muestra.
 
 La transformación inversa consistiría en convertir los nombres de las columnas en valores de una nueva variable.
 
@@ -604,7 +604,7 @@ pivot_longer(names_to = "mouse_id", values_to = "counts", -gene)
 
 ## Pregunta
 
-Extraiga los genes ubicados en los cromosomas X e Y del marco de datos `rna` y despliegue el marco de datos con `sex` como columnas, `chromosome_name` como filas y la expresión media de los genes ubicados en cada cromosoma como valores, como en el siguiente tibble:
+Extraiga los genes ubicados en los cromosomas X e Y de la tabla de datos `rna` y despliegue la tabla de datos con `sex` como columnas, `chromosome_name` como filas y la expresión media de los genes ubicados en cada cromosoma como valores, como en el siguiente tibble:
 
 ```{r, echo=FALSE, message=FALSE, fig.alt="A two by two table with  X and Y row names and Female and Male column names showing the total counts for each X/Y and Female/Male combination. The Y/Female combinations shows 3 counts, while all other counts are above 2000 counts."}
 knitr::include_graphics("fig/Exercise_pivot_W.png")
@@ -625,7 +625,7 @@ Primero calculemos el nivel medio de expresión de los genes situados en los cro
   summarise(mean = mean(expression))
 ```
 
-Y convertir la tabla a formato ancho
+Y pivotar la tabla a formato ancho
 
 ```{r, answer=TRUE, purl=TRUE}
 rna_1 <- rna |>
@@ -638,7 +638,7 @@ rna_1 <- rna |>
 rna_1
 ```
 
-Ahora toma ese marco de datos y transfórmalo con `pivot_longer()` para que cada fila sea una combinación única de `chromosome_name` por `gender`.
+Ahora toma esa tabla de datos y transfórmala con `pivot_longer()` para que cada fila sea una combinación única de `chromosome_name` por `gender`.
 
 ```{r, answer=TRUE, purl=TRUE}
 rna_1 |>
@@ -656,7 +656,7 @@ rna_1 |>
 
 ## Pregunta
 
-Utilice el conjunto de datos `rna` para crear una matriz de expresión en la que cada fila represente los niveles de expresión promedio de los genes y las columnas representen los diferentes puntos temporales.
+Utilice la tabla de datos `rna` para crear una matriz de expresión en la que cada fila represente los niveles de expresión promedio de los genes y las columnas representen los diferentes puntos temporales.
 
 :::::::::::::::  solution
 
@@ -723,7 +723,7 @@ rna |>
 
 ## Pregunta
 
-Utilice el marco de datos anterior que contiene los niveles medios de expresión por punto temporal y cree una nueva columna con los cocientes de expresión (fold-changes) entre el punto temporal 8 y el punto temporal 0, y entre el punto temporal 8 y el punto temporal 4. Convierta esta tabla en una tabla de formato largo que reúna los cocientes calculados.
+Utilice la tabla de datos anterior que contiene los niveles medios de expresión por punto temporal y cree una nueva columna con los cocientes de expresión (fold-changes) entre el punto temporal 8 y el punto temporal 0, y entre el punto temporal 8 y el punto temporal 4. Convierta esta tabla en una tabla de formato largo que reúna los cocientes calculados.
 
 :::::::::::::::  solution
 
@@ -760,11 +760,11 @@ rna_time |>
 
 En muchas situaciones reales, los datos se distribuyen entre múltiples tablas. Por lo general, esto ocurre porque se recopilan diferentes tipos de información de diversas fuentes.
 
-Para algunos análisis, puede resultar conveniente combinar datos de dos o más tablas en un único marco de datos basándose en una columna común a todas ellas.
+Para algunos análisis, puede resultar conveniente combinar datos de dos o más tablas en una única tabla de datos basándose en una columna común a todas ellas.
 
-El paquete `dplyr` proporciona un conjunto de funciones de unión para combinar dos marcos de datos basándose en coincidencias dentro de columnas especificadas. A continuación, presentamos una breve introducción a las uniones. Para lectura adicional, consulte el capítulo sobre [uniones de tablas](https://uclouvain-cbio.github.io/WSBIM1207/sec-join.html). El [Cheat Sheet de Transformación de Datos](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) también ofrece una breve descripción general de las uniones de tablas.
+El paquete `dplyr` proporciona un conjunto de funciones de unión para combinar dos tablas de datos basándose en coincidencias dentro de columnas especificadas. A continuación, presentamos una breve introducción a las uniones. Para lectura adicional, consulte el capítulo sobre [uniones de tablas](https://uclouvain-cbio.github.io/WSBIM1207/sec-join.html). La [Hoja de trucos de transformación de datos](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) también ofrece una breve descripción general de las uniones de tablas.
 
-Vamos a ilustrar la unión utilizando una tabla pequeña, `rna_mini`, que crearemos mediante un subconjunto de la tabla original `rna`, conservando solo 3 columnas y 10 filas.
+Vamos a ilustrar la unión utilizando una tabla pequeña, `rna_mini`, que crearemos mediante un subconjunto de la tabla original `rna`, manteniendo solo 3 columnas y 10 filas.
 
 ```{r}
 rna_mini <- rna |>
@@ -811,7 +811,7 @@ Como se puede observar arriba, el nombre de la variable de la primera tabla se c
 
 ## Desafío:
 
-Descargue la tabla `annot3` [haciendo clic en este enlace](https://carpentries-incubator.github.io/bioc-intro/data/annot3.csv) y colóquela en su repositorio data/. Utilizando la función `full_join()`, una la tabla `rna_mini` con la `annot3`. ¿Qué ha pasado con los genes *Klk6*, *mt-Tf*, *mt-Rnr1*, *mt-Tv*, *mt-Rnr2* y *mt-Tl1*?
+Descargue la tabla `annot3` [haciendo clic en este enlace](https://carpentries-incubator.github.io/bioc-intro/data/annot3.csv) y coloque la tabla en su repositorio data/. Utilizando la función `full_join()`, una las tablas `rna_mini` y `annot3`. ¿Qué ha ocurrido con los genes *Klk6*, *mt-Tf*, *mt-Rnr1*, *mt-Tv*, *mt-Rnr2* y *mt-Tl1*?
 
 :::::::::::::::  solution
 
@@ -832,7 +832,7 @@ El gen *Klk6* solo aparece en `rna_mini`, mientras que los genes *mt-Tf*, *mt-Rn
 
 Ahora que ha aprendido a utilizar `dplyr` para extraer información de sus datos brutos o resumirlos, es posible que desee exportar estos nuevos conjuntos de datos para compartirlos con sus colaboradores o para su archivo.
 
-Al igual que la función `read_csv()` utilizada para leer archivos CSV en R, existe una función `write_csv()` que genera archivos CSV a partir de marcos de datos.
+Al igual que la función `read_csv()` utilizada para leer archivos CSV en R, existe una función `write_csv()` que genera archivos CSV a partir de tablas de datos.
 
 Antes de utilizar `write_csv()`, vamos a crear una carpeta nueva, `data_output`, en nuestro directorio de trabajo donde se almacenará este conjunto de datos generado. No queremos escribir los conjuntos de datos generados en el mismo directorio que nuestros datos brutos. Es una buena práctica mantenerlos separados. La carpeta `data` solo debe contener los datos brutos y sin alterar, y debe dejarse intacta para asegurarnos de no eliminarla ni modificarla. Por el contrario, nuestro script generará el contenido del directorio `data_output`, por lo que, incluso si se eliminan los archivos que contiene, siempre podremos volver a generarlos.
 

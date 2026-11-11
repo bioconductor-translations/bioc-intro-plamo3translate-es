@@ -11,8 +11,8 @@ exercises: 30
 ::::::::::::::::::::::::::::::::::::::: objectives
 
 - Describa qué es un `data.frame`.
-- Cargar datos externos de un archivo .csv en un marco de datos.
-- Resume el contenido de un marco de datos.
+- Cargar datos externos de un archivo .csv en una tabla de datos.
+- Resume el contenido de una tabla de datos.
 - Describa qué es un factor.
 - Convertir entre cadenas y factores.
 - Reordenar y renombrar factores.
@@ -62,13 +62,13 @@ Ya está listo para cargar los datos:
 rna <- read.csv("data/rnaseq.csv")
 ```
 
-Esta instrucción no produce ninguna salida porque, como probablemente recuerde, las asignaciones no muestran nada. Si queremos comprobar que los datos se han cargado, podemos ver el contenido del marco de datos escribiendo su nombre:
+Esta instrucción no produce ninguna salida porque, como probablemente recuerde, las asignaciones no muestran nada. Si queremos comprobar que los datos se han cargado, podemos ver el contenido de la tabla de datos escribiendo su nombre:
 
 ```{r, eval=FALSE}
 rna
 ```
 
-Vaya... fue mucha salida. Al menos significa que los datos se cargaron correctamente. Revisemos la parte superior (las primeras 6 líneas) de este marco de datos utilizando la función `head()`:
+Vaya... fue mucha salida. Al menos significa que los datos se cargaron correctamente. Revisemos la parte superior (las primeras 6 líneas) de esta tabla de datos utilizando la función `head()`:
 
 ```{r, purl=TRUE}
 head(rna)
@@ -88,13 +88,13 @@ rna <- read.table(file = "data/rnaseq.csv",
 
 El argumento header debe establecerse en TRUE para poder leer los encabezados, ya que, por defecto, `read.table()` tiene el argumento header establecido en FALSE.
 
-## ¿Qué son los marcos de datos?
+## ¿Qué son las tablas de datos?
 
-Los marcos de datos son la estructura de datos *de facto* para la mayoría de los datos en tabla, y es lo que utilizamos para estadísticas y gráficos.
+Las tablas de datos son la estructura de datos *de facto* para la mayoría de los datos en formato tabular, y es lo que utilizamos para estadísticas y gráficos.
 
-Un marco de datos puede crearse manualmente, pero lo más común es que se generen mediante las funciones `read.csv()` o `read.table()`; en otras palabras, al importar hojas de cálculo desde su disco duro (o de la web).
+Una tabla de datos puede crearse manualmente, pero lo más común es que se generen mediante las funciones `read.csv()` o `read.table()`; en otras palabras, al importar hojas de cálculo desde su disco duro (o de la web).
 
-Un marco de datos es la representación de los datos en formato de tabla, donde las columnas son vectores que tienen todos la misma longitud. Debido a que las columnas son vectores, cada columna debe contener un único tipo de dato (por ejemplo, caracteres, enteros, factores). Por ejemplo, aquí hay una figura que representa un marco de datos compuesto por un vector numérico, uno de caracteres y uno lógico.
+Una tabla de datos es la representación de los datos en formato de tabla, donde las columnas son vectores que tienen todos la misma longitud. Debido a que las columnas son vectores, cada columna debe contener un único tipo de dato (por ejemplo, caracteres, enteros, factores). Por ejemplo, aquí hay una figura que representa una tabla de datos compuesta por un vector numérico, uno de caracteres y uno lógico.
 
 ```{r, results="markup", fig.cap="Conceptual representation of a data.frame", echo=FALSE, purl=FALSE, out.width="70%", fig.align="center", fig.alt="Schematic representation of a tablular structure with different colours representing different columns and variables types."}
 knitr::include_graphics("fig/data-frame.svg")
@@ -103,7 +103,7 @@ knitr::include_graphics("fig/data-frame.svg")
 
 
 
-Podemos ver esto al inspeccionar la e<b>str</b>uctura de un marco de datos con la función `str()`:
+Podemos ver esto al inspeccionar la e<b>str</b>uctura de una tabla de datos con la función `str()`:
 
 ```{r}
 str(rna)
@@ -111,7 +111,7 @@ str(rna)
 
 ## Inspección de objetos `data.frame` {#inspecting-data-frame-objects}
 
-Ya vimos cómo las funciones `head()` y `str()` pueden ser útiles para comprobar el contenido y la estructura de un marco de datos. Aquí tienes una lista no exhaustiva de funciones para hacerte una idea del contenido/estructura de los datos. ¡Probémoslas!
+Ya vimos cómo las funciones `head()` y `str()` pueden ser útiles para comprobar el contenido y la estructura de una tabla de datos. Aquí tienes una lista no exhaustiva de funciones para hacerte una idea del contenido/estructura de los datos. ¡Probémoslas!
 
 **Tamaño**:
 
@@ -149,16 +149,16 @@ Basándote en la salida de `str(rna)`, ¿puedes responder a las siguientes pregu
 
 ## Solución
 
-- clase: marco de datos
+- clase: tabla de datos
 - cuántas filas: `r nrow(rna)`, cuántas columnas: `r ncol(rna)`
 
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Indexación y selección de subconjuntos de marcos de datos
+## Indexación y selección de subconjuntos de tablas de datos
 
-Nuestro marco de datos `rna` tiene filas y columnas (tiene 2 dimensiones); si queremos extraer algunos datos específicos de él, necesitamos especificar las "coordenadas" que deseamos. Los números de fila vienen primero, seguidos de los números de columna. No obstante, tenga en cuenta que las diferentes formas de especificar estas coordenadas dan lugar a resultados con clases distintas.
+Nuestra tabla de datos `rna` tiene filas y columnas (tiene 2 dimensiones); si queremos extraer algunos datos específicos de ella, necesitamos especificar las "coordenadas" que deseamos. Los números de fila vienen primero, seguidos de los números de columna. No obstante, tenga en cuenta que las diferentes formas de especificar estas coordenadas dan lugar a resultados con clases distintas.
 
 ```{r, eval=FALSE, purl=TRUE}
 # first element in the first column of the data frame (as a vector)
@@ -180,14 +180,14 @@ head_rna
 
 `:` es una función especial que crea vectores numéricos de enteros en orden creciente o decreciente; pruebe `1:10` y `10:1`, por ejemplo. Consulte la sección  [sobre la generación de vectores](23-starting-with-r.Rmd#sec:genvec)  para obtener más detalles.
 
-También puede excluir ciertos índices de un marco de datos utilizando el signo "`-`":
+También puede excluir ciertos índices de una tabla de datos utilizando el signo "`-`":
 
 ```{r, eval=FALSE, purl=TRUE}
 rna[, -1]          ## The whole data frame, except the first column
 rna[-c(7:66465), ] ## Equivalent to head(rna)
 ```
 
-Se pueden seleccionar subconjuntos de los marcos de datos mediante sus índices (como se mostró anteriormente), pero también usando directamente los nombres de sus columnas:
+Se pueden seleccionar subconjuntos de las tablas de datos mediante sus índices (como se mostró anteriormente), pero también usando directamente los nombres de sus columnas:
 
 ```{r, eval=FALSE, purl=TRUE}
 rna["gene"]       # Result is a data.frame
@@ -206,15 +206,15 @@ En RStudio, puede utilizar la función de autocompletado para obtener los nombre
 
 2. ¿Observas cómo `nrow()` te dio el número de filas de un `data.frame`?
 
-- Utilice ese número para extraer únicamente esa última fila del marco de datos inicial `rna`.
+- Utilice ese número para extraer únicamente esa última fila de la tabla de datos inicial `rna`.
 
 - Compáralo con lo que ves como la última fila usando `tail()` para asegurarte de que coincide con lo esperado.
 
 - Extraiga esa última fila utilizando `nrow()` en lugar del número de fila.
 
-- Crea un nuevo marco de datos (`rna_last`) a partir de esa última fila.
+- Crea una nueva tabla de datos (`rna_last`) a partir de esa última fila.
 
-3. Utilice `nrow()` para extraer la fila que se encuentra en el centro del marco de datos `rna`. Guarde el contenido de esta fila en un objeto llamado `rna_middle`.
+3. Utilice `nrow()` para extraer la fila que se encuentra en el centro de la tabla de datos `rna`. Guarde el contenido de esta fila en un objeto llamado `rna_middle`.
 
 4. Combina `nrow()` con la notación `-` anterior para reproducir el comportamiento de `head(rna)`, manteniendo únicamente las filas del 1 al 6 del conjunto de datos rna.
 
@@ -352,7 +352,7 @@ levels(sex) <- c("Male", "Female")
 
 ## Desafío:
 
-Hemos visto cómo se crean los marcos de datos al usar `read.csv()`, pero también pueden crearse manualmente con la función `data.frame()`. Hay algunos errores en este `data.frame` creado a mano. ¿Puedes detectarlos y corregirlos? ¡No dudes en experimentar!
+Hemos visto cómo se crean las tablas de datos al usar `read.csv()`, pero también pueden crearse manualmente con la función `data.frame()`. Hay algunos errores en esta `data.frame` creada a mano. ¿Puedes detectarlos y corregirlos? ¡No dudes en experimentar!
 
 ```{r, eval=FALSE}
 animal_data <- data.frame(
@@ -365,7 +365,7 @@ animal_data <- data.frame(
 
 ## Solución
 
-- falta de comillas alrededor de los nombres de los animales
+- faltan comillas alrededor de los nombres de los animales
 - falta un registro en la columna "feel" (probablemente de uno de los animales peludos)
 - falta una coma en la columna de peso
 
@@ -383,7 +383,7 @@ Verifica tus conjeturas usando `str(country_climate)`:
 
 - ¿Son lo que esperabas? ¿Por qué? ¿Por qué no?
 
-- Inténtalo de nuevo añadiendo `stringsAsFactors = TRUE` después de la última variable al crear el marco de datos. ¿Qué está pasando ahora? También se puede establecer `stringsAsFactors` al leer hojas de cálculo basadas en texto en R utilizando `read.csv()`.
+- Inténtalo de nuevo añadiendo `stringsAsFactors = TRUE` después de la última variable al crear la tabla de datos. ¿Qué está pasando ahora? También se puede establecer `stringsAsFactors` al leer hojas de cálculo basadas en texto en R utilizando `read.csv()`.
 
 ```{r, eval=FALSE, purl=TRUE}
 country_climate <- data.frame(
@@ -414,13 +414,13 @@ str(country_climate)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-La conversión automática de tipos de datos a veces es una ventaja y a veces una molestia. Tenga en cuenta que existe, aprenda las reglas y verifique dos veces que los datos que importa en R sean del tipo correcto dentro de su marco de datos. Si no es así, utilícelo para detectar errores que pudieron haberse introducido durante la entrada de datos (por ejemplo, una letra en una columna que solo debería contener números).
+La conversión automática del tipo de datos a veces es una ventaja y a veces una molestia. Tenga en cuenta que existe, aprenda las reglas y verifique dos veces que los datos que importa en R sean del tipo correcto dentro de su tabla de datos. Si no es así, utilícelo para detectar errores que pudieron haberse introducido durante la entrada de datos (por ejemplo, una letra en una columna que solo debería contener números).
 
 Más información en este [tutorial de RStudio](https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio)
 
 ## Matrices
 
-Antes de continuar, ahora que hemos aprendido sobre los marcos de datos, repasemos la instalación de paquetes y conozcamos un nuevo tipo de dato, a saber, el `matrix`. Al igual que un `data.frame`, una matriz tiene dos dimensiones: filas y columnas. Pero la diferencia principal es que todas las celdas de una `matrix` deben ser del mismo tipo: `numeric`, `character`, `logical`, ... En ese sentido, las matrices se asemejan más a un `vector` que a un `data.frame`.
+Antes de continuar, ahora que hemos aprendido sobre las tablas de datos, repasemos la instalación de paquetes y conozcamos un nuevo tipo de dato: el `matrix`. Al igual que el `data.frame`, una matriz tiene dos dimensiones, filas y columnas. Pero la diferencia principal es que todas las celdas de una `matrix` deben ser del mismo tipo: `numeric`, `character`, `logical`, ... En ese sentido, las matrices se asemejan más a un `vector` que a un `data.frame`.
 
 El constructor predeterminado para una matriz es `matrix`. Recibe un vector de valores para llenar la matriz y el número de filas y/o columnas[^ncol]. Los valores se colocan por columnas, como se ilustra a continuación.
 
@@ -458,7 +458,7 @@ colnames(ip)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-A menudo resulta útil crear matrices de datos aleatorios de gran tamaño como datos de prueba. El siguiente ejercicio le pide que cree dicha matriz con datos aleatorios extraídos de una distribución normal de media 0 y desviación estándar 1, lo cual puede hacerse con la función `rnorm()`.
+A menudo resulta útil crear matrices de datos aleatorias de gran tamaño como datos de prueba. El siguiente ejercicio le pide que cree dicha matriz con datos aleatorios extraídos de una distribución normal de media 0 y desviación estándar 1, lo cual puede hacerse con la función `rnorm()`.
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
@@ -575,7 +575,7 @@ Las listas son un tipo de datos que aún no hemos visto, pero que resulta útil 
 
 - **`list`**: una dimensión, cada elemento puede ser de un tipo de dato diferente.
 
-A continuación, creemos una lista que contenga un vector de números, caracteres, una matriz, un marco de datos y otra lista:
+A continuación, creemos una lista que contenga un vector de números, caracteres, una matriz, una tabla de datos y otra lista:
 
 ```{r list0, purl=TRUE}
 l <- list(1:10, ## numeric

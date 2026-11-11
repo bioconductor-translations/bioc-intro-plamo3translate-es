@@ -13,11 +13,11 @@ download.file(url = "https://github.com/carpentries-incubator/bioc-intro/raw/mai
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Generar gráficos de dispersión, gráficos de cajas, gráficos de líneas, etc., utilizando ggplot.
+- Crear gráficos de dispersión, de cajas, de líneas, etc., utilizando ggplot.
 - Configurar los ajustes universales del gráfico.
 - Describa qué es el faceting y aplique el faceting en ggplot.
 - Modifique la estética de un gráfico ggplot existente (incluyendo las etiquetas de los ejes y el color).
-- Crear gráficos complejos y personalizados a partir de datos en un marco de datos.
+- Crear gráficos complejos y personalizados a partir de datos de una tabla de datos.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -51,7 +51,7 @@ La [Hoja de trucos de visualización de datos](https://raw.githubusercontent.com
 
 ## Representación gráfica con `ggplot2`
 
-`ggplot2` es un paquete de gráficos que facilita la creación de gráficos complejos a partir de datos en un marco de datos. Proporciona una interfaz más programática para especificar qué variables representar, cómo mostrarlas y las propiedades visuales generales. La base teórica que sustenta a `ggplot2` es la *Grammar of Graphics* ( @Wilkinson:2005 ). Al utilizar este enfoque, solo necesitamos cambios mínimos si los datos subyacentes cambian o si decidimos pasar de un gráfico de barras a un gráfico de dispersión. Esto ayuda a crear gráficos de calidad para publicaciones con la mínima cantidad de ajustes y retoques.
+`ggplot2` es un paquete de gráficos que facilita la creación de gráficos complejos a partir de datos de una tabla de datos. Proporciona una interfaz más programática para especificar qué variables representar, cómo mostrarlas y las propiedades visuales generales. La base teórica que sustenta a `ggplot2` es la *Grammar of Graphics* ( @Wilkinson:2005 ). Al utilizar este enfoque, solo necesitamos cambios mínimos si los datos subyacentes cambian o si decidimos pasar de un gráfico de barras a un gráfico de dispersión. Esto ayuda a crear gráficos de calidad editorial con la mínima cantidad de ajustes y retoques.
 
 Existe un libro sobre `ggplot2` ( @ggplot2book ) que ofrece una buena visión general, pero está desactualizado. La tercera edición está en preparación y estará [disponible gratuitamente en línea](https://ggplot2-book.org/). La página web de `ggplot2` ([https://ggplot2.tidyverse.org](https://ggplot2.tidyverse.org)) proporciona una documentación amplia.
 
@@ -59,7 +59,7 @@ Existe un libro sobre `ggplot2` ( @ggplot2book ) que ofrece una buena visión ge
 
 Los gráficos de ggplot se construyen paso a paso añadiendo nuevos elementos. Añadir capas de esta manera permite una gran flexibilidad y personalización de los gráficos.
 
-> La idea detrás de la Gramática de Gráficos es que se puede construir cualquier gráfico a partir de los mismos 3 componentes: (1) un conjunto de datos, (2) un sistema de coordenadas y (3) geoms — es decir, marcas visuales que representan puntos de datos [^three\_comp\_ggplot2]
+> La idea detrás de la Gramática de Gráficos es que puedes construir cualquier gráfico a partir de los mismos 3 componentes: (1) un conjunto de datos, (2) un sistema de coordenadas y (3) geoms — es decir, marcas visuales que representan puntos de datos [^three\_comp\_ggplot2]
 
 [^three\_comp\_ggplot2]: Fuente: [Data Visualization Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf).
 
@@ -69,13 +69,13 @@ Para crear un ggplot, utilizaremos la siguiente plantilla básica que puede empl
 ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
 ```
 
-- utilice la función `ggplot()` y vincule el gráfico a un **marco de datos** específico mediante el argumento `data`
+- utilice la función `ggplot()` y vincule el gráfico a una **tabla de datos** específica mediante el argumento `data`
 
 ```{r, eval=FALSE}
 ggplot(data = rna)
 ```
 
-- defina un **mapeo** (utilizando la función aesthetic (`aes`)), seleccionando las variables a representar y especificando cómo presentarlas en el gráfico, por ejemplo, como posiciones x/y o características como tamaño, forma, color, etc.
+- defina un **mapeo** (utilizando la función aesthetic (`aes`)), seleccionando las variables a representar y especificando cómo presentarlas en el gráfico, por ejemplo, como posiciones x/y o características como el tamaño, la forma, el color, etc.
 
 ```{r, eval=FALSE}
 ggplot(data = rna, mapping = aes(x = expression))
@@ -194,7 +194,7 @@ rna_plot
 
 ## Creación iterativa de gráficos
 
-A continuación, dibujaremos un gráfico de dispersión con dos variables continuas y la función `geom_point()`. Este gráfico representará los cambios relativos de expresión en escala log2 comparando el tiempo 8 frente al tiempo 0, y el tiempo 4 frente al tiempo 0. Para ello, primero necesitamos calcular los promedios de los valores de expresión transformados logarítmicamente por gen y tiempo, y luego los cambios relativos en escala logarítmica restando el promedio de las expresiones logarítmicas entre el tiempo 8 y el tiempo 0, y entre el tiempo 4 y el tiempo 0. Tenga en cuenta que aquí también incluimos el biotipo del gen que utilizaremos más adelante para representar los genes. Guardaremos los cambios relativos de expresión en un nuevo marco de datos llamado `rna_fc.`.
+A continuación, dibujaremos un gráfico de dispersión con dos variables continuas y la función `geom_point()`. Este gráfico representará los cambios relativos de expresión en escala log2 comparando el tiempo 8 frente al tiempo 0, y el tiempo 4 frente al tiempo 0. Para ello, primero necesitamos calcular los promedios de los valores de expresión transformados logarítmicamente por gen y tiempo, y luego los cambios relativos en escala logarítmica restando el promedio de las expresiones logarítmicas entre el tiempo 8 y el tiempo 0, y entre el tiempo 4 y el tiempo 0. Tenga en cuenta que aquí también incluimos el biotipo del gen que utilizaremos más adelante para representar los genes. Guardaremos los cambios relativos de expresión en una nueva tabla de datos llamada `rna_fc.`.
 
 ```{r rna_fc, cache=FALSE, purl=TRUE}
 rna_fc <- rna |> select(gene, time,
@@ -275,7 +275,7 @@ Los gráficos de dispersión pueden ser herramientas exploratorias útiles para 
 
 - A continuación, utilice la función `geom_hex()` para generar la figura de hexbin.
 
-- ¿Cuáles son las fortalezas y debilidades relativas de un gráfico de cuadrículas hexagonales en comparación con un gráfico de dispersión? Examine el gráfico de dispersión anterior y compárelo con el gráfico de cuadrículas hexagonales que creó.
+- ¿Cuáles son las fortalezas y debilidades relativas de un gráfico de binaje hexagonal en comparación con un gráfico de dispersión? Examine el gráfico de dispersión anterior y compárelo con el gráfico de binaje hexagonal que creó.
 
 :::::::::::::::  solution
 
@@ -302,7 +302,7 @@ ggplot(data = rna_fc, mapping = aes(x = time_4_vs_0, y = time_8_vs_0)) +
 
 ## Desafío
 
-Utiliza lo que acabas de aprender para crear un gráfico de dispersión de `expression_log` sobre `sample` del conjunto de datos `rna`, con el tiempo mostrado en diferentes colores. ¿Es esta una buena manera de representar este tipo de datos?
+Utiliza lo que acabas de aprender para crear un gráfico de dispersión de `expression_log` sobre `sample` a partir del conjunto de datos `rna`, con el tiempo mostrado en diferentes colores. ¿Es esta una buena manera de representar este tipo de datos?
 
 :::::::::::::::  solution
 
@@ -375,7 +375,7 @@ ggplot(data = rna,
 
 Añada color a los puntos de datos de su gráfico de cajas según la duración de la infección (`time`).
 
-*Pista:* Compruebe la clase de `time`. Considere cambiar la clase de `time` de entero a factor directamente en la asignación de ggplot. ¿Por qué esto cambia la forma en que R crea el gráfico?
+*Pista:* Revisa la clase de `time`. Considera cambiar la clase de `time` de entero a factor directamente en la asignación de ggplot. ¿Por qué esto cambia la forma en que R crea el gráfico?
 
 :::::::::::::::  solution
 
@@ -508,7 +508,7 @@ ggplot(data = mean_exp_by_time,
   facet_wrap(~ gene, scales = "free_y")
 ```
 
-Ahora queremos dividir la línea en cada gráfico según el sexo de los ratones. Para ello, necesitamos calcular la expresión media en el marco de datos agrupado por `gene`, `time` y `sex`:
+Ahora queremos dividir la línea en cada gráfico según el sexo de los ratones. Para ello, necesitamos calcular la expresión media en la tabla de datos agrupada por `gene`, `time` y `sex`:
 
 ```{r data-facet-by-gene-and-sex, purl=TRUE}
 mean_exp_by_time_sex <- sub_rna |>
@@ -624,7 +624,7 @@ ggplot(data = mean_exp_by_time_sex,
   theme(text = element_text(size = 16))
 ```
 
-Tenga en cuenta que también es posible cambiar las fuentes de sus gráficos. Si utiliza Windows, es posible que tenga que instalar el [paquete **`extrafont`**](https://cran.r-project.org/web/packages/extrafont/index.html).
+Tenga en cuenta que también es posible cambiar las fuentes de sus gráficos. Si utiliza Windows, es posible que tenga que instalar el paquete [**`extrafont`**](https://cran.r-project.org/web/packages/extrafont/index.html).
 
 Podemos personalizar aún más el color del texto de los ejes x e y, el color de la cuadrícula, etc. También podemos, por ejemplo, mover la leyenda a la parte superior estableciendo `legend.position` en `"top"`.
 
@@ -738,7 +738,7 @@ ggplot(data = mean_exp_by_time_sex,
 
 ## Composición de gráficos
 
-El faceting es una herramienta excelente para dividir un gráfico en múltiples subgráficos, pero a veces es posible que desee crear una sola figura que contenga varios gráficos independientes, es decir, gráficos basados en variables diferentes o incluso en marcos de datos distintos.
+El faceting es una herramienta excelente para dividir un gráfico en múltiples subgráficos, pero a veces es posible que desee crear una sola figura que contenga varios gráficos independientes, es decir, gráficos basados en variables diferentes o incluso en tablas de datos distintas.
 
 Comencemos creando los dos gráficos que queremos disponer uno junto al otro:
 
@@ -869,7 +869,7 @@ Nota: Los parámetros `width` y `height` también determinan el tamaño de la fu
 
 ## Otros paquetes para la visualización
 
-`ggplot2` es un paquete muy potente que encaja a la perfección en nuestro pipeline de *datos ordenados* y *herramientas ordenadas*. Existen otros paquetes de visualización en R que no deberían pasarse por alto.
+`ggplot2` es un paquete muy potente que encaja a la perfección en nuestro pipeline de *datos ordenados* y *herramientas ordenadas*. Existen otros paquetes de visualización en R que no deben pasarse por alto.
 
 ### Gráficos básicos
 
@@ -889,7 +889,7 @@ abline(h = 10, col = "red")
 rect(5, 5, 15, 15, lwd = 3)
 ```
 
-Otra diferencia principal es que las funciones de trazado de los gráficos básicos intentan hacer *lo correcto* según el tipo de entrada; es decir, adaptan su comportamiento en función de la clase de su entrada. Esto es, nuevamente, muy diferente a lo que tenemos en `ggplot2`, que solo acepta marcos de datos como entrada y requiere que los gráficos se construyan poco a poco.
+Otra diferencia principal es que las funciones de trazado de los gráficos básicos intentan hacer *lo correcto* según el tipo de entrada; es decir, adaptan su comportamiento en función de la clase de su entrada. Esto es, nuevamente, muy diferente a lo que tenemos en `ggplot2`, que solo acepta tablas de datos como entrada y requiere que los gráficos se construyan poco a poco.
 
 ```{r plotmethod, fig.width=8, fig.height=8, fig.cap="Plotting boxplots (top) and histograms (bottom) vectors (left) or a matrices (right).", fig.alt="A two-by-two composition of 2 boxplots at the top, and 2 histograms at the bottom."}
 par(mfrow = c(2, 2))
@@ -905,7 +905,7 @@ El enfoque estándar de los gráficos básicos puede ser muy eficiente para figu
 
 ### El paquete lattice
 
-El paquete **`lattice`** es similar a `ggplot2` en que utiliza marcos de datos como entrada, devuelve objetos gráficos y admite el faceting. `lattice`, sin embargo, no se basa en la gramática de gráficos y tiene una interfaz más compleja.
+El paquete **`lattice`** es similar a `ggplot2` en que utiliza tablas de datos como entrada, devuelve objetos gráficos y admite el faceting. `lattice`, sin embargo, no se basa en la gramática de gráficos y tiene una interfaz más compleja.
 
 Una buena referencia para el paquete `lattice` es  @latticebook.
 
