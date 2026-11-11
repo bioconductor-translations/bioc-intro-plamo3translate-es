@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "upstream": {
-    "ref": "e298f2befb10a4a45b5a0b3f4732558a824ab1fb",
+    "ref": "english/main",
     "revision": "e298f2befb10a4a45b5a0b3f4732558a824ab1fb"
   },
   "model": {
@@ -11,24 +11,24 @@
     "target_language": "es",
     "temperature": 0
   },
-  "files_relative_to": "episodes",
+  "files_relative_to": ".",
   "files": {
-    "10-data-organisation.Rmd": {
+    "episodes/10-data-organisation.Rmd": {
       "source_sha256": "bcef1e2e788bf61f61e3fece854fa1d236bbc32e59d4bdc92e64ba8f9a9ff5bd",
       "translated_sha256": "3f8d26bd517e4a307889a628f3b76cb81fe15e7296b0f2e6514e284b5a46a463",
       "build_patches": []
     },
-    "20-r-rstudio.Rmd": {
+    "episodes/20-r-rstudio.Rmd": {
       "source_sha256": "78ae9f31c5cf3c178565dcafaeddb50e71a851fc72e5eff3da1a75c1b3af600d",
       "translated_sha256": "bde26b12c4fb23444de0c8b71e20a3bfbba8722eadcf72906686c212fa2588dd",
       "build_patches": []
     },
-    "23-starting-with-r.Rmd": {
+    "episodes/23-starting-with-r.Rmd": {
       "source_sha256": "b93ae38b61df468b2ce58cb48582ffe42e434b3eef4c59dd23e07add5b5fd306",
       "translated_sha256": "d121fa69d7d9f7ec99d13470e5ade6024f1d1793702476078b30dccdd309b64e",
       "build_patches": []
     },
-    "25-starting-with-data.Rmd": {
+    "episodes/25-starting-with-data.Rmd": {
       "source_sha256": "7a5b1d25d7ca28b5c2ff0b1eb5bb96339ab37d27bb81f15e13fe32555fb7328e",
       "translated_sha256": "244d2f2cb8760d8cb1733dffd8106c4cd37d6fdef02c6a3ad1dbe43ebb4c99a5",
       "build_patches": [
@@ -36,12 +36,12 @@
         "vector-generation-link"
       ]
     },
-    "30-dplyr.Rmd": {
+    "episodes/30-dplyr.Rmd": {
       "source_sha256": "5c323e484cb48262574459e23a868bf42c5e7c37730deaa2b160afdfc925ad03",
       "translated_sha256": "084087516bcaa62e332c11507f3130683328ae7df5aca73a92384f59747c08fe",
       "build_patches": []
     },
-    "40-visualization.Rmd": {
+    "episodes/40-visualization.Rmd": {
       "source_sha256": "329007bcb72ff9176b37a6c4311f08de47651263cb7c1b39748041ac94c48090",
       "translated_sha256": "8b9c68f69c24e3a5c7dba2f6bef2c24d25b7df0bbf7c34d129c8637881c7c98b",
       "build_patches": [
@@ -49,10 +49,17 @@
         "painter-model-link"
       ]
     },
-    "60-next-steps.Rmd": {
+    "episodes/60-next-steps.Rmd": {
       "source_sha256": "0a506ddaa815eeec39a4e48746743f3d84bb1a099145dd1598132ed7a354e051",
       "translated_sha256": "adc794a7684c72d5d2882207a5e45a6d8a8fbdeb1c4fc98cab543d90839b70a7",
       "build_patches": []
+    },
+    "learners/setup.md": {
+      "source_sha256": "05179cc96c0b30156766b791ec286736f6893f43214b8f52aef35d286fa97993",
+      "translated_sha256": "b658ad4af0432446e2a3a5816f25eed1faa30c042ac6aa367b5214521da996e8",
+      "build_patches": [
+        "setup-everyone-heading-id"
+      ]
     }
   },
   "reviewed_context_records": 29,
@@ -60,11 +67,12 @@
     "data-frame-heading-id",
     "vector-generation-link",
     "theme-object-call",
-    "painter-model-link"
+    "painter-model-link",
+    "setup-everyone-heading-id"
   ],
-  "translation_memory_records": 945,
+  "translation_memory_records": 978,
   "translation_records_by_status": {
-    "machine": 863,
-    "reviewed": 98
+    "machine": 880,
+    "reviewed": 114
   }
 }

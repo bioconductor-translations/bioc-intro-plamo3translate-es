@@ -42,6 +42,16 @@
       "after": "El sistema gráfico predeterminado que incluye R, a menudo llamado *gráficos básicos de R*, es sencillo y rápido. Se basa en el *modelo del pintor o del lienzo*, donde diferentes resultados se superponen directamente entre sí (véase la figura  [siguiente](#fig:paintermodel) ). Esta es una diferencia fundamental con `ggplot2` (y con `lattice`, descrito más adelante), que devuelve objetos dedicados que se renderizan en pantalla o en un archivo, e incluso pueden actualizarse.\n\n<span id=\"fig:paintermodel\"></span>",
       "expected_occurrences": 1,
       "changes_code": false
+    },
+    {
+      "id": "setup-everyone-heading-id",
+      "file": "learners/setup.md",
+      "description": "Retain the setup guide anchor used by each operating system section after translating the heading.",
+      "source_guard": "### For everyone\n",
+      "before": "### Para todos\n",
+      "after": "### Para todos {#for-everyone}\n",
+      "expected_occurrences": 1,
+      "changes_code": false
     }
   ]
 }

@@ -65,11 +65,12 @@ Community](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcb
 Computational Biology 21 (4): e1012925.
 
 
-## Updating the Spanish episodes
+## Updating the Spanish lessons and setup guide
 
-The translation tool reads the English episodes from `english/main`, reuses
-the available Spanish translation memory, and translates changed prose with the
-pinned PLaMo model:
+The translation tool reads the English episodes and `learners/setup.md` from
+`english/main`, reuses the available Spanish translation memory, and translates
+changed prose with the pinned PLaMo model. Pandoc fenced-division markers and
+attributes remain literal:
 
 ```sh
 git fetch english main

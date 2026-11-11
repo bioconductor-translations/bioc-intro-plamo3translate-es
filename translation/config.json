@@ -8,6 +8,7 @@
     "temperature": 0
   },
   "upstream": {"remote": "english", "branch": "main", "ref": "english/main"},
+  "targets": ["episodes", "learners/setup.md"],
   "memory": "seed-cache.json",
   "glossary": "glossary.json",
   "contexts": "reviewed-context.json",

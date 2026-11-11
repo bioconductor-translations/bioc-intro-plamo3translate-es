@@ -1,8 +1,7 @@
 {
   "schema_version": 1,
-  "description": "English-to-Spanish translation memory for the recorded English episode revision. Machine records retain their generation profile; corrected records are marked reviewed. Only exact source/kind keys in the listed episode files are reusable.",
+  "description": "English-to-Spanish translation memory for the recorded English lesson revision. Machine records retain their generation profile; corrected records are marked reviewed. Only exact source/kind keys in the listed source files are reusable.",
   "key_algorithm": "sha256(UTF-8(source) + one NUL byte + UTF-8(kind)); source is normalized masked English text",
-  "files_relative_to": "episodes",
   "model": {
     "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
     "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
@@ -16105,6 +16104,568 @@
         "target_language": "es",
         "temperature": 0
       }
+    },
+    "51532aa5af76b91bcb5b508b4c6c2f31c986cf2af87a1ae6cee0476b691224db": {
+      "source": "Setup",
+      "kind": "title",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Configuración",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "5ae1e2708d9588ed22a71b49fd6e23afb546d27fa5aa70dc472c61fddeb85e87": {
+      "source": "Please make sure you have a spreadsheet editor at hand, such as LibreOffice, Microsoft Excel or Google Sheets.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Por favor, asegúrese de tener a mano un editor de hojas de cálculo, como LibreOffice, Microsoft Excel o Google Sheets.",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "c70e76294919ffcca9586bed6c1f39b5029863c6c38a4af937cb28e159370ba7": {
+      "source": "Install R, RStudio and packages (see below).",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Instale R, RStudio y los paquetes (consulte más abajo).",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "8b56e251eba9cf98777d4b6aab2dd03ea95b6b84a539bc49ccb5649c02d7864c": {
+      "source": "R and RStudio",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "R y RStudio",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "4c64b08b7f9af2b91020c1bece49ebf504575f9b14a506aaa223da9327620d23": {
+      "source": "R and RStudio are separate downloads and installations. R is the underlying statistical computing environment, but using R alone is no fun. RStudio is a graphical integrated development environment (IDE) that makes using R much easier and more interactive. You need to install R before you install RStudio. After installing both programs, you will need to install some specific R packages within RStudio. Follow the instructions below for your operating system, and then follow the instructions to install packages.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "R y RStudio se descargan e instalan por separado. R es el entorno de computación estadística subyacente, pero usar R por sí solo no es muy interesante. RStudio es un entorno de desarrollo integrado (IDE) gráfico que hace que el uso de R sea mucho más sencillo e interactivo. Es necesario instalar R antes de instalar RStudio. Tras instalar ambos programas, deberá instalar algunos paquetes específicos de R dentro de RStudio. Siga las instrucciones a continuación según su sistema operativo y, a continuación, siga las instrucciones para instalar los paquetes.",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "c5fc40df1344b11ef491c7a70cca5df54ffa02927e67c6f07f6cef62066f84bf": {
+      "source": "You are running Windows",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Está utilizando Windows",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "6db62b534d31733d88fc058b1a0f642a59559884630e36d6a87fcd5fe786080c": {
+      "source": "If you already have R and RStudio installed",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Si ya tiene instalados R y RStudio",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "d4b0aa7fb555386719249346c0bc45d29fbf33d21659268a60950ad73d99a1d1": {
+      "source": "Open RStudio, and click on \"Help\" > \"Check for updates\". If a new version is available, quit RStudio, and download the latest version for RStudio.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Abra RStudio y haga clic en \"Help\" > \"Check for updates\". Si hay una versión nueva disponible, cierre RStudio y descargue la versión más reciente de RStudio.",
+      "review_status": "reviewed",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "4d199c774b2975013f43054358aa6cddc02e0586af424c619eca3dcee6e46f66": {
+      "source": "To check which version of R you are using, start RStudio and the first thing that appears in the console indicates the version of R you are running. Alternatively, you can type <x0/>, which will also display which version of R you are running. Go on the [CRAN website](<x1/>) and check whether a more recent version is available. If so, please download and install it. You can [check here](<x2/>) for more information on how to remove old versions from your system if you wish to do so.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Para comprobar qué versión de R está utilizando, inicie RStudio; lo primero que aparece en la consola indicará la versión de R que está ejecutando. Alternativamente, puede escribir <x0/>, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](<x1/>) y compruebe si hay una versión más reciente disponible. Si es así, descargue e instale la misma. Puede [consultar aquí](<x2/>) para obtener más información sobre cómo eliminar versiones antiguas de su sistema si así lo desea.",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "8b6979b64919b25d3bd8c5bcca9033d35739018248384132c6773febda120ccd": {
+      "source": "Follow the steps in the instructions [for everyone](<x0/>) at the bottom of this page.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Siga los pasos de las instrucciones [para todos](<x0/>) al final de esta página.",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "a91b2e41238b7433e4a3dca258ebb3f8e47639f90df1f144776b8793a40faf3c": {
+      "source": "If you don't have R and RStudio installed",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Si no tiene instalados R y RStudio",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "f4ab1ef5e2e02b85b6a77a5cab2ab1881f8b5cd574139db6c98730136aa0442e": {
+      "source": "Download R from the [CRAN website](<x0/>).",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Descargue R desde el [sitio web de CRAN](<x0/>).",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "b1286e3573e11dfdfff012c6b7eb2033be2bc7f3ba6249c2f3b1dc50b2bc47bf": {
+      "source": "Run the <x0/> file that was just downloaded",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Ejecute el archivo <x0/> que acaba de descargar",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "aef8b44d11d35bb5d460e3a88717745cd5905878e158a1e05a35df7a1c00b0e3": {
+      "source": "Go to the [RStudio download page](<x0/>)",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Vaya a la [página de descargas de RStudio](<x0/>)",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "7b16294384e80a26493eae4e62854bf69ffc0920df12ee83d86c85afc87d189a": {
+      "source": "Under *All Installers* select **RStudio xxxx.yy.zz-uuu.exe - Windows 10/11** (where x, y, z, and u represent version numbers)",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.exe - Windows 10/11** (donde x, y, z y u representan los números de versión)",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "2257286e5fb003c9c5cb032bec6a3c296984a0765f8543ede3ba32607ece0c7b": {
+      "source": "Double click the file to install it",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Haga doble clic en el archivo para instalarlo",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "5aaee65781c6611ef1c7d9bf8dca421d64013254b836c45a3b888863c3f70796": {
+      "source": "Once it's installed, open RStudio to make sure it works and you don't get any error messages",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "ba0f4d21a531e519653e174fde98509cddd4eeed6ffba1d316422729bdc8222d": {
+      "source": "You are running macOS",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Está utilizando macOS",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "dd5e527923700fb3bb1a3874536892f818709aa856e82b215eeaadc617877b47": {
+      "source": "To check the version of R you are using, start RStudio and the first thing that appears on the terminal indicates the version of R you are running. Alternatively, you can type <x0/>, which will also display which version of R you are running. Go on the [CRAN website](<x1/>) and check whether a more recent version is available. If so, please download and install it.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Para comprobar la versión de R que está utilizando, inicie RStudio; lo primero que aparece en la terminal indicará la versión de R que está ejecutando. Alternativamente, puede escribir <x0/>, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](<x1/>) y compruebe si hay una versión más reciente disponible. Si es así, por favor descargue e instale la misma.",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "1d8408a1ba3ad0c70031ca1d3febf1db830b3e2eac00459c8fa2009227051847": {
+      "source": "Select the <x0/> file for the latest R version",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Seleccione el archivo <x0/> para la versión más reciente de R",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "43504d5730de2ef31ee9ccf4488dff8b5e819e9256cfcdafd42d8aba72b863b6": {
+      "source": "Double click on the downloaded file to install R",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Haga doble clic en el archivo descargado para instalar R",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "0c77036b1710bc02acb931db90bf6e23cebcf2696a54b176a47ef59aea0e31e8": {
+      "source": "It is also a good idea to install [XQuartz](<x0/>) (needed by some packages)",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "También es recomendable instalar [XQuartz](<x0/>) (necesario para algunos paquetes)",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "3e4d8e669a69b291856a66dc9f161be773c6342249c55337f8f8d19aa30f7c3b": {
+      "source": "Under *All Installers* select **RStudio xxxx.yy.zz-uuu.dmg - macOS 10.15+** (where x, y, z, and u represent version numbers)",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.dmg - macOS 10.15+** (donde x, y, z y u representan los números de versión)",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "0223b88fb0e60e819a837579eb084d31e1906a5a3d895cb757bc29189871563e": {
+      "source": "Double click the file to install RStudio",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Haga doble clic en el archivo para instalar RStudio",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "0d15f047afffcda0ff0f778d711f0c221cb6e84efb1e275352f8f921bc7613fc": {
+      "source": "Once it's installed, open RStudio to make sure it works and you don't get any error messages.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "9aa9ce6cc4b84d944cdb95482601cb37b986f82cd28f98ad74f0752d5cac86e1": {
+      "source": "You are running Linux",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Está utilizando Linux",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "7d28e1d8b9024995d1a92326fee235975d8d73e6fa22e1bcff3fa1345adb634b": {
+      "source": "Install R using your package manager and RStudio",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Instale R con su gestor de paquetes e instale RStudio",
+      "review_status": "reviewed",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "e0af5827855664ae2578aa9330a6f0337f06b93f0cd2c08673181c3ce0406db3": {
+      "source": "Follow the instructions for your distribution from [CRAN](<x0/>), they provide information to get the most recent version of R for common distributions. For most distributions, you could use your package manager (e.g., for Debian/Ubuntu run <x1/>, and for Fedora <x2/>), but we don't recommend this approach as the versions provided by this are usually out of date. In any case, make sure you have at least R 4.2.0.",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Siga las instrucciones de [CRAN](<x0/>) para su distribución; estas proporcionan información para obtener la versión más reciente de R para las distribuciones comunes. Para la mayoría de las distribuciones, podría utilizar su gestor de paquetes (por ejemplo, para Debian/Ubuntu ejecute <x1/>, y para Fedora <x2/>), pero no recomendamos este enfoque ya que las versiones proporcionadas por este suelen estar desactualizadas. En cualquier caso, asegúrese de tener al menos R 4.2.0.",
+      "review_status": "reviewed",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "0d60a925ad2ba9fd3bf8fc3e2c8725982972cff55fd64a348ae9d06f46508c44": {
+      "source": "Under *All Installers* select the version that matches your distribution, and install it with your preferred method (e.g., with Debian/Ubuntu <x0/> at the terminal).",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "En *All Installers*, seleccione la versión que coincida con su distribución e instálela con el método de su preferencia (por ejemplo, con Debian/Ubuntu <x0/> en la terminal).",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "6c23057b8dfbfee2fe1abb20d4d73df20ac7564461832035291d14ee75863e8f": {
+      "source": "Follow the steps in the [instructions for everyone](<x0/>)",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Siga los pasos de las [instrucciones para todos](<x0/>)",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "ac251fa7d2f1f6e2cb6752caeeb696ad211c0a4669f586875c4dcdbc61c0a9c0": {
+      "source": "For everyone",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Para todos",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "3a905c26aa2ecdf1f0e117dc905cadcb8b1102e2d76fb6e84c483fae5dcf83e9": {
+      "source": "After installing R and RStudio, you need to install a couple of packages that will be used during the workshop. We will also learn about package installation during the course to explain the following commands. For now, simply follow the instructions below:",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Tras instalar R y RStudio, deberá instalar un par de paquetes que se utilizarán durante el taller. También aprenderemos sobre la instalación de paquetes a lo largo del curso para explicar los siguientes comandos. Por ahora, simplemente siga las instrucciones a continuación:",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
+    },
+    "238d736adb0d45574925dda46e48254cd5ba1919dd9769ebbc568478794f467f": {
+      "source": "Start RStudio by double-clicking the icon and then type:",
+      "kind": "prose",
+      "files": [
+        "learners/setup.md"
+      ],
+      "translation": "Inicie RStudio haciendo doble clic en el icono y luego escriba:",
+      "review_status": "machine",
+      "profile": "8a757c5ec77baf5ee2878c94caa9748429cb567b5a275eb0a2e3c23525a12f3f",
+      "model": {
+        "id": "pfnet/plamo-3-translate-8b-MLX-4bit",
+        "revision": "9d87684408bdf34500b7d6115c257d83350c1fe5",
+        "source_language": "en",
+        "target_language": "es",
+        "temperature": 0
+      }
     }
-  }
+  },
+  "file_key_format": "Episode files use paths relative to episodes/; other files use paths relative to the selected source root."
 }

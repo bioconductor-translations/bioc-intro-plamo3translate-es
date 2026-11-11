@@ -9,7 +9,7 @@
 #   "huggingface-hub==2.4.0; sys_platform == 'darwin' and platform_machine == 'arm64'",
 # ]
 # ///
-"""Incrementally translate upstream English episodes with PLaMo, without checkout.
+"""Incrementally translate selected English lesson files with PLaMo, without checkout.
 
 Reviewed translations replay with Python's standard library alone. MLX and the
 model are loaded only if new source prose needs a translation.
@@ -71,7 +71,7 @@ def source_files(args, config: dict) -> tuple[dict[str, str], dict]:
         output = args.output_dir.resolve()
         if output.is_relative_to(source) or source.is_relative_to(output):
             raise ValueError("The English source directory and translated output directory must differ and must not be nested inside each other")
-        paths = sorted(p for p in source.rglob("*") if p.suffix.lower() == ".rmd" and p.is_file())
+        paths = sorted(p for p in source.rglob("*") if p.suffix.lower() in {".rmd", ".md"} and p.is_file())
         files = {p.relative_to(source).as_posix(): p.read_bytes().decode("utf-8") for p in paths}
         provenance = {"directory": str(source)}
     else:
@@ -83,20 +83,27 @@ def source_files(args, config: dict) -> tuple[dict[str, str], dict]:
             revision = git("rev-parse", "--verify", "--end-of-options", f"{ref}^{{commit}}").decode().strip()
         except ValueError as error:
             raise ValueError(f"Cannot read English source ref {ref!r}. Fetch upstream first.\n{error}") from error
-        names = git("ls-tree", "-r", "--name-only", "-z", revision, "--", "episodes").split(b"\0")
+        targets = config.get("targets", ["episodes"])
+        if not isinstance(targets, list) or not targets:
+            raise ValueError("Translation targets must be a nonempty list of repository-relative paths")
+        for target in targets:
+            if (not isinstance(target, str) or not PurePosixPath(target).parts
+                    or PurePosixPath(target).is_absolute() or ".." in PurePosixPath(target).parts):
+                raise ValueError(f"Unsafe translation target: {target!r}")
+        names = git("--literal-pathspecs", "ls-tree", "-r", "--name-only", "-z", revision,
+                    "--", *targets).split(b"\0")
         files = {}
         for raw in names:
             if not raw:
                 continue
             name = raw.decode("utf-8")
             path = PurePosixPath(name)
-            if path.suffix.lower() != ".rmd":
+            if path.suffix.lower() not in {".rmd", ".md"}:
                 continue
-            relative = path.relative_to("episodes").as_posix()
-            files[relative] = git("show", f"{revision}:{name}").decode("utf-8")
+            files[name] = git("show", f"{revision}:{name}").decode("utf-8")
         provenance = {"ref": ref, "revision": revision}
     if not files:
-        raise ValueError("No English .Rmd files found")
+        raise ValueError("No English Markdown or R Markdown files found")
     for name in files:
         path = PurePosixPath(name)
         if path.is_absolute() or ".." in path.parts:
@@ -131,8 +138,18 @@ def memory_translation(record: dict | None, unit: Unit, profile: str,
 
 def safe_relative(name: str) -> None:
     path = PurePosixPath(name)
-    if path.is_absolute() or ".." in path.parts or path.suffix.lower() != ".rmd":
-        raise ValueError(f"Unsafe managed episode path: {name}")
+    if path.is_absolute() or ".." in path.parts or path.suffix.lower() not in {".rmd", ".md"}:
+        raise ValueError(f"Unsafe managed translation path: {name}")
+
+
+def memory_file(name: str) -> str:
+    """Retain existing episode keys when adding repository-relative targets."""
+    path = PurePosixPath(name)
+    return path.relative_to("episodes").as_posix() if path.parts[0] == "episodes" else name
+
+
+def target_contains(name: str, targets: list[str]) -> bool:
+    return any(PurePosixPath(name).is_relative_to(PurePosixPath(target)) for target in targets)
 
 
 @dataclass
@@ -314,10 +331,10 @@ def atomic_write_set(writes: dict[Path, bytes | None], snapshots: dict[Path, byt
 def parser() -> argparse.ArgumentParser:
     cli = argparse.ArgumentParser(description=__doc__)
     source = cli.add_mutually_exclusive_group()
-    source.add_argument("--source-ref", help="Git ref containing English episodes (default: configured English ref)")
-    source.add_argument("--source-dir", type=Path, help="Directory containing English Rmd files")
+    source.add_argument("--source-ref", help="Git ref containing English lesson files (default: configured English ref)")
+    source.add_argument("--source-dir", type=Path, help="Directory containing English Markdown and R Markdown files")
     cli.add_argument("--fetch", action="store_true", help="Fetch the configured upstream branch first")
-    cli.add_argument("--output-dir", type=Path, default=ROOT / "episodes")
+    cli.add_argument("--output-dir", type=Path, default=ROOT, help="Output root; Git targets retain their repository-relative paths")
     cli.add_argument("--cache-dir", type=Path, default=ROOT / ".cache" / "translation")
     cli.add_argument("--config", type=Path, default=ROOT / "translation" / "config.json")
     cli.add_argument("--model-dir", type=Path, help="Existing copy of the pinned model weights")
@@ -326,7 +343,7 @@ def parser() -> argparse.ArgumentParser:
     cli.add_argument("--dry-run", action="store_true", help="Show translation requirements without loading MLX or writing files")
     cli.add_argument("--check", action="store_true", help="Replay cached translations and fail if output differs; write nothing")
     cli.add_argument("--overwrite", action="store_true", help="Explicitly replace locally edited translated outputs")
-    cli.add_argument("--prune", action="store_true", help="Remove unchanged managed episodes deleted upstream")
+    cli.add_argument("--prune", action="store_true", help="Remove unchanged managed translation targets deleted upstream")
     cli.add_argument("--update-memory", action="store_true", help="Save new translations and provenance to versioned translation resources")
     cli.add_argument("--no-patches", action="store_true", help="Omit the separately recorded local build adaptations")
     return cli
@@ -356,14 +373,16 @@ def run(argv=None, backend_factory=None) -> int:
                                 "contexts": contexts, "context": config["context"],
                                 "mouse_dataset_files": config.get("mouse_dataset_files", [])}))
     files, provenance = source_files(args, config)
-    docs = {name: extract_document(text, name) for name, text in files.items()}
+    docs = {name: extract_document(text, memory_file(name)) for name, text in files.items()}
+    if len({doc.filename for doc in docs.values()}) != len(docs):
+        raise ValueError("Source paths overlap in the translation memory namespace")
     prose = " ".join(unit.source for doc in docs.values() for unit in doc.units)
     japanese = len(re.findall(r"[\u3040-\u30ff\u3400-\u9fff]", prose))
     if japanese > 100 and japanese > len(prose) / 4:
         raise ValueError("Source prose appears to be Japanese already; select the upstream English ref")
     cache_path = args.cache_dir / "cache.jsonl"
     cache = load_cache(cache_path)
-    translations, needed, seeded, cached = {name: {} for name in docs}, [], 0, 0
+    translations, needed, seeded, cached = {doc.filename: {} for doc in docs.values()}, [], 0, 0
     for doc in docs.values():
         for unit in doc.units:
             key = unit_key(unit)
@@ -381,19 +400,24 @@ def run(argv=None, backend_factory=None) -> int:
     # Same source text repeated within one chapter needs only one model request.
     pending = {cache_key(profile, request.unit): request for request in needed}
     print(f"English source: {provenance.get('revision', provenance.get('directory'))}")
-    print(f"{len(files)} episodes; {sum(len(d.units) for d in docs.values())} passages; "
+    print(f"{len(files)} documents; {sum(len(d.units) for d in docs.values())} passages; "
           f"{seeded} translation-memory replays; {cached} runtime-cache replays; "
           f"{len(pending)} new/changed passages need PLaMo")
     state_path = args.cache_dir / f"state-{digest(str(args.output_dir.resolve()))[:16]}.json"
     state_snapshot = file_snapshot(state_path)
     state = read_json(state_path) if state_path.exists() else manifest
     managed = state.get("files", {})
+    if not args.source_dir and state.get("files_relative_to", "episodes") == "episodes":
+        managed = {f"episodes/{name}": entry for name, entry in managed.items()}
     for name in managed:
         safe_relative(name)
-    stale = sorted(name for name in set(managed) - set(files)
+    inactive = set() if args.source_dir else {
+        name for name in managed if not target_contains(name, config.get("targets", ["episodes"]))
+    }
+    stale = sorted(name for name in set(managed) - set(files) - inactive
                    if (args.output_dir / name).exists())
     if stale:
-        print("Previously managed episodes absent upstream: " + ", ".join(stale))
+        print("Previously managed documents absent upstream: " + ", ".join(stale))
     if args.dry_run:
         for request in pending.values():
             print(f"  needs translation: {request.unit.file}:{request.unit.id} {request.unit.masked[:100]}")
@@ -414,7 +438,7 @@ def run(argv=None, backend_factory=None) -> int:
             expected = managed.get(name, {}).get("translated_sha256")
             if before is not None and expected and digest(before) != expected:
                 raise ValueError(f"Translated output has local edits: {path}. Review it, or use --overwrite explicitly.")
-            if before is not None and not expected:
+            if before is not None and not expected and before != files.get(name, "").encode("utf-8"):
                 # Fully cached identical outputs are checked again after rendering.
                 if pending:
                     raise ValueError(f"Existing output has no generation record: {path}. Use --overwrite explicitly.")
@@ -449,9 +473,9 @@ def run(argv=None, backend_factory=None) -> int:
     outputs, adaptations = {}, {}
     skipped = []
     for name, doc in docs.items():
-        text = render_document(doc, translations[name])
+        text = render_document(doc, translations[doc.filename])
         validate_document(files[name], text, name)
-        text, applied, omitted = apply_patches(files[name], text, name, patches)
+        text, applied, omitted = apply_patches(files[name], text, doc.filename, patches)
         adaptations[name] = applied
         skipped.extend({"file": name, **item} for item in omitted)
         outputs[name] = text.encode("utf-8")
@@ -466,26 +490,30 @@ def run(argv=None, backend_factory=None) -> int:
     for name in differences:
         before = snapshots[target_paths[name]]
         expected = managed.get(name, {}).get("translated_sha256")
-        if before is not None and not expected and not args.overwrite:
+        if before is not None and not expected and before != files[name].encode("utf-8") and not args.overwrite:
             raise ValueError(f"Existing output has no generation record: {target_paths[name]}. Use --overwrite explicitly.")
     writes = {target_paths[name]: outputs[name] for name in differences}
     if args.prune:
         writes.update({target_paths[name]: None for name in stale if snapshots[target_paths[name]] is not None})
-    next_state = {"schema_version": SCHEMA_VERSION, "upstream": provenance,
+    next_state = {"schema_version": SCHEMA_VERSION, "upstream": provenance, "files_relative_to": ".",
                   "model": config["model"], "files": {
                       name: {"source_sha256": digest(files[name]), "translated_sha256": digest(data),
                              "build_patches": adaptations[name]}
                       for name, data in outputs.items()}}
-    if not args.prune:
-        # Keep ownership of stale outputs so a later --prune can remove them.
-        next_state["files"].update({name: managed[name] for name in stale
-                                   if (args.output_dir / name).is_file()})
+    # Deselection never authorizes deletion. Retain ownership so targets can be
+    # reselected later; retain stale targets too until pruning is explicit.
+    retained = inactive | (set(stale) if not args.prune else set())
+    next_state["files"].update({name: managed[name] for name in retained
+                               if (args.output_dir / name).is_file()})
     if args.update_memory:
         # A language change starts a fresh catalog, rather than relabeling old
         # reviewed translations or retaining untranslated records as reusable.
         if not same_language_pair(memory_model, config["model"]):
             memory["records"] = {}
         memory["model"] = config["model"]
+        memory.pop("files_relative_to", None)
+        memory["file_key_format"] = ("Episode files use paths relative to episodes/; "
+                                     "other files use paths relative to the selected source root.")
         # Current passages and their filenames are persisted alongside their output.
         for doc in docs.values():
             for unit in doc.units:
@@ -503,6 +531,14 @@ def run(argv=None, backend_factory=None) -> int:
                     memory["records"][key] = {"source": unit.masked, "kind": unit.kind,
                                               "files": [unit.file], **variant}
         manifest.update(next_state)
+        manifest["translation_memory_records"] = len(memory["records"])
+        statuses = {}
+        for record in memory["records"].values():
+            for name in record["files"]:
+                status = {**record, **record.get("variants", {}).get(name, {})}.get("review_status", "reviewed")
+                statuses[status] = statuses.get(status, 0) + 1
+        manifest["translation_records_by_status"] = statuses
+        manifest["build_patches"] = [patch["id"] for patch in patches]
         for path, data in ((resources["memory"], json_bytes(memory)), (resources["manifest"], json_bytes(manifest))):
             snapshots[path] = resource_snapshots[path]
             if snapshots[path] != data:
@@ -510,7 +546,7 @@ def run(argv=None, backend_factory=None) -> int:
     snapshots[state_path] = state_snapshot
     writes[state_path] = json_bytes(next_state)
     atomic_write_set(writes, snapshots)
-    print(f"Wrote {len(differences)} changed translated episodes; {len(outputs) - len(differences)} unchanged.")
+    print(f"Wrote {len(differences)} changed translated documents; {len(outputs) - len(differences)} unchanged.")
     if skipped:
         print("Upstream or translation changes require review of the listed local build adaptations.")
     return 0

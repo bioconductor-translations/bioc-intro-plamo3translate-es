@@ -455,6 +455,105 @@ class TranslationCliTests(unittest.TestCase):
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
             return self.cli.run(self.arguments + list(extra), backend_factory=factory)
 
+    def use_git_source(self):
+        subprocess.run(["git", "init", "-q", "-b", "main", str(self.source)], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(self.source), "add", "."], check=True, capture_output=True)
+        subprocess.run([
+            "git", "-C", str(self.source), "-c", "user.name=Translation Tests",
+            "-c", "user.email=translation-tests@example.invalid", "-c", "commit.gpgsign=false",
+            "-c", "core.hooksPath=/dev/null", "commit", "-q", "-m", "English source fixture",
+        ], check=True, capture_output=True)
+        index = self.arguments.index("--source-dir")
+        del self.arguments[index:index + 2]
+        self.arguments += ["--source-ref", "main"]
+
+    def test_git_targets_add_setup_without_invalidating_legacy_episode_memory(self):
+        _, config, directory = self.copy_translation_resources()
+        source = "An episode fixture.\n"
+        self.write_source(source, "episodes/lesson.Rmd")
+        self.write_source("---\ntitle: Setup\n---\n\n::: {.solution #windows title=\"English attribute\"}\n\nInstall R.\n\n:::\n", "learners/setup.md")
+        self.write_source("This page is not a translation target.\n", "learners/discuss.md")
+        self.write_source("value\n1\n", "episodes/data/fixture.csv")
+        unit = core.extract_document(source, "lesson.Rmd").units[0]
+        translated = "Una lección traducida.\n"
+        memory = {"schema_version": 1, "model": config["model"], "records": {
+            core.unit_key(unit): {"source": unit.masked, "kind": unit.kind, "files": [unit.file],
+                                  "translation": translated.strip(), "review_status": "reviewed"},
+        }}
+        (directory / config["memory"]).write_text(json.dumps(memory, ensure_ascii=False))
+        (directory / config["manifest"]).write_text(json.dumps({
+            "schema_version": 1, "files_relative_to": "episodes", "files": {
+                "lesson.Rmd": {"translated_sha256": hashlib.sha256(translated.encode()).hexdigest()},
+            },
+        }))
+        episode = self.output / "episodes/lesson.Rmd"
+        episode.parent.mkdir(parents=True)
+        episode.write_text(translated)
+        self.use_git_source()
+        backend = FakeBackend()
+        with mock.patch.object(self.cli, "ROOT", self.source):
+            self.run_cli(backend=backend)
+            self.run_cli(["--check"], forbid_backend=True)
+        self.assertEqual(episode.read_text(), translated)
+        self.assertNotIn(unit.source, backend.seen)
+        self.assertFalse((self.output / "learners/discuss.md").exists())
+        self.assertFalse((self.output / "episodes/data/fixture.csv").exists())
+        setup = (self.output / "learners/setup.md").read_text()
+        self.assertIn('::: {.solution #windows title="English attribute"}\n', setup)
+        self.assertNotIn("English attribute", " ".join(backend.seen))
+
+    def test_new_markdown_target_can_replace_an_exact_english_baseline(self):
+        _, config, directory = self.copy_translation_resources()
+        (directory / config["manifest"]).write_text(json.dumps({"files": {}}))
+        source = "---\ntitle: Setup\n---\n\nInstall `R`.\n"
+        self.write_source(source, "learners/setup.md")
+        output = self.output / "learners/setup.md"
+        output.parent.mkdir(parents=True)
+        output.write_text(source)
+        self.run_cli()
+        self.assertNotEqual(output.read_text(), source)
+        self.assertIn("`R`", output.read_text())
+        self.run_cli(["--check"], forbid_backend=True)
+
+    def test_git_prune_keeps_a_deselected_setup_target(self):
+        config_path, config, _ = self.copy_translation_resources()
+        self.write_source("An episode fixture.\n", "episodes/lesson.Rmd")
+        self.write_source("Install R.\n", "learners/setup.md")
+        self.use_git_source()
+        with mock.patch.object(self.cli, "ROOT", self.source):
+            self.run_cli()
+            setup = self.output / "learners/setup.md"
+            before = setup.read_bytes()
+            config["targets"] = ["episodes"]
+            config_path.write_text(json.dumps(config))
+            self.run_cli(["--cache-only", "--prune"], forbid_backend=True)
+        self.assertEqual(setup.read_bytes(), before)
+        self.assertTrue((self.output / "episodes/lesson.Rmd").is_file())
+
+    def test_edited_unmanaged_markdown_target_is_protected_before_inference(self):
+        _, config, directory = self.copy_translation_resources()
+        (directory / config["manifest"]).write_text(json.dumps({"files": {}}))
+        self.write_source("Install R.\n", "learners/setup.md")
+        output = self.output / "learners/setup.md"
+        output.parent.mkdir(parents=True)
+        edited = "A manually edited setup guide.\n"
+        output.write_text(edited)
+        with self.assertRaisesRegex(ValueError, "no generation record"):
+            self.run_cli(forbid_backend=True)
+        self.assertEqual(output.read_text(), edited)
+
+    def test_prune_removes_only_managed_markdown_targets(self):
+        self.write_source("Install R.\n", "learners/setup.md")
+        self.write_source("A retained episode.\n", "episodes/lesson.Rmd")
+        self.run_cli()
+        unmanaged = self.output / "learners/notes.md"
+        unmanaged.write_text("Personal notes.\n")
+        (self.source / "learners/setup.md").unlink()
+        self.run_cli(["--cache-only", "--prune"], forbid_backend=True)
+        self.assertFalse((self.output / "learners/setup.md").exists())
+        self.assertTrue((self.output / "episodes/lesson.Rmd").is_file())
+        self.assertEqual(unmanaged.read_text(), "Personal notes.\n")
+
     def test_cached_replay_and_code_only_update_never_load_the_model(self):
         self.write_source("A unique incremental fixture paragraph.\n\n```{r}\nx <- 1\n```\n")
         backend = FakeBackend()
@@ -784,7 +883,7 @@ class TranslationCliTests(unittest.TestCase):
         self.assertEqual(second.read_bytes(), before[second])
         self.assertFalse(list(self.output.glob(".translation-*")))
 
-    def test_reviewed_upstream_revision_replays_all_seven_delivered_lessons(self):
+    def test_recorded_upstream_revision_replays_all_delivered_targets(self):
         manifest = json.loads((ROOT / "translation" / "source-manifest.json").read_text())
         revision = manifest["upstream"]["revision"]
         available = subprocess.run(
@@ -794,11 +893,14 @@ class TranslationCliTests(unittest.TestCase):
         if available.returncode:
             self.skipTest("The original upstream Git revision is not available locally")
         for filename, expected in manifest["files"].items():
+            source_path = (Path(manifest.get("files_relative_to", "episodes")) / filename).as_posix()
             source = subprocess.check_output(
-                ["git", "show", revision + ":episodes/" + filename], cwd=ROOT,
+                ["git", "show", revision + ":" + source_path], cwd=ROOT,
             )
             self.assertEqual(hashlib.sha256(source).hexdigest(), expected["source_sha256"])
-            (self.source / filename).write_bytes(source)
+            destination = self.source / filename
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(source)
         self.run_cli(["--cache-only"], forbid_backend=True)
         for filename, expected in manifest["files"].items():
             with self.subTest(filename=filename):

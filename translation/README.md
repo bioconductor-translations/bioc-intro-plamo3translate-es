@@ -1,7 +1,9 @@
 # Updating the Spanish translation
 
-Run these commands from the repository root. The translator reads English Rmd
-files from a Git revision and writes Spanish Rmd files under `episodes/`.
+Run these commands from the repository root. The translator reads selected
+English Markdown and R Markdown files from a Git revision and writes Spanish
+files at the same repository-relative paths. The `targets` list in `config.json`
+selects the `episodes/` directory and `learners/setup.md`.
 It reads the source revision without checking it out or merging it into the
 working tree.
 
@@ -58,12 +60,13 @@ review:
 
 ```sh
 uv run --locked scripts/translate.py --source-ref english/main --update-memory
-git diff -- episodes translation
+git diff -- episodes learners/setup.md translation
 Rscript scripts/build.R
 ```
 
-Unchanged passages reuse the available translation memory. New or changed prose is sent to
-the pinned model. Review new Spanish text for technical terminology, exercise
+Unchanged passages reuse the available translation memory. Adding a target does
+not invalidate the existing episode translations. New or changed prose is sent
+to the pinned model. Review new Spanish text for technical terminology, exercise
 conditions, and meaning before committing the lesson and memory changes.
 The tool does not commit or push changes.
 
@@ -83,53 +86,64 @@ normal update that must also be completed entirely from memory.
 The translator checks output hashes against the supplied baseline and the last
 successful run. It stops before replacing an edited Spanish lesson. Review or
 save those edits first; `--overwrite` explicitly permits replacing edited
-outputs.
+outputs. A newly selected target can replace an existing English file without
+this flag only when the file still matches its English source exactly.
 
-Carpentries colon fences, full code blocks, commented-out code, inline code,
+Pandoc fenced-division lines (including opening and closing colon markers,
+classes, IDs, and attributes), full code blocks, commented-out code, inline code,
 link destinations, identifiers, and other protected syntax are kept out of the model's
 translation text. All planned lessons are validated before output replacement.
 Missing or altered placeholders and unsupported structural changes stop the
 update for review.
 
-Four separately recorded build adaptations in `patches.json` are reapplied
+Five separately recorded build adaptations in `patches.json` are reapplied
 only when their exact English source guards and translated text still match:
 
 - A stable heading ID for the `data.frame` section.
 - A link to the vector-generation section.
 - A figure link and anchor for the painter model.
 - The existing `blue_theme()` call corrected to use the saved theme object.
+- A stable `for-everyone` heading ID for the setup guide's internal links.
 
-The last adaptation is the only code edit. Its guard matches the complete
+The theme adaptation is the only code edit. Its guard matches the complete
 original chunk, so it will not overwrite a changed upstream example. Use
-`--no-patches` to omit all four adaptations and retain upstream code exactly.
+`--no-patches` to omit all five adaptations and retain upstream code exactly.
 Review skipped adaptations when upstream changes their source excerpts.
 
 ## Sources, outputs, and memory
 
-Use a local English episode directory instead of a Git revision when needed:
+Use a local English source directory instead of a Git revision when needed.
+Local-directory mode translates every `.md` and `.Rmd` file below the selected
+directory, retaining relative paths:
 
 ```sh
-uv run --locked scripts/translate.py --source-dir /path/to/english/episodes --output-dir /path/to/spanish/episodes
+uv run --locked scripts/translate.py --source-dir /path/to/english/lesson --output-dir /path/to/spanish/lesson
 ```
 
 Choose separate directory trees: the input and output directories must differ
 and must not be nested inside each other.
 
-`--output-dir` defaults to this repository's `episodes/`. Runtime cache and
+`--output-dir` defaults to the repository root. In Git mode, an episode is
+written to `episodes/<name>.Rmd` and the setup guide to `learners/setup.md`
+under that output root. Runtime cache and
 output-state records use the ignored `.cache/translation/` directory; change
 that location with `--cache-dir`. Runtime cache contents and model weights do not belong
 in Git.
 
 The versioned resources in this directory are:
 
-- `config.json`: model revision, source remote, prompt settings, and resource
-  paths. Use `--config /path/to/config.json` to select another configuration.
+- `config.json`: model revision, source remote, repository-relative target files
+  and directories, prompt settings, and resource paths. Use
+  `--config /path/to/config.json` to select another configuration.
 - `seed-cache.json`: reusable Spanish translations, keyed by normalized
-  masked source text and unit kind, and restricted to their episode filenames.
+  masked source text and unit kind, and restricted to their source files.
+  Existing episode keys remain relative to `episodes/` for compatibility;
+  other targets use paths relative to the source root, such as `learners/setup.md`.
 - `glossary.json`: shared English-to-Spanish terminology.
 - `reviewed-context.json`: disambiguation and glossary overrides selected by
   exact source keys and filenames, rather than paragraph numbers.
-- `source-manifest.json`: English revision, model provenance, and file hashes.
+- `source-manifest.json`: English revision, model provenance, and file hashes
+  using paths relative to the output root.
 - `patches.json`: the guarded local build adaptations described above.
 
 `--update-memory` saves new records and provenance in the versioned resources
@@ -149,12 +163,12 @@ Generated memory records retain the profile of the model, prompt, glossary,
 and context settings used to create them. Changing those settings requires
 fresh generation for those machine records. Reviewed records in the same source
 and target languages remain stable for matching source text in their original
-episodes. The same
-English text can have separate translations in different episodes, so adding a
-translation in one chapter does not replace another chapter's wording.
+files. The same English text can have separate translations in different files,
+so adding a translation in the setup guide does not replace a chapter's wording.
 
-The translator updates Rmd lessons only. Synchronize upstream images, datasets,
+The translator updates selected Markdown and R Markdown files. Synchronize upstream images, datasets,
 and other supporting files separately. Review `config.yaml` episode ordering
-when chapters are added or removed. To remove a previously managed episode that
+when chapters are added or removed. To remove a previously managed document that
 has disappeared upstream, use `--prune`; edited outputs remain protected. Files
-outside the translator's managed lesson set are not pruned.
+removed from the target selection are retained, including when `--prune` is
+used. Files outside the translator's managed target set are not pruned.
