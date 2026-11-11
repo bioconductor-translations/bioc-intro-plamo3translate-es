@@ -54,11 +54,23 @@
       "translated_sha256": "adc794a7684c72d5d2882207a5e45a6d8a8fbdeb1c4fc98cab543d90839b70a7",
       "build_patches": []
     },
+    "index.md": {
+      "source_sha256": "974e6265db2978767b2ab354c67aa388cc6d90456ea4e7cd43f99769613edc45",
+      "translated_sha256": "62c87b17461991348df5866bd50950aa27dd359a41d91dd321beb042fad0e668",
+      "build_patches": [
+        "homepage-about-heading-id",
+        "homepage-single-prerequisite-heading"
+      ]
+    },
     "learners/setup.md": {
       "source_sha256": "05179cc96c0b30156766b791ec286736f6893f43214b8f52aef35d286fa97993",
-      "translated_sha256": "b658ad4af0432446e2a3a5816f25eed1faa30c042ac6aa367b5214521da996e8",
+      "translated_sha256": "aacc951a0eaab9a21cfec0031e0b89a86d1de880c5b374a0de9a2f53b31053ad",
       "build_patches": [
-        "setup-everyone-heading-id"
+        "setup-everyone-heading-id",
+        "setup-windows-existing-tight-list",
+        "setup-windows-install-tight-list",
+        "setup-macos-existing-tight-list",
+        "setup-macos-install-tight-list"
       ]
     }
   },
@@ -68,11 +80,17 @@
     "vector-generation-link",
     "theme-object-call",
     "painter-model-link",
-    "setup-everyone-heading-id"
+    "setup-everyone-heading-id",
+    "setup-windows-existing-tight-list",
+    "setup-windows-install-tight-list",
+    "setup-macos-existing-tight-list",
+    "setup-macos-install-tight-list",
+    "homepage-about-heading-id",
+    "homepage-single-prerequisite-heading"
   ],
-  "translation_memory_records": 978,
+  "translation_memory_records": 981,
   "translation_records_by_status": {
     "machine": 880,
-    "reviewed": 114
+    "reviewed": 117
   }
 }

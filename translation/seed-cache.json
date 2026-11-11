@@ -16665,6 +16665,36 @@
         "target_language": "es",
         "temperature": 0
       }
+    },
+    "b555236deda8407306515db7ebc2a9f6625f8866592aa6b5000d9894cddffedc": {
+      "source": "About this course",
+      "kind": "prose",
+      "files": [
+        "index.md"
+      ],
+      "translation": "Acerca de este curso",
+      "review_status": "reviewed",
+      "review_notes": "Reviewed manual Spanish homepage translation."
+    },
+    "f275c02564c66391e998166ca1b62777bea7aeabe7be14b35fbfd72d46d2726c": {
+      "source": "Prerequisites",
+      "kind": "prose",
+      "files": [
+        "index.md"
+      ],
+      "translation": "Prerrequisito",
+      "review_status": "reviewed",
+      "review_notes": "Reviewed manual Spanish homepage translation."
+    },
+    "0efb4dcbf63c2c38d3257189355fb3f07c6e9ca06a96459546501c0d4b8450f6": {
+      "source": "Familiarity with tabular data and spreadsheets.",
+      "kind": "prose",
+      "files": [
+        "index.md"
+      ],
+      "translation": "Familiaridad con los datos tabulares y las hojas de cálculo.",
+      "review_status": "reviewed",
+      "review_notes": "Reviewed manual Spanish homepage translation."
     }
   },
   "file_key_format": "Episode files use paths relative to episodes/; other files use paths relative to the selected source root."

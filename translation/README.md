@@ -3,7 +3,7 @@
 Run these commands from the repository root. The translator reads selected
 English Markdown and R Markdown files from a Git revision and writes Spanish
 files at the same repository-relative paths. The `targets` list in `config.json`
-selects the `episodes/` directory and `learners/setup.md`.
+selects the `episodes/` directory, `index.md`, and `learners/setup.md`.
 It reads the source revision without checking it out or merging it into the
 working tree.
 
@@ -60,7 +60,7 @@ review:
 
 ```sh
 uv run --locked scripts/translate.py --source-ref english/main --update-memory
-git diff -- episodes learners/setup.md translation
+git diff -- episodes index.md learners/setup.md translation
 Rscript scripts/build.R
 ```
 
@@ -96,7 +96,7 @@ translation text. All planned lessons are validated before output replacement.
 Missing or altered placeholders and unsupported structural changes stop the
 update for review.
 
-Five separately recorded build adaptations in `patches.json` are reapplied
+Separately recorded build adaptations in `patches.json` are reapplied
 only when their exact English source guards and translated text still match:
 
 - A stable heading ID for the `data.frame` section.
@@ -104,10 +104,12 @@ only when their exact English source guards and translated text still match:
 - A figure link and anchor for the painter model.
 - The existing `blue_theme()` call corrected to use the saved theme object.
 - A stable `for-everyone` heading ID for the setup guide's internal links.
+- Compact Windows and macOS instruction lists so each bullet stays beside its text.
+- A stable homepage heading ID and a single prerequisite callout heading.
 
 The theme adaptation is the only code edit. Its guard matches the complete
 original chunk, so it will not overwrite a changed upstream example. Use
-`--no-patches` to omit all five adaptations and retain upstream code exactly.
+`--no-patches` to omit these adaptations and retain upstream code exactly.
 Review skipped adaptations when upstream changes their source excerpts.
 
 ## Sources, outputs, and memory
@@ -124,7 +126,8 @@ Choose separate directory trees: the input and output directories must differ
 and must not be nested inside each other.
 
 `--output-dir` defaults to the repository root. In Git mode, an episode is
-written to `episodes/<name>.Rmd` and the setup guide to `learners/setup.md`
+written to `episodes/<name>.Rmd`, the homepage to `index.md`, and the setup guide
+to `learners/setup.md`
 under that output root. Runtime cache and
 output-state records use the ignored `.cache/translation/` directory; change
 that location with `--cache-dir`. Runtime cache contents and model weights do not belong

@@ -68,6 +68,22 @@ main <- function() {
   })
   on.exit(replace_pandoc_args(original_pandoc_args), add = TRUE)
 
+  # Correct the installed Spanish callout label for this build process only.
+  original_callout_translations <- get("get_callout_translations", ns, inherits = FALSE)
+  replace_callout_translations <- function(fun) {
+    unlockBinding("get_callout_translations", ns)
+    assign("get_callout_translations", fun, envir = ns)
+    lockBinding("get_callout_translations", ns)
+  }
+  replace_callout_translations(function() {
+    translations <- original_callout_translations()
+    if (identical(unname(translations["Prereq"]), "Pre requisito")) {
+      translations["Prereq"] <- "Prerrequisito"
+    }
+    translations
+  })
+  on.exit(replace_callout_translations(original_callout_translations), add = TRUE)
+
   sandpaper::build_lesson(path = root, rebuild = "--rebuild" %in% args,
                          quiet = FALSE, preview = FALSE)
 

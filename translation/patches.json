@@ -1,7 +1,6 @@
 {
   "schema_version": 1,
   "description": "Reviewed local build adaptations, applied after prose translation only when the exact English source guard and translated before-text both match once. Skip changed upstream excerpts; never guess a fuzzy match.",
-  "files_relative_to": "episodes",
   "patches": [
     {
       "id": "data-frame-heading-id",
@@ -52,6 +51,67 @@
       "after": "### Para todos {#for-everyone}\n",
       "expected_occurrences": 1,
       "changes_code": false
+    },
+    {
+      "id": "setup-windows-existing-tight-list",
+      "file": "learners/setup.md",
+      "description": "Keep the setup instruction list tight so Workbench accordion bullets share a line with their text.",
+      "source_guard": "- Open RStudio, and click on \"Help\" > \"Check for updates\". If a new version is\n  available, quit RStudio, and download the latest version for RStudio.\n\n- To check which version of R you are using, start RStudio and the first thing\n  that appears in the console indicates the version of R you are\n  running. Alternatively, you can type `sessionInfo()`, which will also display\n  which version of R you are running. Go on\n  the [CRAN website](https://cran.r-project.org/bin/windows/base/) and check\n  whether a more recent version is available. If so, please download and install\n  it. You can [check here](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f) for\n  more information on how to remove old versions from your system if you wish to do so.\n\n- Follow the steps in the instructions [for everyone](#for-everyone) at the\n  bottom of this page.",
+      "before": "- Abra RStudio y haga clic en \"Help\" > \"Check for updates\". Si hay una versión nueva disponible, cierre RStudio y descargue la versión más reciente de RStudio.\n\n- Para comprobar qué versión de R está utilizando, inicie RStudio; lo primero que aparece en la consola indicará la versión de R que está ejecutando. Alternativamente, puede escribir `sessionInfo()`, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](https://cran.r-project.org/bin/windows/base/) y compruebe si hay una versión más reciente disponible. Si es así, descargue e instale la misma. Puede [consultar aquí](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f) para obtener más información sobre cómo eliminar versiones antiguas de su sistema si así lo desea.\n\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "after": "- Abra RStudio y haga clic en \"Help\" > \"Check for updates\". Si hay una versión nueva disponible, cierre RStudio y descargue la versión más reciente de RStudio.\n- Para comprobar qué versión de R está utilizando, inicie RStudio; lo primero que aparece en la consola indicará la versión de R que está ejecutando. Alternativamente, puede escribir `sessionInfo()`, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](https://cran.r-project.org/bin/windows/base/) y compruebe si hay una versión más reciente disponible. Si es así, descargue e instale la misma. Puede [consultar aquí](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f) para obtener más información sobre cómo eliminar versiones antiguas de su sistema si así lo desea.\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "expected_occurrences": 1,
+      "changes_code": false
+    },
+    {
+      "id": "setup-windows-install-tight-list",
+      "file": "learners/setup.md",
+      "description": "Keep the setup instruction list tight so Workbench accordion bullets share a line with their text.",
+      "source_guard": "- Download R from\n  the [CRAN website](https://cran.r-project.org/bin/windows/base/release.htm).\n\n- Run the `.exe` file that was just downloaded\n\n- Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)\n\n- Under *All Installers* select **RStudio xxxx.yy.zz-uuu.exe - Windows 10/11** (where x, y, z, and u represent version numbers)\n\n- Double click the file to install it\n\n- Once it's installed, open RStudio to make sure it works and you don't get any\n  error messages\n\n- Follow the steps in the instructions [for everyone](#for-everyone) at the\n  bottom of this page.",
+      "before": "- Descargue R desde el [sitio web de CRAN](https://cran.r-project.org/bin/windows/base/release.htm).\n\n- Ejecute el archivo `.exe` que acaba de descargar\n\n- Vaya a la [página de descargas de RStudio](https://www.rstudio.com/products/rstudio/download/#download)\n\n- En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.exe - Windows 10/11** (donde x, y, z y u representan los números de versión)\n\n- Haga doble clic en el archivo para instalarlo\n\n- Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.\n\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "after": "- Descargue R desde el [sitio web de CRAN](https://cran.r-project.org/bin/windows/base/release.htm).\n- Ejecute el archivo `.exe` que acaba de descargar\n- Vaya a la [página de descargas de RStudio](https://www.rstudio.com/products/rstudio/download/#download)\n- En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.exe - Windows 10/11** (donde x, y, z y u representan los números de versión)\n- Haga doble clic en el archivo para instalarlo\n- Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "expected_occurrences": 1,
+      "changes_code": false
+    },
+    {
+      "id": "setup-macos-existing-tight-list",
+      "file": "learners/setup.md",
+      "description": "Keep the setup instruction list tight so Workbench accordion bullets share a line with their text.",
+      "source_guard": "- Open RStudio, and click on \"Help\" > \"Check for updates\". If a new version is\n  available, quit RStudio, and download the latest version for RStudio.\n\n- To check the version of R you are using, start RStudio and the first thing\n  that appears on the terminal indicates the version of R you are running. Alternatively, you can type `sessionInfo()`, which will\n  also display which version of R you are running. Go on\n  the [CRAN website](https://cran.r-project.org/bin/macosx/) and check\n  whether a more recent version is available. If so, please download and install\n  it.\n\n- Follow the steps in the instructions [for everyone](#for-everyone) at the\n  bottom of this page.",
+      "before": "- Abra RStudio y haga clic en \"Help\" > \"Check for updates\". Si hay una versión nueva disponible, cierre RStudio y descargue la versión más reciente de RStudio.\n\n- Para comprobar la versión de R que está utilizando, inicie RStudio; lo primero que aparece en la terminal indicará la versión de R que está ejecutando. Alternativamente, puede escribir `sessionInfo()`, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](https://cran.r-project.org/bin/macosx/) y compruebe si hay una versión más reciente disponible. Si es así, por favor descargue e instale la misma.\n\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "after": "- Abra RStudio y haga clic en \"Help\" > \"Check for updates\". Si hay una versión nueva disponible, cierre RStudio y descargue la versión más reciente de RStudio.\n- Para comprobar la versión de R que está utilizando, inicie RStudio; lo primero que aparece en la terminal indicará la versión de R que está ejecutando. Alternativamente, puede escribir `sessionInfo()`, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](https://cran.r-project.org/bin/macosx/) y compruebe si hay una versión más reciente disponible. Si es así, por favor descargue e instale la misma.\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "expected_occurrences": 1,
+      "changes_code": false
+    },
+    {
+      "id": "setup-macos-install-tight-list",
+      "file": "learners/setup.md",
+      "description": "Keep the setup instruction list tight so Workbench accordion bullets share a line with their text.",
+      "source_guard": "- Download R from\n  the [CRAN website](https://cran.r-project.org/bin/macosx/).\n\n- Select the `.pkg` file for the latest R version\n\n- Double click on the downloaded file to install R\n\n- It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed\n  by some packages)\n\n- Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)\n\n- Under *All Installers* select **RStudio xxxx.yy.zz-uuu.dmg - macOS 10.15+** (where x, y, z, and u represent version numbers)\n\n- Double click the file to install RStudio\n\n- Once it's installed, open RStudio to make sure it works and you don't get any\n  error messages.\n\n- Follow the steps in the instructions [for everyone](#for-everyone) at the\n  bottom of this page.",
+      "before": "- Descargue R desde el [sitio web de CRAN](https://cran.r-project.org/bin/macosx/).\n\n- Seleccione el archivo `.pkg` para la versión más reciente de R\n\n- Haga doble clic en el archivo descargado para instalar R\n\n- También es recomendable instalar [XQuartz](https://www.xquartz.org/) (necesario para algunos paquetes)\n\n- Vaya a la [página de descargas de RStudio](https://www.rstudio.com/products/rstudio/download/#download)\n\n- En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.dmg - macOS 10.15+** (donde x, y, z y u representan los números de versión)\n\n- Haga doble clic en el archivo para instalar RStudio\n\n- Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.\n\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "after": "- Descargue R desde el [sitio web de CRAN](https://cran.r-project.org/bin/macosx/).\n- Seleccione el archivo `.pkg` para la versión más reciente de R\n- Haga doble clic en el archivo descargado para instalar R\n- También es recomendable instalar [XQuartz](https://www.xquartz.org/) (necesario para algunos paquetes)\n- Vaya a la [página de descargas de RStudio](https://www.rstudio.com/products/rstudio/download/#download)\n- En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.dmg - macOS 10.15+** (donde x, y, z y u representan los números de versión)\n- Haga doble clic en el archivo para instalar RStudio\n- Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.\n- Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.",
+      "expected_occurrences": 1,
+      "changes_code": false
+    },
+    {
+      "id": "homepage-about-heading-id",
+      "file": "index.md",
+      "description": "Keep the existing homepage section anchor when translating its title.",
+      "source_guard": "## About this course\n",
+      "before": "## Acerca de este curso\n",
+      "after": "## Acerca de este curso {#about-this-course}\n",
+      "expected_occurrences": 1,
+      "changes_code": false
+    },
+    {
+      "id": "homepage-single-prerequisite-heading",
+      "file": "index.md",
+      "description": "Use the localized prereq callout header once, omitting the redundant inner heading.",
+      "source_guard": "## Prerequisites\n",
+      "before": "## Prerrequisito\n",
+      "after": "",
+      "expected_occurrences": 1,
+      "changes_code": false
     }
-  ]
+  ],
+  "file_key_format": "Episode files use paths relative to episodes/; other files use repository-relative paths."
 }

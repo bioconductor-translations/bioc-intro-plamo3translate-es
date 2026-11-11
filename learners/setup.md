@@ -19,9 +19,7 @@ title: "Configuración"
 ## Si ya tiene instalados R y RStudio
 
 - Abra RStudio y haga clic en "Help" > "Check for updates". Si hay una versión nueva disponible, cierre RStudio y descargue la versión más reciente de RStudio.
-
 - Para comprobar qué versión de R está utilizando, inicie RStudio; lo primero que aparece en la consola indicará la versión de R que está ejecutando. Alternativamente, puede escribir `sessionInfo()`, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](https://cran.r-project.org/bin/windows/base/) y compruebe si hay una versión más reciente disponible. Si es así, descargue e instale la misma. Puede [consultar aquí](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f) para obtener más información sobre cómo eliminar versiones antiguas de su sistema si así lo desea.
-
 - Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.
 
 
@@ -32,17 +30,11 @@ title: "Configuración"
 ## Si no tiene instalados R y RStudio
 
 - Descargue R desde el [sitio web de CRAN](https://cran.r-project.org/bin/windows/base/release.htm).
-
 - Ejecute el archivo `.exe` que acaba de descargar
-
 - Vaya a la [página de descargas de RStudio](https://www.rstudio.com/products/rstudio/download/#download)
-
 - En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.exe - Windows 10/11** (donde x, y, z y u representan los números de versión)
-
 - Haga doble clic en el archivo para instalarlo
-
 - Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.
-
 - Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.
 
 
@@ -57,9 +49,7 @@ title: "Configuración"
 ## Si ya tiene instalados R y RStudio
 
 - Abra RStudio y haga clic en "Help" > "Check for updates". Si hay una versión nueva disponible, cierre RStudio y descargue la versión más reciente de RStudio.
-
 - Para comprobar la versión de R que está utilizando, inicie RStudio; lo primero que aparece en la terminal indicará la versión de R que está ejecutando. Alternativamente, puede escribir `sessionInfo()`, lo que también mostrará qué versión de R está ejecutando. Acceda al [sitio web de CRAN](https://cran.r-project.org/bin/macosx/) y compruebe si hay una versión más reciente disponible. Si es así, por favor descargue e instale la misma.
-
 - Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.
 
 
@@ -70,21 +60,13 @@ title: "Configuración"
 ## Si no tiene instalados R y RStudio
 
 - Descargue R desde el [sitio web de CRAN](https://cran.r-project.org/bin/macosx/).
-
 - Seleccione el archivo `.pkg` para la versión más reciente de R
-
 - Haga doble clic en el archivo descargado para instalar R
-
 - También es recomendable instalar [XQuartz](https://www.xquartz.org/) (necesario para algunos paquetes)
-
 - Vaya a la [página de descargas de RStudio](https://www.rstudio.com/products/rstudio/download/#download)
-
 - En *All Installers*, seleccione **RStudio xxxx.yy.zz-uuu.dmg - macOS 10.15+** (donde x, y, z y u representan los números de versión)
-
 - Haga doble clic en el archivo para instalar RStudio
-
 - Una vez instalado, abra RStudio para asegurarse de que funcione y de que no aparezcan mensajes de error.
-
 - Siga los pasos de las instrucciones [para todos](#for-everyone) al final de esta página.
 
 
