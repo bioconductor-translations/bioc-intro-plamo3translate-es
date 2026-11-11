@@ -24,7 +24,11 @@
   <div class="container-fluid top-nav-container">
     <div class="col-md-8">
       <div class="large-logo">
-        <img id="incubator-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo.svg"></div>
+        <a href="index.html">
+        <img id="incubator-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo.svg"></a>
+
+
+      </div>
     </div>
     <div class="selector-container">
       <menu class="theme-selector" id="theme-selector-menu"><li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
@@ -64,7 +68,9 @@
       <span class="menu-title">Menú</span>
     </button>
     <div class="nav-logo">
-      <img class="small-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo-sm.svg"></div>
+      <a href="index.html">
+      <img class="small-logo" alt="Carpentries Incubator" src="../assets/images/incubator-logo-sm.svg"></a>
+    </div>
     <div class="lesson-title-md">
       Introducción al análisis de datos con R y Bioconductor
     </div>
@@ -105,7 +111,7 @@
       </fieldset>
     </form>
     -->
-    <a id="search-button" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Buscar en la página All In One">Buscar en la página All In One</a>
+    <a id="search-button-nav" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Buscar en la página All In One">Buscar en la página All In One</a>
   </div><!--/div.container-fluid -->
 </nav><aside class="col-md-12 lesson-progress"><div class="progress incubator">
     <div class="progress-bar incubator" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso de la lección">43%</div>
@@ -119,6 +125,9 @@
           <i class="search-icon" data-feather="x" role="img"></i>
         </button>
         <div class="sidebar-inner">
+          <div class="row mobile-row" id="theme-row-mobile">
+            <a id="search-button-sidebar" class="btn btn-primary" href="../instructor/aio.html" role="button" aria-label="Buscar en la página All In One">Buscar en la página All In One</a>
+          </div>
           <div class="row mobile-row" id="theme-row-mobile">
             <menu class="col theme-selector" id="theme-selector-sidebar"><li class="nav-item dropdown theme-button-list" id="theme-button-list-sidebar">
                 <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
@@ -161,6 +170,7 @@
                     </div>
                   </div><!--/div.accordion-item-->
                 </div><!--/div.accordion-flush-->
+
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
 
@@ -273,6 +283,29 @@
               </div>
             </div>
 
+            <hr class="half-width"><div class="accordion accordion-flush" id="accordion-links-toggle">
+                <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading-links-toggle">
+                  <button class="accordion-button collapsed" id="links" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-links-toggle" aria-expanded="false" aria-controls="flush-collapse-links-toggle">
+                    LINKS
+                  </button>
+                </h2>
+                <div id="flush-collapse-links-toggle" class="accordion-collapse show collapse" data-bs-parent="#accordion-links-toggle">
+                    <div class="accordion-body">
+                        <ul><li>
+                            <a href="../instructor/key-points.html">Puntos Clave</a>
+                            </li>
+                            <li>
+                            <a href="../instructor/instructor-notes.html">Notas de la instructora</a>
+                            </li>
+                            <li>
+                            <a href="../instructor/images.html">Extraer todas las imágenes</a>
+                            </li>
+                        </ul></div>
+                </div>
+                </div><!--/div.accordion-item-->
+            </div><!--/div.accordion-flush-->
+
             <hr class="half-width"><div class="accordion accordion-flush lesson-resources" id="accordion-resources-toggle">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-heading-resources-toggle">
@@ -282,16 +315,7 @@
                 </h2>
                 <div id="flush-collapse-resources-toggle" class="accordion-collapse collapse" data-bs-parent="#accordion-resources-toggle">
                   <div class="accordion-body">
-                    <ul><li>
-                        <a href="../instructor/key-points.html">Puntos Clave</a>
-                      </li>
-                      <li>
-                        <a href="../instructor/instructor-notes.html">Notas de la instructora</a>
-                      </li>
-                      <li>
-                        <a href="../instructor/images.html">Extraer todas las imágenes</a>
-                      </li>
-                      <hr><li><a class="dropdown-item" href="discuss.html">Discussion</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+                    <ul><hr><li><a class="dropdown-item" href="discuss.html">Discussion</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -318,16 +342,16 @@
       <div class="d-none d-sm-none d-md-block">
         <a class="chapter-link" href="../instructor/25-starting-with-data.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previo: Comenzando con los
+          Previo: Comenzando con los datos...
         </a>
         <a class="chapter-link float-end" href="../instructor/40-visualization.html" rel="next">
-          Siguiente: Visualización de...
+          Siguiente: Visualización de datos...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Manipulación y análisis de datos con dplyr</h1>
-        <p>Última actualización: 2026-11-09 |
+        <p>Última actualización: 2026-11-11 |
 
         <a href="https://github.com/bioconductor-translations/bioc-intro-plamo3translate-es/edit/main/episodes/30-dplyr.Rmd" class="external-link">Mejora esta página <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -361,8 +385,8 @@
 <strong><code>tidyr</code></strong>.</li>
 <li>Describa varias de sus funciones que son extremadamente útiles para
 manipular datos.</li>
-<li>Describa el concepto de los formatos ancho y largo, y vea cómo
-reestructurar un marco de datos de un formato a otro.</li>
+<li>Describa el concepto de los formatos de tabla ancho y largo, y vea
+cómo reestructurar una tabla de datos de un formato a otro.</li>
 <li>Demostrar cómo unir tablas.</li>
 </ul></div>
 </div>
@@ -390,12 +414,12 @@ posteriormente, importarlo en cada sesión posterior de R cuando lo
 necesitemos.</p>
 <ul><li><p>El paquete <strong><code>dplyr</code></strong> ofrece
 herramientas potentes para tareas de manipulación de datos. Está
-diseñado para trabajar directamente con marcos de datos, con muchas
+diseñado para funcionar directamente con tablas de datos, con muchas
 tareas de manipulación optimizadas.</p></li>
-<li><p>Como veremos más adelante, a veces queremos que un marco de datos
-se reorganice para poder realizar ciertos análisis específicos o para su
-visualización. El paquete <strong><code>tidyr</code></strong> aborda
-este problema común de reorganización de datos y proporciona
+<li><p>Como veremos más adelante, a veces queremos que una tabla de
+datos se reorganice para poder realizar ciertos análisis específicos o
+para su visualización. El paquete <strong><code>tidyr</code></strong>
+aborda este problema común de reorganización de datos y proporciona
 herramientas para manipular los datos de manera ordenada.</p></li>
 </ul><p>Para obtener más información sobre
 <strong><code>dplyr</code></strong> y
@@ -474,8 +498,8 @@ utilizando la función <code>read_csv()</code> (fíjese en el
 </div>
 <p>Nótese que la clase de los datos se denomina ahora «tibble».</p>
 <p>Los tibbles ajustan algunos de los comportamientos de los objetos de
-marco de datos que presentamos anteriormente. La estructura de datos es
-muy similar a la de un marco de datos. Para nuestros propósitos, las
+tabla de datos que presentamos anteriormente. La estructura de datos es
+muy similar a la de una tabla de datos. Para nuestros propósitos, las
 únicas diferencias son que:</p>
 <ol style="list-style-type: decimal"><li><p>Muestra el tipo de datos de cada columna debajo de su nombre.
 Tenga en cuenta que &lt;<code>dbl</code>&gt; es un tipo de datos
@@ -499,8 +523,8 @@ estadísticas resumidas sobre datos agrupados</li>
 <li>
 <code>count()</code>: contar valores discretos</li>
 </ul></section><section><h2 class="section-heading" id="selección-de-columnas-y-filtrado-de-filas">Selección de columnas y filtrado de filas<a class="anchor" aria-label="anchor" href="#selecci%C3%B3n-de-columnas-y-filtrado-de-filas"></a></h2>
-<hr class="half-width"><p>Para seleccionar columnas de un marco de datos, utilice
-<code>select()</code>. El primer argumento de esta función es el marco
+<hr class="half-width"><p>Para seleccionar columnas de una tabla de datos, utilice
+<code>select()</code>. El primer argumento de esta función es la tabla
 de datos (<code>rna</code>), y los argumentos siguientes son las
 columnas a conservar.</p>
 <div class="codewrapper sourceCode" id="cb5">
@@ -708,7 +732,7 @@ hsapiens_homolog_associated_gene_name <em>no sea</em> un
 <hr class="half-width"><p>¿Qué pasa si quieres seleccionar y filtrar al mismo tiempo? Hay tres
 formas de hacerlo: usar pasos intermedios, funciones anidadas o
 pipes.</p>
-<p>Con pasos intermedios, se crea un marco de datos temporal y se
+<p>Con pasos intermedios, se crea una tabla de datos temporal y se
 utiliza como entrada para la siguiente función, de la siguiente
 manera:</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -788,7 +812,7 @@ través de <code>select()</code> para conservar únicamente las columnas
 <code>expression</code>.</p>
 <p>El pipe <code>|&gt;</code> toma el objeto a su izquierda y lo pasa
 directamente como primer argumento a la función a su derecha; ya no es
-necesario incluir explícitamente el marco de datos como argumento de las
+necesario incluir explícitamente la tabla de datos como argumento de las
 funciones <code>filter()</code> y <code>select()</code>.</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -817,7 +841,7 @@ funciones <code>filter()</code> y <code>select()</code>.</p>
 # ℹ 14,730 more rows</code></pre>
 </div>
 <p>A algunas personas les resulta útil leer el pipe como la palabra
-“luego”. Por ejemplo, en el ejemplo anterior, tomamos el marco de datos
+“luego”. Por ejemplo, en el ejemplo anterior, tomamos la tabla de datos
 <code>rna</code>, <em>luego</em> filtramos las filas con
 <code>sex == "Male"</code> mediante <code>filter</code>, <em>luego</em>
 seleccionamos las columnas <code>gene</code>, <code>sample</code>,
@@ -826,7 +850,7 @@ seleccionamos las columnas <code>gene</code>, <code>sample</code>,
 <p>Las funciones <strong><code>dplyr</code></strong> por sí mismas son
 algo sencillas, pero al combinarlas en flujos de trabajo lineales
 mediante el pipe, podemos realizar manipulaciones más complejas de
-marcos de datos.</p>
+tablas de datos.</p>
 <p>Si queremos crear un nuevo objeto con esta versión reducida de los
 datos, podemos asignarle un nombre nuevo:</p>
 <div class="codewrapper sourceCode" id="cb25">
@@ -880,7 +904,7 @@ conserve únicamente las columnas <code>gene</code>, <code>sample</code>,
   Solución
   </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -981,16 +1005,16 @@ columna nueva dentro de la misma llamada a <code>mutate()</code>:</p>
 <div id="desafío-1" class="callout-inner">
 <h3 class="callout-title">Desafío</h3>
 <div class="callout-content">
-<p>Crea un nuevo marco de datos a partir de los datos <code>rna</code>
+<p>Crea una nueva tabla de datos a partir de los datos <code>rna</code>
 que cumpla los siguientes criterios: contenga únicamente las columnas
 <code>gene</code>, <code>chromosome_name</code>,
 <code>phenotype_description</code>, <code>sample</code> y
 <code>expression</code>. Los valores de expresión deben estar
-transformados logarítmicamente. Este marco de datos debe contener
+transformados logarítmicamente. Esta tabla de datos debe contener
 únicamente genes ubicados en cromosomas sexuales, asociados a un
 phenotype_description y con una expresión logarítmica superior a 5.</p>
 <p><strong>Pista</strong>: ¡piensa en cómo deben ordenarse los comandos
-para generar este marco de datos!</p>
+para generar esta tabla de datos!</p>
 </div>
 </div>
 </div>
@@ -1001,7 +1025,7 @@ para generar este marco de datos!</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1276,7 +1300,7 @@ temporales.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb49">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1478,7 +1502,7 @@ secuenciación?</li>
 biotipo.</li>
 <li>Identifique los genes asociados con la descripción del fenotipo
 “abnormal DNA methylation” y calcule su expresión media (en log) en el
-tiempo 0, el tiempo 4 y el tiempo 8.</li>
+momento 0, el momento 4 y el momento 8.</li>
 </ol></div>
 </div>
 </div>
@@ -1489,7 +1513,7 @@ tiempo 0, el tiempo 4 y el tiempo 8.</li>
   Solución
   </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb66">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1693,7 +1717,7 @@ valores de la columna <code>sample</code> se conviertan en los nombres
 de las variables de columna.</p>
 <p>El punto clave aquí es que seguimos una estructura de datos ordenada,
 pero hemos <strong>reconfigurado</strong> los datos según las
-observaciones de interés: los niveles de expresión por gen en lugar de
+observaciones de interés: los niveles de expresión por gen, en lugar de
 registrarlos por gen y por muestra.</p>
 <p>La transformación inversa consistiría en convertir los nombres de las
 columnas en valores de una nueva variable.</p>
@@ -1738,7 +1762,7 @@ formato ancho.</p>
 en nuevos nombres de columna;</li>
 <li>el <code>values_from</code>: la columna cuyos valores llenarán las
 nuevas columnas.</li>
-</ol><figure style="text-align: center"><img src="../fig/pivot_wider.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the values in the 'sample' column on the left have become column names on the right and how the values in the 'expression' column on the left have become values on the the right. Below is the call to 'pivot_wider()' with annotations pointing to the 'sample' and 'expression' function arguments." width="3709" class="figure mx-auto d-block"><figcaption>
+</ol><figure style="text-align: center"><img src="../fig/pivot_wider.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the values in the 'sample' column on the left have become column names on the right and how the values in the 'expression' column on the left have become values on the the right. Below is the call to 'pivot_wider()' with annotations pointing to the 'sample' and 'expression' function arguments." class="figure mx-auto d-block"><figcaption>
 Wide pivot of the <code>rna</code> data.
 </figcaption></figure><div class="codewrapper sourceCode" id="cb80">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1862,7 +1886,7 @@ queremos crear y llenar con los valores actuales;</li>
 <li>los nombres de las columnas que se utilizarán para completar las
 variables <code>names_to</code> y <code>values_to</code> (o las columnas
 que se excluirán de la transformación).</li>
-</ol><!-- a la derecha y flechas que ilustran cómo los valores de la --><!-- columna 'sample' a la izquierda se han convertido en nombres de --><!-- columnas a la derecha y cómo los valores de la columna 'expression' --><!-- a la izquierda se han convertido en valores a la derecha. --><figure style="text-align: center"><img src="../fig/pivot_longer.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the column names on the left have become a new column 'sample' on the left and the values in the wide table on the right have become a new column 'expression' on the left.  Below is the call to 'pivot_wider()' with annotations pointing to the 'sample', 'expression' and the '-gene' arguments." width="4245" class="figure mx-auto d-block"><figcaption>
+</ol><!-- a la derecha y flechas que ilustran cómo los valores de la --><!-- columna 'sample' a la izquierda se han convertido en nombres de --><!-- columnas a la derecha y cómo los valores de la columna 'expression' --><!-- a la izquierda se han convertido en valores a la derecha. --><figure style="text-align: center"><img src="../fig/pivot_longer.png" alt="Figure showing the long table format on the left and wide table format on the right and arrows illustrating how the column names on the left have become a new column 'sample' on the left and the values in the wide table on the right have become a new column 'expression' on the left.  Below is the call to 'pivot_wider()' with annotations pointing to the 'sample', 'expression' and the '-gene' arguments." class="figure mx-auto d-block"><figcaption>
 Long pivot of the <code>rna</code> data.
 </figcaption></figure><p>Para recrear <code>rna_long</code> a partir de <code>rna_wide</code>,
 crearíamos una clave llamada <code>sample</code> y un valor llamado
@@ -2054,7 +2078,7 @@ en formato largo.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution5" class="accordion-collapse collapse" data-bs-parent="#accordionSolution5" aria-labelledby="headingSolution5">
+<div id="collapseSolution5" class="accordion-collapse collapse" aria-labelledby="headingSolution5" data-bs-parent="#accordionSolution5">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb100">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2122,12 +2146,12 @@ en formato largo.</p>
 <div id="pregunta-1" class="callout-inner">
 <h3 class="callout-title">Pregunta</h3>
 <div class="callout-content">
-<p>Extraiga los genes ubicados en los cromosomas X e Y del marco de
-datos <code>rna</code> y despliegue el marco de datos con
+<p>Extraiga los genes ubicados en los cromosomas X e Y de la tabla de
+datos <code>rna</code> y despliegue la tabla de datos con
 <code>sex</code> como columnas, <code>chromosome_name</code> como filas
 y la expresión media de los genes ubicados en cada cromosoma como
 valores, como en el siguiente tibble:</p>
-<figure><img src="../fig/Exercise_pivot_W.png" alt="A two by two table with  X and Y row names and Female and Male column names showing the total counts for each X/Y and Female/Male combination. The Y/Female combinations shows 3 counts, while all other counts are above 2000 counts." width="1347" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>¡Tendrá que resumir antes de reestructurar!</p>
+<figure><img src="../fig/Exercise_pivot_W.png" alt="A two by two table with  X and Y row names and Female and Male column names showing the total counts for each X/Y and Female/Male combination. The Y/Female combinations shows 3 counts, while all other counts are above 2000 counts." style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>¡Tendrá que resumir antes de reestructurar!</p>
 </div>
 </div>
 </div>
@@ -2138,7 +2162,7 @@ valores, como en el siguiente tibble:</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution6" class="accordion-collapse collapse" data-bs-parent="#accordionSolution6" aria-labelledby="headingSolution6">
+<div id="collapseSolution6" class="accordion-collapse collapse" aria-labelledby="headingSolution6" data-bs-parent="#accordionSolution6">
 <div class="accordion-body">
 <p>Primero calculemos el nivel medio de expresión de los genes situados
 en los cromosomas X e Y en las muestras de ratones machos y hembras…</p>
@@ -2173,7 +2197,7 @@ en los cromosomas X e Y en las muestras de ratones machos y hembras…</p>
 3 Male   X               2497.
 4 Male   Y               2117.</code></pre>
 </div>
-<p>Y convertir la tabla a formato ancho</p>
+<p>Y pivotar la tabla a formato ancho</p>
 <div class="codewrapper sourceCode" id="cb107">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2210,7 +2234,7 @@ en los cromosomas X e Y en las muestras de ratones machos y hembras…</p>
 1 X                3504. 2497.
 2 Y                   3  2117.</code></pre>
 </div>
-<p>Ahora toma ese marco de datos y transfórmalo con
+<p>Ahora toma esa tabla de datos y transfórmala con
 <code>pivot_longer()</code> para que cada fila sea una combinación única
 de <code>chromosome_name</code> por <code>gender</code>.</p>
 <div class="codewrapper sourceCode" id="cb111">
@@ -2245,8 +2269,8 @@ de <code>chromosome_name</code> por <code>gender</code>.</p>
 <div id="pregunta-2" class="callout-inner">
 <h3 class="callout-title">Pregunta</h3>
 <div class="callout-content">
-<p>Utilice el conjunto de datos <code>rna</code> para crear una matriz
-de expresión en la que cada fila represente los niveles de expresión
+<p>Utilice la tabla de datos <code>rna</code> para crear una matriz de
+expresión en la que cada fila represente los niveles de expresión
 promedio de los genes y las columnas representen los diferentes puntos
 temporales.</p>
 </div>
@@ -2259,7 +2283,7 @@ temporales.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution7" class="accordion-collapse collapse" data-bs-parent="#accordionSolution7" aria-labelledby="headingSolution7">
+<div id="collapseSolution7" class="accordion-collapse collapse" aria-labelledby="headingSolution7" data-bs-parent="#accordionSolution7">
 <div class="accordion-body">
 <p>Primero, calculemos la expresión media por gen y por momento.</p>
 <div class="codewrapper sourceCode" id="cb113">
@@ -2487,7 +2511,7 @@ no empiece con un número:</p>
 <div id="pregunta-3" class="callout-inner">
 <h3 class="callout-title">Pregunta</h3>
 <div class="callout-content">
-<p>Utilice el marco de datos anterior que contiene los niveles medios de
+<p>Utilice la tabla de datos anterior que contiene los niveles medios de
 expresión por punto temporal y cree una nueva columna con los cocientes
 de expresión (fold-changes) entre el punto temporal 8 y el punto
 temporal 0, y entre el punto temporal 8 y el punto temporal 4. Convierta
@@ -2503,7 +2527,7 @@ calculados.</p>
   Solución
   </h4>
 </button>
-<div id="collapseSolution8" class="accordion-collapse collapse" data-bs-parent="#accordionSolution8" aria-labelledby="headingSolution8">
+<div id="collapseSolution8" class="accordion-collapse collapse" aria-labelledby="headingSolution8" data-bs-parent="#accordionSolution8">
 <div class="accordion-body">
 <p>Partiendo del tibble rna_time:</p>
 <div class="codewrapper sourceCode" id="cb129">
@@ -2598,19 +2622,19 @@ calculados.</p>
 múltiples tablas. Por lo general, esto ocurre porque se recopilan
 diferentes tipos de información de diversas fuentes.</p>
 <p>Para algunos análisis, puede resultar conveniente combinar datos de
-dos o más tablas en un único marco de datos basándose en una columna
+dos o más tablas en una única tabla de datos basándose en una columna
 común a todas ellas.</p>
 <p>El paquete <code>dplyr</code> proporciona un conjunto de funciones de
-unión para combinar dos marcos de datos basándose en coincidencias
+unión para combinar dos tablas de datos basándose en coincidencias
 dentro de columnas especificadas. A continuación, presentamos una breve
 introducción a las uniones. Para lectura adicional, consulte el capítulo
 sobre <a href="https://uclouvain-cbio.github.io/WSBIM1207/sec-join.html" class="external-link">uniones
-de tablas</a>. El <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf" class="external-link">Cheat
-Sheet de Transformación de Datos</a> también ofrece una breve
+de tablas</a>. La <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf" class="external-link">Hoja
+de trucos de transformación de datos</a> también ofrece una breve
 descripción general de las uniones de tablas.</p>
 <p>Vamos a ilustrar la unión utilizando una tabla pequeña,
 <code>rna_mini</code>, que crearemos mediante un subconjunto de la tabla
-original <code>rna</code>, conservando solo 3 columnas y 10 filas.</p>
+original <code>rna</code>, manteniendo solo 3 columnas y 10 filas.</p>
 <div class="codewrapper sourceCode" id="cb135">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2775,11 +2799,11 @@ tabla se conserva en la unida.</p>
 <h3 class="callout-title">Desafío:</h3>
 <div class="callout-content">
 <p>Descargue la tabla <code>annot3</code> <a href="https://carpentries-incubator.github.io/bioc-intro/data/annot3.csv" class="external-link">haciendo
-clic en este enlace</a> y colóquela en su repositorio data/. Utilizando
-la función <code>full_join()</code>, una la tabla <code>rna_mini</code>
-con la <code>annot3</code>. ¿Qué ha pasado con los genes <em>Klk6</em>,
-<em>mt-Tf</em>, <em>mt-Rnr1</em>, <em>mt-Tv</em>, <em>mt-Rnr2</em> y
-<em>mt-Tl1</em>?</p>
+clic en este enlace</a> y coloque la tabla en su repositorio data/.
+Utilizando la función <code>full_join()</code>, una las tablas
+<code>rna_mini</code> y <code>annot3</code>. ¿Qué ha ocurrido con los
+genes <em>Klk6</em>, <em>mt-Tf</em>, <em>mt-Rnr1</em>, <em>mt-Tv</em>,
+<em>mt-Rnr2</em> y <em>mt-Tl1</em>?</p>
 </div>
 </div>
 </div>
@@ -2790,7 +2814,7 @@ con la <code>annot3</code>. ¿Qué ha pasado con los genes <em>Klk6</em>,
   Solución
   </h4>
 </button>
-<div id="collapseSolution9" class="accordion-collapse collapse" data-bs-parent="#accordionSolution9" aria-labelledby="headingSolution9">
+<div id="collapseSolution9" class="accordion-collapse collapse" aria-labelledby="headingSolution9" data-bs-parent="#accordionSolution9">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb146">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2837,7 +2861,7 @@ exportar estos nuevos conjuntos de datos para compartirlos con sus
 colaboradores o para su archivo.</p>
 <p>Al igual que la función <code>read_csv()</code> utilizada para leer
 archivos CSV en R, existe una función <code>write_csv()</code> que
-genera archivos CSV a partir de marcos de datos.</p>
+genera archivos CSV a partir de tablas de datos.</p>
 <p>Antes de utilizar <code>write_csv()</code>, vamos a crear una carpeta
 nueva, <code>data_output</code>, en nuestro directorio de trabajo donde
 se almacenará este conjunto de datos generado. No queremos escribir los
@@ -2876,10 +2900,10 @@ que creamos anteriormente.</p>
       <div class="d-none d-sm-none d-md-block">
         <a class="chapter-link" href="../instructor/25-starting-with-data.html" rel="prev">
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>
-          Previo: Comenzando con los
+          Previo: Comenzando con los datos...
         </a>
         <a class="chapter-link float-end" href="../instructor/40-visualization.html" rel="next">
-          Siguiente: Visualización de...
+          Siguiente: Visualización de datos...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -2905,7 +2929,7 @@ que creamos anteriormente.</p>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Plantilla compartida bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> por <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Construido con <a href="https://github.com/carpentries/sandpaper/tree/0.20.2" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a> y <a href="https://github.com/carpentries/varnish/tree/1.1.1" class="external-link">varnish (1.1.1)</a></p>
+        <p>Construido con <a href="https://github.com/carpentries/sandpaper/tree/0.21.1" class="external-link">sandpaper (0.21.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a> y <a href="https://github.com/carpentries/varnish/tree/1.1.3" class="external-link">varnish (1.1.3)</a></p>
 		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -2927,8 +2951,8 @@ que creamos anteriormente.</p>
   "url": "https://bioconductor-translations.github.io/bioc-intro-plamo3translate-es/instructor/30-dplyr.html",
   "identifier": "https://bioconductor-translations.github.io/bioc-intro-plamo3translate-es/instructor/30-dplyr.html",
   "dateCreated": "2020-09-14",
-  "dateModified": "2026-11-09",
-  "datePublished": "2026-11-09"
+  "dateModified": "2026-11-11",
+  "datePublished": "2026-11-11"
 }
 
   </script><script>
